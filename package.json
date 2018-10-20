@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Omar Elhwarii Portfolio",
+  "main": "src/ts/main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "iixixv",
+  "license": "ISC"
+}
