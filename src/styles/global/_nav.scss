@@ -1,0 +1,32 @@
+nav {
+	position: fixed;
+	height: 100%;
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+
+	ul {
+		list-style-type: none;
+		height: 100%;
+		padding: 40px 40px 40px 0px;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+
+		li {
+			padding: 10px 40px;
+			a {
+				font-size: 20px;
+				text-decoration: none;
+				font-weight: 500;
+				color: $c-primary;
+			}
+
+			&.active {
+        margin-bottom: auto;
+        border-left: 7px solid $c-secondary;
+			}
+		}
+	}
+}

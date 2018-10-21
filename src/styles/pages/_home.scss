@@ -1,0 +1,17 @@
+#home {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	h1 {
+		font-family: $f-secondary;
+		font-weight: 400;
+		font-size: 180px;
+	}
+
+	p {
+		font-weight: 500;
+		font-size: 20px;
+	}
+}
