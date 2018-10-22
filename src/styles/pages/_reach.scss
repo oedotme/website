@@ -1,0 +1,19 @@
+#reach {
+	display: flex;
+	justify-content: center;
+  flex-direction: column;
+  
+  ul {
+    list-style-type: none;
+
+    li {
+      padding-bottom: 30px;
+
+      a {
+        text-decoration: none;
+        font-weight: 500;
+        color: $c-primary;
+      }
+    }
+  } 
+}
