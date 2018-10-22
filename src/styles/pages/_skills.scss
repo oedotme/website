@@ -1,0 +1,86 @@
+#skills {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+
+	h4 {
+		padding-top: 30px;
+	}
+
+	ul {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(200px, 300px));
+		grid-auto-rows: auto;
+		grid-gap: 20px 15px;
+		// background: salmon;
+		max-width: 700px;
+		padding: 20px 40px;
+		list-style-type: none;
+
+		li {
+			// background: lightblue;
+
+			.base,
+			.progress {
+				width: 200px;
+				height: 7px;
+			}
+			.base {
+				margin-top: 10px;
+				background: $c-grey;
+
+				.progress {
+					background: $c-secondary;
+
+          // web stack
+					&.html {
+						width: 170px;
+					}
+					&.css {
+						width: 160px;
+					}
+					&.javascript {
+						width: 170px;
+					}
+					&.react {
+						width: 140px;
+					}
+					&.vue {
+						width: 160px;
+					}
+					&.typescript {
+						width: 150px;
+					}
+					&.nodejs {
+						width: 130px;
+					}
+					&.mongodb {
+						width: 140px;
+					}
+					&.graphql {
+						width: 120px;
+					}
+					&.python {
+						width: 160px;
+          }
+          // tools
+					&.figma {
+						width: 170px;
+					}
+					&.git {
+						width: 160px;
+					}
+					&.vim {
+						width: 160px;
+					}
+					&.vscode {
+						width: 160px;
+					}
+					&.linux {
+						width: 140px;
+					}
+				}
+			}
+		}
+	}
+}
