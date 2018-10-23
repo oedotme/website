@@ -15,7 +15,11 @@ nav {
 		justify-content: flex-end;
 
 		li {
+			justify-self: flex-start;
 			padding: 10px 40px;
+			transition: opacity 0.3s ease-in-out;
+			opacity: 0.5;
+			border-left: 5px solid white;
 			a {
 				font-size: 20px;
 				text-decoration: none;
@@ -23,9 +27,14 @@ nav {
 				color: $c-primary;
 			}
 
+			&:hover {
+				opacity: 1;
+			}
+
 			&.active {
-        margin-bottom: auto;
-        border-left: 5px solid $c-secondary;
+				margin-bottom: auto;
+				opacity: 1;
+				border-left: 5px solid $c-secondary;
 			}
 		}
 	}
