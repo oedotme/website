@@ -1,21 +1,18 @@
 #about {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-content: center;
+	display: flex;
+	align-items: center;
 
 	p {
 		line-height: 1.9;
-		align-self: center;
-		justify-self: center;
 		max-width: 400px;
+		padding-left: 100px;
 	}
 
 	div {
-		text-align: right;
-		align-self: center;
 
 		img {
-			height: 100vh;
+			height: 500px;
+			margin-top: -100px;
 		}
 	}
 }
