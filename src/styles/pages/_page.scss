@@ -2,4 +2,9 @@
   min-height: 900px;
   height: 100vh; 
   margin-left: 200px;
+  width: 80vw;
+
+	@media (max-width: 1050px) {
+    margin-left: 0;
+  }
 }
