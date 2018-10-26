@@ -1,10 +1,11 @@
 .page {
-  min-height: 900px;
-  height: 100vh; 
-  margin-left: 200px;
-  width: 80vw;
+	min-height: 900px;
+  height: 100vh;
+  max-width: 1010px;
+	margin-left: 200px;
 
 	@media (max-width: 1050px) {
-    margin-left: 0;
-  }
+		margin-left: 0;
+		align-items: center;
+	}
 }

@@ -1,18 +1,37 @@
 #about {
-	display: flex;
+	background: lightblue;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 	align-items: center;
+	align-content: center;
+	justify-items: center;
+	grid-gap: 2vw;
 
 	p {
-		line-height: 1.9;
-		max-width: 400px;
-		// padding-left: 50px;
+		line-height: 2;
+		max-width: 435px;
 	}
 
-	div {
+	img {
+		width: 38vw;
+		max-width: 435px;
+		min-width: 250px;
+	}
+
+	@media (max-width: 1050px) {
+		p {
+			width: 38vw;
+		}
+	}
+
+	@media (max-width: 850px) {
+		grid-template-columns: repeat(1, 1fr);
 
 		img {
-			height: 500px;
-			margin-top: -100px;
+			width: 80vw;
+		}
+		p {
+			width: 80vw;
 		}
 	}
 }

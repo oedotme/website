@@ -1,3 +1,7 @@
+::selection {
+	background: lighten($c-secondary, 20);
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -8,5 +12,13 @@ body {
 	font-family: $f-primary;
 	color: $c-primary;
 	font-size: 16px;
-	padding: 15px;
+	margin: 15px;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style-type: none;
 }
