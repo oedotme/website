@@ -1,6 +1,7 @@
 #skills {
 	display: grid;
 	align-items: center;
+	padding-top: 30px;
 
 	#skills-set {
 		display: grid;
@@ -8,7 +9,6 @@
 		grid-gap: 30px;
 
 		li {
-
 			h4 {
 				padding-bottom: 15px;
 			}
@@ -23,8 +23,6 @@
 	}
 
 	@media (max-width: 1050px) {
-		padding-top: 30px;
-
 		#skills-set {
 			justify-items: center;
 		}
