@@ -1,19 +1,23 @@
 #reach {
 	display: flex;
 	justify-content: center;
-  flex-direction: column;
-  
-  ul {
-    list-style-type: none;
+	flex-direction: column;
 
-    li {
-      padding-bottom: 30px;
+	ul {
+		list-style-type: none;
 
-      a {
-        text-decoration: none;
-        font-weight: 500;
-        color: $c-primary;
-      }
-    }
-  } 
+		li {
+			padding-bottom: 30px;
+
+			a {
+				text-decoration: none;
+				font-weight: 500;
+				color: $c-primary;
+			}
+		}
+	}
+
+	@media (max-width: 500px) {
+		min-height: 500px;
+	}
 }
