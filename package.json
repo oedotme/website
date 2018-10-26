@@ -5,11 +5,13 @@
   "main": "src/ts/main.ts",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html -d docs --public-url ./"
+    "build": "parcel build src/index.html -d docs --public-url ./",
+    "deploy": "rm -rf docs && npm run build"
   },
   "author": "iixixv",
   "license": "ISC",
   "devDependencies": {
+    "cssnano": "^4.1.7",
     "node-sass": "^4.9.4",
     "typescript": "^3.1.3"
   }
