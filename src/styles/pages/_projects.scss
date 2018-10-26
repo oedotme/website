@@ -1,14 +1,11 @@
 #projects {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
+	display: grid;
+	align-items: center;
 
 	ul {
-		list-style-type: none;
 		display: grid;
 		grid-template-columns: repeat(2, 300px);
-		grid-gap: 40px 60px;
-		max-width: 850px;
+		grid-gap: 40px 0;
 
 		li {
 			display: grid;
@@ -16,39 +13,54 @@
 
 			background: $c-lightgrey;
 			box-shadow: 5px 5px 20px $c-grey;
-			width: 300px;
-			height: 300px;
+			width: 250px;
+			height: 250px;
 
 			img {
 				align-self: center;
-        justify-self: center;
-        max-width: 300px;
-        max-height: 300px;
+				justify-self: center;
+				max-width: 200px;
+				max-height: 200px;
 			}
 
 			.more {
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-content: center;
-        
-        p {
-          font-size: 14px;
-          font-weight: 500;
-          align-self: flex-end;
-        }
+				padding: 10px 20px;
+				display: flex;
+				justify-content: space-between;
+				align-content: center;
 
-        .links {
-          align-self: flex-end;
+				.info {
+					font-size: 14px;
+					font-weight: 500;
+					align-self: flex-end;
+				}
 
-          a {
-            text-decoration: none;
-            color: $c-secondary;
-            font-weight: 600;
-            padding-left: 5px; 
-          }
-        }
+				.links {
+					align-self: flex-end;
+
+					a {
+						text-decoration: none;
+						color: $c-secondary;
+						// font-weight: 600;
+						padding-left: 5px;
+
+					}
+				}
 			}
+		}
+	}
+
+	@media (max-width: 1050px) {
+		ul {
+			grid-template-columns: repeat(2, 300px);
+			justify-items: center;
+		}
+	}
+
+	@media (max-width: 600px) {
+		padding-top: 90px;
+		ul {
+			grid-template-columns: repeat(1, 300px);
 		}
 	}
 }
