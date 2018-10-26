@@ -3,17 +3,42 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-  min-height: 900px;
-  height: 100vh; 
+	min-height: 700px;
+	height: 100vh;
 
 	h1 {
 		font-family: $f-secondary;
 		font-weight: 400;
-		font-size: 150px;
+		font-size: 140px;
 	}
 
 	p {
 		font-weight: 500;
 		font-size: 20px;
+	}
+
+	@media (max-width: 700px) {
+		h1 {
+			font-size: 100px;
+		}
+	}
+
+	@media (max-width: 490px) {
+		min-height: 500px;
+		h1 {
+			font-size: 60px;
+		}
+		p {
+			font-size: 16px;
+		}
+	}
+
+	@media (max-width: 320px) {
+		h1 {
+			font-size: 50px;
+		}
+		p {
+			font-size: 13px;
+		}
 	}
 }
