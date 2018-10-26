@@ -1,5 +1,4 @@
 #about {
-	background: lightblue;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	align-items: center;
@@ -27,10 +26,7 @@
 	@media (max-width: 850px) {
 		grid-template-columns: repeat(1, 1fr);
 
-		img {
-			width: 80vw;
-		}
-		p {
+		p, img {
 			width: 80vw;
 		}
 	}
