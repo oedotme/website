@@ -1,4 +1,5 @@
 const links = document.querySelectorAll('.link')
+const up = document.querySelector('#up')
 
 const activateLink = (e) => {
 	let active = document.querySelector('.active')
@@ -16,3 +17,13 @@ const activateLink = (e) => {
 for (let link of links) {
 	link.addEventListener('click', activateLink)
 }
+
+const goUp = () => {
+	let active = document.querySelector('.active')
+
+	if (active) {
+		active.classList.remove('active')
+	}
+}
+
+up.addEventListener('click', goUp)
