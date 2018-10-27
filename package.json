@@ -5,8 +5,7 @@
   "main": "src/ts/main.ts",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html -d docs --public-url ./",
-    "deploy": "rm -rf docs && npm run build"
+    "build": "rm -rf docs && parcel build src/index.html -d docs --public-url ./"
   },
   "author": "iixixv",
   "license": "ISC",
