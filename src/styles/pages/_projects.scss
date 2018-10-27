@@ -10,9 +10,9 @@
 		li {
 			display: grid;
 			grid-template-rows: 1fr 40px;
-
+			border-radius: 5px;
 			background: $c-lightgrey;
-			box-shadow: 5px 5px 20px $c-grey;
+			box-shadow: 5px 5px 15px lighten($c-grey, 5);
 			width: 250px;
 			height: 250px;
 
