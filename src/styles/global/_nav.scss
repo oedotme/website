@@ -60,6 +60,10 @@ nav {
 					font-size: 17px;
 				}
 
+				&:hover {
+					opacity: .5;
+				}
+
 				&.active {
 					margin-bottom: 0;
 					border-left: 0 solid $c-secondary;
