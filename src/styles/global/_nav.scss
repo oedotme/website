@@ -61,12 +61,13 @@ nav {
 				}
 
 				&:hover {
-					opacity: .5;
+					opacity: 0.5;
 				}
 
 				&.active {
 					margin-bottom: 0;
 					border-left: 0 solid $c-secondary;
+					opacity: 1;
 				}
 			}
 		}
