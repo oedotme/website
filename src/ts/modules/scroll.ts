@@ -8,11 +8,12 @@ const reach: HTMLElement = document.querySelector('#reach')
 
 window.addEventListener('scroll', () => {
 	let fromTop = window.scrollY
-	let homeHeight = home.offsetHeight - 300
+	let homeHeight = home.offsetHeight - 200
 	let homeAbout = homeHeight + about.offsetHeight - 200
-	let homeAboutSkills = homeAbout + skills.offsetHeight + 150 
-	let homeAboutSkillsProjects = homeAboutSkills + projects.offsetHeight + 50
-	let homeAboutSkillsProjectsReach = homeAboutSkillsProjects + reach.offsetHeight - 200
+	let homeAboutSkills = homeAbout + skills.offsetHeight + 200
+	let homeAboutSkillsProjects = homeAboutSkills + projects.offsetHeight + 100
+	let homeAboutSkillsProjectsReach =
+		homeAboutSkillsProjects + reach.offsetHeight
 
 	if (fromTop > homeHeight && fromTop < homeAbout) {
 		deactivateLink()
@@ -32,7 +33,10 @@ window.addEventListener('scroll', () => {
 		let projectsLink = document.querySelector('.projects-link')
 		projectsLink.classList.add('active')
 		//
-	} else if (fromTop > homeAboutSkillsProjects && fromTop < homeAboutSkillsProjectsReach) {
+	} else if (
+		fromTop > homeAboutSkillsProjects &&
+		fromTop < homeAboutSkillsProjectsReach
+	) {
 		deactivateLink()
 
 		let reachLink = document.querySelector('.reach-link')
