@@ -1,11 +1,11 @@
 #about {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
 	align-items: center;
-	align-content: center;
 	justify-items: center;
+	align-content: center;
+	grid-template-columns: repeat(2, 1fr);
 	grid-gap: 2vw;
-	min-height: 900px;
+	min-height: 800px;
 	
 	p {
 		line-height: 2;
@@ -26,7 +26,8 @@
 
 	@media (max-width: 850px) {
 		grid-template-columns: repeat(1, 1fr);
-
+		grid-gap: 0;
+		padding-top: 50px;
 		p, img {
 			width: 80vw;
 		}

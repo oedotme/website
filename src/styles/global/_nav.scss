@@ -19,8 +19,7 @@ nav {
 			margin-left: -15px;
 			padding: 10px 40px;
 			transition: opacity 0.3s ease-in-out;
-			opacity: 0.5;
-			border-left: 5px solid white;
+			opacity: 0.25;
 			a {
 				font-size: 18px;
 				font-weight: 500;
@@ -32,9 +31,7 @@ nav {
 			}
 
 			&.active {
-				// margin-bottom: auto;
 				opacity: 1;
-				// border-left: 5px solid $c-secondary;
 			}
 		}
 	}
@@ -54,7 +51,7 @@ nav {
 			li {
 				margin-left: 0;
 				padding: 10px 5%;
-				border-left: 0 solid white;
+				opacity: 0.5;
 
 				a {
 					font-size: 17px;
@@ -65,8 +62,6 @@ nav {
 				}
 
 				&.active {
-					margin-bottom: 0;
-					border-left: 0 solid $c-secondary;
 					opacity: 1;
 				}
 			}

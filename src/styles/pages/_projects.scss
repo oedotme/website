@@ -1,12 +1,13 @@
 #projects {
 	display: grid;
 	align-items: center;
+	justify-items: center;
 	min-height: 900px;
 
 	ul {
 		display: grid;
 		grid-template-columns: repeat(2, 300px);
-		grid-gap: 40px 0;
+		grid-gap: 50px 40px;
 
 		li {
 			display: grid;
