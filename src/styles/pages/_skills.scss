@@ -1,7 +1,8 @@
 #skills {
 	display: grid;
 	align-items: center;
-	padding-top: 30px;
+	padding-top: 80px;
+	// background: ;
 
 	#skills-set {
 		display: grid;
@@ -67,17 +68,6 @@
 				width: 140px;
 			}
 
-			// languages
-			&.javascript {
-				width: 170px;
-			}
-			&.typescript {
-				width: 150px;
-			}
-			&.python {
-				width: 160px;
-			}
-
 			// backend
 			&.nodejs {
 				width: 150px;
@@ -95,22 +85,50 @@
 				width: 140px;
 			}
 
-			// tools
-			&.figma {
+			// languages
+			&.javascript {
 				width: 170px;
 			}
-			&.git {
+			&.typescript {
+				width: 150px;
+			}
+			&.python {
+				width: 160px;
+			}
+
+			// testing
+			&.jest {
+				width: 140px;
+			}
+			&.mocha {
+				width: 140px;
+			}
+
+			// tools
+			&.webpack {
+				width: 160px;
+			}
+			&.parcel {
 				width: 160px;
 			}
 			&.vscode {
 				width: 160px;
+			}
+			&.figma {
+				width: 170px;
 			}
 
 			// others
 			&.linux {
 				width: 140px;
 			}
+			&.git {
+				width: 160px;
+			}
 			&.vim {
+				width: 160px;
+			}
+			&.fish {
 				width: 160px;
 			}
 		}
