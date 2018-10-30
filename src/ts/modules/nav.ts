@@ -18,16 +18,34 @@ const activateLink = (e) => {
 
 	let current = e.target.parentElement
 	current.classList.add('active')
+
+	scrollToTarget(current.firstChild, e)
 }
+
+// deactivate currently active link and go up to home page
+const goUp = (e) => {
+	deactivateLink()
+	scrollToTarget(up, e)
+}
+
+// smooth scrolling
+const scrollToTarget = (link, e) => {
+	let hashVal = link.getAttribute('href')
+	let target = document.querySelector(hashVal)
+
+	target.scrollIntoView({
+		behavior: 'smooth',
+		block: 'start'
+	})
+	history.pushState(null, null, hashVal)
+	e.preventDefault()
+}
+
+// event listenrs
 
 // add event listener for link activation
 for (let link of links) {
 	link.firstChild.addEventListener('click', activateLink)
-}
-
-// deactivate currently active link and go up to home page
-const goUp = () => {
-	deactivateLink()
 }
 
 // add event listener to go up to home
