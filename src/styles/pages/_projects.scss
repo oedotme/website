@@ -1,10 +1,11 @@
 #projects {
 	display: grid;
+	justify-items: center;
 
 	ul {
 		display: grid;
 		grid-template-columns: repeat(2, 300px);
-		grid-gap: 50px 40px;
+		grid-gap: 45px 0px;
 
 		li {
 			display: grid;
@@ -41,7 +42,6 @@
 						text-decoration: none;
 						color: $c-secondary;
 						padding-left: 5px;
-
 					}
 				}
 			}
