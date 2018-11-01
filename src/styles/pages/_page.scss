@@ -1,10 +1,10 @@
 .page {
-  // height: 100vh;
-  max-width: 1010px;
+	max-width: 1010px;
 	margin-left: 200px;
+	padding: 200px 0px 100px;
 
 	@media (max-width: 1050px) {
 		margin-left: 0;
-		align-items: center;
+		padding: 100px 0px 50px;
 	}
 }
