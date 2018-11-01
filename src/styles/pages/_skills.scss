@@ -1,9 +1,7 @@
 #skills {
 	display: grid;
-	align-items: center;
 	justify-items: center;
-	min-height: 930px;
-	// padding-top: 80px;
+	padding: 100px 0px 100px;
 
 	#skills-set {
 		display: grid;
@@ -31,8 +29,6 @@
 	}
 
 	@media (max-width: 650px) {
-		padding-top: 110px;
-
 		#skills-set {
 			grid-template-columns: repeat(1, 300px);
 		}
