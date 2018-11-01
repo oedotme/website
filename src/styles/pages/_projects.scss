@@ -1,8 +1,5 @@
 #projects {
 	display: grid;
-	align-items: center;
-	justify-items: center;
-	min-height: 900px;
 
 	ul {
 		display: grid;
@@ -43,7 +40,6 @@
 					a {
 						text-decoration: none;
 						color: $c-secondary;
-						// font-weight: 600;
 						padding-left: 5px;
 
 					}
@@ -60,7 +56,6 @@
 	}
 
 	@media (max-width: 600px) {
-		padding-top: 90px;
 		ul {
 			grid-template-columns: repeat(1, 300px);
 		}
