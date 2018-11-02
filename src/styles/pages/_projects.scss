@@ -20,7 +20,15 @@
 				align-self: center;
 				justify-self: center;
 				max-width: 200px;
-				max-height: 200px;
+				max-height: 100px;
+				filter: grayscale(100);
+				transition: .1s filter linear;
+			}
+
+			&:hover {
+				img {
+					filter: none;
+				}
 			}
 
 			.more {
