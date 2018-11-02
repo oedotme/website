@@ -2,7 +2,9 @@ parcelRequire=function(e,r,n,t){var i="function"==typeof parcelRequire&&parcelRe
 "use strict";exports.__esModule=!0;var t=document.querySelectorAll(".link"),e=document.querySelector("#up");exports.deactivateLink=function(){var t=document.querySelector(".active");t&&t.classList.remove("active")};for(var r=function(t){t.target.parentElement.classList.contains("link")&&exports.deactivateLink();var e=t.target.parentElement;e.classList.add("active"),n(e.firstChild,t)},i=function(t){exports.deactivateLink(),n(e,t)},n=function(t,e){var r=t.getAttribute("href");document.querySelector(r).scrollIntoView({behavior:"smooth",block:"start"}),history.pushState(null,null,r),e.preventDefault()},a=0,c=t;a<c.length;a++){var l=c[a];l.firstChild.addEventListener("click",r)}e.addEventListener("click",i);
 },{}],"OkNS":[function(require,module,exports) {
 "use strict";exports.__esModule=!0;var e=require("./nav"),t=document.querySelector("#home"),c=document.querySelector("#about"),i=document.querySelector("#skills"),o=document.querySelector("#projects"),s=document.querySelector("#reach");window.addEventListener("scroll",function(){var r=window.scrollY,a=t.offsetHeight-200,l=a+c.offsetHeight-200,d=l+i.offsetHeight+200,n=d+o.offsetHeight+100,u=n+s.offsetHeight;if(r>a&&r<l)e.deactivateLink(),document.querySelector(".about-link").classList.add("active");else if(r>l&&r<d){e.deactivateLink(),document.querySelector(".skills-link").classList.add("active")}else if(r>d&&r<n){e.deactivateLink(),document.querySelector(".projects-link").classList.add("active")}else if(r>n&&r<u){e.deactivateLink(),document.querySelector(".reach-link").classList.add("active")}else e.deactivateLink()});
-},{"./nav":"FNjk"}],"g7hl":[function(require,module,exports) {
-"use strict";exports.__esModule=!0,require("./modules/nav"),require("./modules/scroll");
-},{"./modules/nav":"FNjk","./modules/scroll":"OkNS"}]},{},["g7hl"], null)
-//# sourceMappingURL=main.25cc083d.map
+},{"./nav":"FNjk"}],"SjYX":[function(require,module,exports) {
+var e=document.querySelector("#copyMail"),t=function(){var t="iixixv.me@gmail.com",o=document.createElement("textarea");o.value=t,o.setAttribute("readonly",""),o.style.position="absolute",o.style.left="-9999px",document.body.appendChild(o),o.select(),document.execCommand("copy"),document.body.removeChild(o),e.setAttribute("title","Copied: "+t)};e.addEventListener("click",t);
+},{}],"g7hl":[function(require,module,exports) {
+"use strict";exports.__esModule=!0,require("./modules/nav"),require("./modules/scroll"),require("./modules/copyMail");
+},{"./modules/nav":"FNjk","./modules/scroll":"OkNS","./modules/copyMail":"SjYX"}]},{},["g7hl"], null)
+//# sourceMappingURL=main.dc909049.map

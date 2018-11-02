@@ -14,9 +14,6 @@ const copyMail = () => {
 	document.body.removeChild(el)
 
 	copyMailBtn.setAttribute('title', `Copied: ${mail}`)
-	setTimeout(() => {
-		copyMailBtn.setAttribute('title', `Copied!`)
-	}, 5000)
 }
 
 copyMailBtn.addEventListener('click', copyMail)
