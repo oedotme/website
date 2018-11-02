@@ -7,10 +7,10 @@
 	height: 100vh;
 	max-height: 900px;
 
-	h1 {
-		font-family: $f-secondary;
-		font-weight: 400;
-		font-size: 140px;
+	img {
+		width: 75vw;
+		max-width: 625px;
+		padding-bottom: 20px;
 	}
 
 	p {
@@ -19,15 +19,15 @@
 	}
 
 	@media (max-width: 700px) {
-		h1 {
-			font-size: 100px;
+		img {
+			padding-bottom: 15px;
 		}
 	}
 
 	@media (max-width: 490px) {
 		min-height: 500px;
-		h1 {
-			font-size: 60px;
+		img {
+			padding-bottom: 10px;
 		}
 		p {
 			font-size: 16px;
@@ -35,9 +35,6 @@
 	}
 
 	@media (max-width: 320px) {
-		h1 {
-			font-size: 50px;
-		}
 		p {
 			font-size: 13px;
 		}
