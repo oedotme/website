@@ -15,6 +15,7 @@
 			box-shadow: 5px 5px 15px lighten($c-grey, 5);
 			width: 250px;
 			height: 250px;
+			transition: 0.2s box-shadow ease-in-out;
 
 			img {
 				align-self: center;
@@ -22,10 +23,11 @@
 				max-width: 200px;
 				max-height: 100px;
 				filter: grayscale(100);
-				transition: .1s filter linear;
+				transition: 0.1s filter ease-in-out;
 			}
 
 			&:hover {
+				box-shadow: 7px 7px 20px lighten($c-grey, 4);
 				img {
 					filter: none;
 				}
