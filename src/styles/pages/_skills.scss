@@ -48,17 +48,17 @@
 			background: $c-secondary;
 
 			// frontend
-			&.html {
-				width: 170px;
-			}
-			&.css {
+			&.sass {
 				width: 160px;
 			}
-			&.react {
-				width: 140px;
+			&.react-rn {
+				width: 160px;
 			}
 			&.vue {
 				width: 160px;
+			}
+			&.flutter {
+				width: 140px;
 			}
 			&.service-workers {
 				width: 140px;
@@ -68,7 +68,7 @@
 			&.nodejs {
 				width: 150px;
 			}
-			&.graphql {
+			&.graphql-apollo {
 				width: 120px;
 			}
 			&.docker {
@@ -82,29 +82,29 @@
 			}
 
 			// languages
-			&.javascript {
+			&.js-ts {
 				width: 170px;
 			}
-			&.typescript {
-				width: 150px;
+			&.dart {
+				width: 140px;
 			}
 			&.python {
-				width: 160px;
+				width: 150px;
 			}
 
 			// testing
 			&.jest {
 				width: 140px;
 			}
-			&.mocha {
+			&.mocha-chai {
 				width: 140px;
+			}
+			&.cypress {
+				width: 130px;
 			}
 
 			// tools
-			&.webpack {
-				width: 160px;
-			}
-			&.parcel {
+			&.webpack-parcel {
 				width: 160px;
 			}
 			&.vscode {
@@ -115,16 +115,13 @@
 			}
 
 			// others
-			&.linux {
-				width: 140px;
+			&.linux-shell-scripting {
+				width: 150px;
 			}
 			&.git {
 				width: 160px;
 			}
 			&.vim {
-				width: 160px;
-			}
-			&.fish {
 				width: 160px;
 			}
 		}
