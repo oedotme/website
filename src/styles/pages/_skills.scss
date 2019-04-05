@@ -8,8 +8,17 @@
 		grid-gap: 30px;
 
 		li {
+			min-width: 200px;
+
 			h4 {
-				padding-bottom: 15px;
+				padding-bottom: 10px;
+			}
+
+			.underline {
+				width: 40px;
+				height: 7px;
+				background: $c-secondary;
+				margin-bottom: 25px;
 			}
 
 			ul {
@@ -30,100 +39,6 @@
 	@media (max-width: 650px) {
 		#skills-set {
 			grid-template-columns: repeat(1, 300px);
-		}
-	}
-}
-
-#skills #skills-set li ul li {
-	.base,
-	.progress {
-		width: 200px;
-		height: 7px;
-	}
-	.base {
-		margin-top: 10px;
-		background: $c-grey;
-
-		.progress {
-			background: $c-secondary;
-
-			// frontend
-			&.sass {
-				width: 160px;
-			}
-			&.react-rn {
-				width: 160px;
-			}
-			&.vue {
-				width: 160px;
-			}
-			&.flutter {
-				width: 140px;
-			}
-			&.service-workers {
-				width: 140px;
-			}
-
-			// backend
-			&.nodejs {
-				width: 150px;
-			}
-			&.graphql-apollo {
-				width: 120px;
-			}
-			&.docker {
-				width: 140px;
-			}
-			&.mongodb {
-				width: 150px;
-			}
-			&.postgresql {
-				width: 140px;
-			}
-
-			// languages
-			&.js-ts {
-				width: 170px;
-			}
-			&.dart {
-				width: 140px;
-			}
-			&.python {
-				width: 150px;
-			}
-
-			// testing
-			&.jest {
-				width: 140px;
-			}
-			&.mocha-chai {
-				width: 140px;
-			}
-			&.cypress {
-				width: 130px;
-			}
-
-			// tools
-			&.webpack-parcel {
-				width: 160px;
-			}
-			&.vscode {
-				width: 160px;
-			}
-			&.figma {
-				width: 170px;
-			}
-
-			// others
-			&.linux-shell-scripting {
-				width: 150px;
-			}
-			&.git {
-				width: 160px;
-			}
-			&.vim {
-				width: 160px;
-			}
 		}
 	}
 }
