@@ -48,10 +48,13 @@
 				.links {
 					align-self: flex-end;
 
-					a {
+					.visit {
 						text-decoration: none;
-						color: $c-secondary;
 						margin-left: 10px;
+
+						&.disabled {
+							filter: grayscale(10);
+						}
 					}
 				}
 			}
