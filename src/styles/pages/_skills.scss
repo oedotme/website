@@ -5,7 +5,7 @@
 	#skills-set {
 		display: grid;
 		grid-template-columns: repeat(2, 300px);
-		grid-gap: 30px;
+		grid-gap: 40px 30px;
 
 		li {
 			min-width: 200px;
@@ -18,7 +18,7 @@
 				width: 40px;
 				height: 7px;
 				background: $c-secondary;
-				margin-bottom: 25px;
+				margin-bottom: 15px;
 			}
 
 			ul {
