@@ -1,3 +1,4 @@
 import './modules/nav'
 import './modules/scroll'
-import './modules/copyMail'
+import './modules/copy_mail'
+import './modules/load_image'
