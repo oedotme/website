@@ -3,7 +3,7 @@
 	align-items: center;
 	grid-template-columns: repeat(2, 1fr);
 	grid-gap: 2vw;
-	
+
 	p {
 		line-height: 2;
 		max-width: 435px;
@@ -12,7 +12,6 @@
 		span {
 			margin-left: -25px;
 			margin-right: 10px;
-			
 		}
 	}
 
@@ -31,7 +30,9 @@
 	@media (max-width: 850px) {
 		grid-template-columns: repeat(1, 1fr);
 		grid-gap: 0;
-		p, img {
+
+		p,
+		img {
 			width: 80vw;
 		}
 	}
