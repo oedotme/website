@@ -11,6 +11,7 @@
 
 	h1 {
 		font-size: 3rem;
+		font-weight: 700;
 		margin-bottom: 1rem;
 		letter-spacing: 0.2rem;
 	}
@@ -20,7 +21,7 @@
 		color: lighten($c-primary, 20);
 
 		span {
-			font-weight: bold;
+			font-weight: 700;
 			color: darken($c-primary, 1);
 		}
 	}
