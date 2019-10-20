@@ -18,11 +18,11 @@
 
 	p {
 		font-size: 1.2rem;
-		color: lighten($c-primary, 20);
+		color: $c-grey;
 
 		span {
 			font-weight: 700;
-			color: darken($c-primary, 1);
+			color: $c-primary;
 		}
 	}
 

@@ -5,7 +5,7 @@ nav {
 	width: 200px;
 	display: flex;
 	flex-direction: column;
-	background: white;
+	background: $c-background;
 	z-index: 100;
 
 	ul {

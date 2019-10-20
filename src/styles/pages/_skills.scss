@@ -1,6 +1,7 @@
 #skills {
 	display: grid;
 	justify-items: center;
+	align-content: center;
 
 	#skills-set {
 		display: grid;
@@ -12,12 +13,13 @@
 
 			h4 {
 				padding-bottom: 10px;
+				color: $c-secondary;
 			}
 
 			.underline {
 				width: 40px;
 				height: 7px;
-				background: $c-secondary;
+				background: $c-lightgrey;
 				margin-bottom: 15px;
 			}
 
@@ -25,6 +27,7 @@
 				padding-left: 15px;
 				li {
 					padding-bottom: 15px;
+					color: $c-grey;
 				}
 			}
 		}
