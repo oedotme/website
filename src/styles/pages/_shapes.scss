@@ -1,0 +1,29 @@
+#shapes {
+	#dots {
+		position: absolute;
+		right: 50%;
+		top: 25%;
+		opacity: 0.1;
+		display: flex;
+
+		div {
+			content: '';
+			height: 10px;
+			width: 10px;
+			margin-right: 15px;
+			border-radius: 50%;
+			background: lighten($c-background, 25);
+		}
+	}
+
+	#square {
+		position: absolute;
+		z-index: 11;
+		left: -75px;
+		top: 90%;
+		height: 1200px;
+		width: 150px;
+		opacity: 0.05;
+		background: lighten($c-background, 25);
+	}
+}
