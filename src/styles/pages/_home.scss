@@ -6,16 +6,22 @@
 	min-height: 700px;
 	height: 100vh;
 	max-height: 900px;
+	text-align: left;
+	margin: 2rem;
 
-	img {
-		width: 75vw;
-		max-width: 625px;
-		padding-bottom: 20px;
+	h1 {
+		font-size: 3rem;
+		margin-bottom: 1rem;
 	}
 
 	p {
-		font-weight: 500;
-		font-size: 20px;
+		font-size: 1.2rem;
+		color: lighten($c-primary, 20);
+
+		span {
+			font-weight: bold;
+			color: darken($c-primary, 1);
+		}
 	}
 
 	@media (max-width: 700px) {
