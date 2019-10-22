@@ -22,6 +22,7 @@ nav {
 			padding: 10px 40px;
 			transition: opacity 0.3s ease-in-out;
 			opacity: 0.25;
+
 			a {
 				font-size: 18px;
 				font-weight: 500;
@@ -39,8 +40,7 @@ nav {
 	}
 
 	@media (max-width: 1050px) {
-		margin: -15px;
-		height: 100px;
+		height: 80px;
 		width: 100%;
 		background: $c-background;
 		z-index: 12;
@@ -55,7 +55,7 @@ nav {
 
 			li {
 				margin-left: 0;
-				padding: 10px 5%;
+				padding: 10px 3.5%;
 				opacity: 0.5;
 
 				a {
