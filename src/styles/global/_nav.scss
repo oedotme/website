@@ -5,8 +5,9 @@ nav {
 	width: 200px;
 	display: flex;
 	flex-direction: column;
-	background: $c-background;
 	z-index: 10;
+	opacity: 0;
+	animation: nav_slide_right 0.3s 0.5s ease-in forwards;
 
 	ul {
 		padding: 40px 40px 40px 0px;
@@ -41,6 +42,9 @@ nav {
 		margin: -15px;
 		height: 100px;
 		width: 100%;
+		background: $c-background;
+		z-index: 12;
+		animation: nav_slide_down 0.3s 0.5s ease-in forwards;
 
 		ul {
 			padding: 0px;
@@ -73,5 +77,29 @@ nav {
 		ul li a {
 			font-size: 15px;
 		}
+	}
+}
+
+@keyframes nav_slide_right {
+	0% {
+		opacity: 0;
+		transform: translateX(-0.5rem);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0rem);
+	}
+}
+
+@keyframes nav_slide_down {
+	0% {
+		opacity: 0;
+		transform: translateY(-0.5rem);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0rem);
 	}
 }
