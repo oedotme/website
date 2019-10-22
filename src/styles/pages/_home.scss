@@ -25,12 +25,13 @@
 		span {
 			display: inline-flex;
 			flex-direction: column;
+			text-shadow: 2.5px 2.5px 0px $c-background;
 
 			#line {
 				z-index: -1;
-				transform: translate(0.5rem, -1.4rem);
+				transform: translate(0.6rem, -1.4rem);
 				display: inline-block;
-				width: 100%;
+				width: 96%;
 				height: 1.4rem;
 				opacity: 0;
 				background: $c-secondary;
@@ -100,7 +101,7 @@
 		transform: translate(-70%, -1.4rem);
 	}
 	100% {
-		transform: translate(0.5rem, -1.4rem);
-		opacity: 0.4;
+		transform: translate(0.6rem, -1.4rem);
+		opacity: 0.9;
 	}
 }
