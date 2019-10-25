@@ -22,7 +22,7 @@ const activateLink = (e) => {
 	scrollToTarget(current.firstChild, e)
 }
 
-// deactivate currently active link and go up to home page
+// deactivate currently active link and go up to about page
 const goUp = (e) => {
 	deactivateLink()
 	scrollToTarget(up, e)
@@ -35,7 +35,7 @@ const scrollToTarget = (link, e) => {
 
 	target.scrollIntoView({
 		behavior: 'smooth',
-		block: 'start'
+		block: 'start',
 	})
 	history.pushState(null, null, hashVal)
 	e.preventDefault()
@@ -48,5 +48,5 @@ for (let link of links) {
 	link.firstChild.addEventListener('click', activateLink)
 }
 
-// add event listener to go up to home
+// add event listener to go up to about
 up.addEventListener('click', goUp)

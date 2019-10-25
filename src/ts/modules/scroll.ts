@@ -1,6 +1,6 @@
 import { deactivateLink } from './nav'
 
-const home: HTMLElement = document.querySelector('#home')
+const about: HTMLElement = document.querySelector('#about')
 const skills: HTMLElement = document.querySelector('#skills')
 const projects: HTMLElement = document.querySelector('#projects')
 const reach: HTMLElement = document.querySelector('#reach')
@@ -11,15 +11,15 @@ let reach_link = document.querySelector('.reach-link')
 
 window.addEventListener('scroll', () => {
 	let top = window.scrollY
-	let home_height = home.offsetHeight
-	let skills_height = home_height + skills.offsetHeight - 100
+	let about_height = about.offsetHeight
+	let skills_height = about_height + skills.offsetHeight - 100
 	let projects_height = skills_height + projects.offsetHeight - 100
 	let reach_height = projects_height + reach.offsetHeight
 
-	if (top + 200 < home_height) {
+	if (top + 200 < about_height) {
 		deactivateLink()
 		//
-	} else if (top > home_height && top < skills_height) {
+	} else if (top > about_height && top < skills_height) {
 		deactivateLink()
 		skills_link.classList.add('active')
 		//
