@@ -11,8 +11,8 @@
 	"license": "ISC",
 	"devDependencies": {
 		"cssnano": "^4.1.10",
-		"node-sass": "^4.12.0",
+		"node-sass": "^4.13.0",
 		"parcel-bundler": "^1.12.4",
-		"typescript": "^3.6.4"
+		"typescript": "^3.7.2"
 	}
 }
