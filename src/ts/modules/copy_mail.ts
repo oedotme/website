@@ -1,19 +1,19 @@
-const copyMailBtn = document.querySelector('#copyMail')
+const copy_mail_button = document.querySelector('#copy-mail')
 
-const copyMail = () => {
+const copy_mail = () => {
 	const mail = 'iixixv.me@gmail.com'
 
-	const el = document.createElement('textarea')
-	el.value = mail
-	el.setAttribute('readonly', '')
-	el.style.position = 'absolute'
-	el.style.left = '-9999px'
-	document.body.appendChild(el)
-	el.select()
+	const element = document.createElement('textarea')
+	element.value = mail
+	element.setAttribute('readonly', '')
+	element.style.position = 'absolute'
+	element.style.left = '-9999px'
+	document.body.appendChild(element)
+	element.select()
 	document.execCommand('copy')
-	document.body.removeChild(el)
+	document.body.removeChild(element)
 
-	copyMailBtn.setAttribute('title', `Copied: ${mail}`)
+	copy_mail_button.setAttribute('title', `Copied: ${mail}`)
 }
 
-copyMailBtn.addEventListener('click', copyMail)
+copy_mail_button.addEventListener('click', copy_mail)
