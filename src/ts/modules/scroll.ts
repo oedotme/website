@@ -1,4 +1,4 @@
-import { deactivateLink } from './nav'
+import { deactivate_link } from './nav'
 
 const about: HTMLElement = document.querySelector('#about')
 const skills: HTMLElement = document.querySelector('#skills')
@@ -17,18 +17,18 @@ window.addEventListener('scroll', () => {
 	let reach_height = projects_height + reach.offsetHeight
 
 	if (top + 200 < about_height) {
-		deactivateLink()
+		deactivate_link()
 		//
 	} else if (top > about_height && top < skills_height) {
-		deactivateLink()
+		deactivate_link()
 		skills_link.classList.add('active')
 		//
 	} else if (top > skills_height && top < projects_height) {
-		deactivateLink()
+		deactivate_link()
 		projects_link.classList.add('active')
 		//
 	} else if (top > projects_height && top < reach_height) {
-		deactivateLink()
+		deactivate_link()
 		reach_link.classList.add('active')
 		//
 	}
