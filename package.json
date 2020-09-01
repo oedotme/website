@@ -1,13 +1,12 @@
 {
 	"name": "me",
 	"version": "1.0.0",
-	"description": "Omar Elhwarii Portfolio",
-	"main": "src/ts/main.ts",
+	"description": "Omar Elhawary personal website",
 	"scripts": {
 		"start": "parcel src/index.html",
 		"build": "rm -rf docs && parcel build src/index.html -d docs --public-url ./"
 	},
-	"author": "iixixv",
+	"author": "oedotme",
 	"license": "ISC",
 	"devDependencies": {
 		"cssnano": "^4.1.10",
