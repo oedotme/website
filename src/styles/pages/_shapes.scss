@@ -1,29 +1,29 @@
 #shapes {
-	#square {
-		position: absolute;
-		left: -75px;
-		top: 90%;
-		height: 1200px;
-		width: 135px;
-		background: lighten($c-background, 25);
-		opacity: 0;
-		transform: translateY(20rem);
-		animation: bounce 1.5s ease-in-out forwards;
-	}
+  #square {
+    position: absolute;
+    left: -75px;
+    top: 90%;
+    height: 1200px;
+    width: 135px;
+    background: lighten($c-background, 25);
+    opacity: 0;
+    transform: translateY(20rem);
+    animation: bounce 1.5s ease-in-out forwards;
+  }
 }
 
 @keyframes bounce {
-	0%,
-	50% {
-		transform: translateY(20rem);
-	}
+  0%,
+  50% {
+    transform: translateY(20rem);
+  }
 
-	85% {
-		transform: translateY(-1.5rem);
-	}
+  85% {
+    transform: translateY(-1.5rem);
+  }
 
-	100% {
-		opacity: 0.08;
-		transform: translateY(0rem);
-	}
+  100% {
+    opacity: 0.08;
+    transform: translateY(0rem);
+  }
 }

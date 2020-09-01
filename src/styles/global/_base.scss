@@ -1,26 +1,26 @@
 ::selection {
-	background: lighten($c-primary, 25);
-	color: $c-background;
+  background: lighten($c-primary, 25);
+  color: $c-background;
 }
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-	background: $c-background;
-	font-family: $f-primary;
-	color: $c-primary;
-	font-size: 16px;
-	margin: 0 15px 15px;
-	overflow-x: hidden;
+  background: $c-background;
+  font-family: $f-primary;
+  color: $c-primary;
+  font-size: 16px;
+  margin: 0 15px 15px;
+  overflow-x: hidden;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 ul {
-	list-style-type: none;
+  list-style-type: none;
 }
