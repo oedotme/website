@@ -1,13 +1,16 @@
 {
-  "name": "me",
+  "name": "oedotme.github.io",
   "version": "1.0.0",
+  "author": "oedotme",
   "description": "Omar Elhawary personal website",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/oedotme/oedotme.github.io"
+  },
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "rm -rf docs && parcel build src/index.html -d docs --public-url ./"
   },
-  "author": "oedotme",
-  "license": "ISC",
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.1.1",
