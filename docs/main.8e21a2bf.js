@@ -3,8 +3,8 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{}],"OkNS":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("./nav"),t=document.querySelector("#about"),c=document.querySelector("#skills"),i=document.querySelector("#projects"),o=document.querySelector("#reach"),r=document.querySelector(".skills-link"),l=document.querySelector(".projects-link"),s=document.querySelector(".reach-link");window.addEventListener("scroll",function(){var a=window.scrollY,d=t.offsetHeight,n=d+c.offsetHeight-100,u=n+i.offsetHeight-100,v=u+o.offsetHeight;a+200<d?e.deactivate_link():a>d&&a<n?(e.deactivate_link(),r.classList.add("active")):a>n&&a<u?(e.deactivate_link(),l.classList.add("active")):a>u&&a<v&&(e.deactivate_link(),s.classList.add("active"))});
 },{"./nav":"FNjk"}],"NyrK":[function(require,module,exports) {
-var e=document.querySelector("#copy-mail"),t=function(){var t="iixixv.me@gmail.com",o=document.createElement("textarea");o.value=t,o.setAttribute("readonly",""),o.style.position="absolute",o.style.left="-9999px",document.body.appendChild(o),o.select(),document.execCommand("copy"),document.body.removeChild(o),e.setAttribute("title","Copied: "+t)};e.addEventListener("click",t);
+var e=document.querySelector("#copy-mail"),t=function(){var t="oedotme@gmail.com",o=document.createElement("textarea");o.value=t,o.setAttribute("readonly",""),o.style.position="absolute",o.style.left="-9999px",document.body.appendChild(o),o.select(),document.execCommand("copy"),document.body.removeChild(o),e.setAttribute("title","Copied: "+t)};e.addEventListener("click",t);
 },{}],"g7hl":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),require("./modules/nav"),require("./modules/scroll"),require("./modules/copy_mail");
 },{"./modules/nav":"FNjk","./modules/scroll":"OkNS","./modules/copy_mail":"NyrK"}]},{},["g7hl"], null)
-//# sourceMappingURL=main.dc749d24.js.map
+//# sourceMappingURL=main.8e21a2bf.js.map
