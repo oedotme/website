@@ -1,7 +1,7 @@
 const copy_mail_button = document.querySelector('#copy-mail')
 
 const copy_mail = () => {
-  const mail = 'iixixv.me@gmail.com'
+  const mail = 'oedotme@gmail.com'
 
   const element = document.createElement('textarea')
   element.value = mail
