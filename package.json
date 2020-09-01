@@ -1,17 +1,16 @@
 {
-	"name": "me",
-	"version": "1.0.0",
-	"description": "Omar Elhawary personal website",
-	"scripts": {
-		"start": "parcel src/index.html",
-		"build": "rm -rf docs && parcel build src/index.html -d docs --public-url ./"
-	},
-	"author": "oedotme",
-	"license": "ISC",
-	"devDependencies": {
-		"cssnano": "^4.1.10",
-		"node-sass": "^4.13.1",
-		"parcel-bundler": "^1.12.4",
-		"typescript": "^3.7.5"
-	}
+  "name": "me",
+  "version": "1.0.0",
+  "description": "Omar Elhawary personal website",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "rm -rf docs && parcel build src/index.html -d docs --public-url ./"
+  },
+  "author": "oedotme",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.1",
+    "sass": "^1.26.10",
+    "typescript": "^4.0.2"
+  }
 }
