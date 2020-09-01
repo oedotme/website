@@ -29,7 +29,7 @@
 
       #line {
         z-index: -1;
-        transform: translate(0.6rem, -1.4rem);
+        transform: translate(0.6rem, -0.4rem);
         display: inline-block;
         width: 96%;
         height: 1.4rem;
@@ -98,7 +98,7 @@
 @keyframes line_slide {
   0% {
     opacity: 0;
-    transform: translate(-70%, -1.4rem);
+    transform: translate(0.6rem, -1rem);
   }
   100% {
     transform: translate(0.6rem, -1.4rem);
