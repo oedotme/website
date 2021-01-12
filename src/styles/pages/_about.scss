@@ -34,7 +34,7 @@
         width: 96%;
         height: 1.4rem;
         opacity: 0;
-        background: $c-secondary;
+        background: lighten($c-background, 5);
         margin-bottom: 1rem;
         animation: line_slide 0.3s 0.7s ease forwards;
       }
@@ -102,6 +102,6 @@
   }
   100% {
     transform: translate(0.6rem, -1.4rem);
-    opacity: 0.9;
+    opacity: 1;
   }
 }
