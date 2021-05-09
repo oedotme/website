@@ -8,15 +8,14 @@
     "url": "https://github.com/oedotme/website"
   },
   "scripts": {
-    "dev": "parcel src/index.html",
-    "pre:build": "rm -rf docs && parcel build src/index.html -d docs --public-url ./",
-    "post:build": "echo omarelhawary.me > docs/CNAME",
-    "build": "npm run pre:build && npm run post:build"
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite preview"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
     "prettier": "^2.1.1",
     "sass": "^1.26.10",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.2",
+    "vite": "^2.2.4"
   }
 }
