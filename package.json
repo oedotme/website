@@ -1,11 +1,11 @@
 {
-  "name": "oedotme.github.io",
+  "name": "website",
   "version": "1.0.0",
   "author": "oedotme",
   "description": "Omar Elhawary personal website @ https://omarelhawary.me",
   "license": "ISC",
   "repository": {
-    "url": "https://github.com/oedotme/oedotme.github.io"
+    "url": "https://github.com/oedotme/website"
   },
   "scripts": {
     "dev": "parcel src/index.html",
@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
-    "prettier": "^2.1.1",
-    "sass": "^1.26.10",
-    "typescript": "^4.0.2"
+    "prettier": "^2.2.1",
+    "sass": "^1.32.12",
+    "typescript": "^4.2.4"
   }
 }
