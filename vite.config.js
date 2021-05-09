@@ -1,3 +1,5 @@
 import { defineConfig } from 'vite'
 
-export default defineConfig({ resolve: { alias: { '@': '/src' } } })
+export default defineConfig({
+  resolve: { alias: { '@': '/src' } },
+})
