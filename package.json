@@ -1,21 +1,55 @@
 {
   "name": "website",
   "version": "1.0.0",
-  "author": "oedotme",
   "description": "Omar Elhawary's personal website @ https://omarelhawary.me",
+  "author": "Omar Elhawary <oedotme@gmail.com> (https://omarelhawary.me)",
   "license": "ISC",
   "repository": {
     "url": "https://github.com/oedotme/website"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "start": "vite preview"
+    "build": "npm run compile && npm run client",
+    "export": "npm run static && npm run server && npm run compile && npm run prerender",
+    "start": "vite preview build/client",
+    "client": "vite build --outDir build/client/dist",
+    "static": "vite build --outDir build/static/dist",
+    "server": "vite build --outDir build/server/dist --ssr src/server.tsx",
+    "prerender": "node -r esbuild-register prerender.ts",
+    "compile": "tsc",
+    "format": "prettier --write 'src/**/*.{css,html,json,md,mdx,js,jsx,ts,tsx}'",
+    "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "hoofd": "^1.2.2",
+    "preact": "^10.5.13",
+    "wouter-preact": "^2.7.4"
   },
   "devDependencies": {
-    "prettier": "^2.1.1",
-    "sass": "^1.26.10",
-    "typescript": "^4.0.2",
-    "vite": "^2.2.4"
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@preact/preset-vite": "^2.1.0",
+    "@tailwindcss/jit": "^0.1.18",
+    "@types/node": "^15.3.0",
+    "@types/react": "^17.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "autoprefixer": "^10.2.5",
+    "esbuild-register": "^2.5.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "postcss": "^8.2.15",
+    "preact-render-to-string": "^5.1.19",
+    "prettier": "^2.3.0",
+    "tailwindcss": "^2.1.2",
+    "typescript": "^4.2.4",
+    "vite": "^2.3.2"
   }
 }
