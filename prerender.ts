@@ -26,7 +26,7 @@ for (const url of routes) {
   const html = template
     .replace(/<title>.+<\/title>/, `<title>${title}</title>`)
     .replace('<!--head-->', head)
-    .replace('<!--app-->', app)
+    .replace('<div id="app"></div>', `<div id="app">${app}</div>`)
 
   const dist = 'build/static/dist'
   const file = `./${dist}${url.replace(/\/$/, '/index')}.html`

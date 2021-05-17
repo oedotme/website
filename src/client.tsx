@@ -1,11 +1,17 @@
-import { render } from 'preact'
+import { hydrate, render } from 'preact'
 import { Router } from 'wouter-preact'
 
 import { App } from '@/app'
 
-render(
-  <Router>
-    <App />
-  </Router>,
-  document.querySelector('#app') as Element
-)
+function Client(): JSX.Element {
+  return (
+    <Router>
+      <App />
+    </Router>
+  )
+}
+
+const app = document.querySelector('#app') as Element
+
+if (app.hasChildNodes()) hydrate(<Client />, app)
+else render(<Client />, app)
