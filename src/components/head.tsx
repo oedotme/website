@@ -17,7 +17,7 @@ export default function Head(props: Props): null {
   const handler = ''
 
   const {
-    title = 'Omar Elhawary · Frontend Developer',
+    title = 'Omar Elhawary — Frontend developer',
     description = 'Frontend developer working with TypeScript and React',
     image = base + '/assets/logo.svg',
     type = 'website',
