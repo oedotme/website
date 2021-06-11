@@ -6,6 +6,6 @@ type Props = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, 
   width: string
 }
 
-export function Image({ alt, height, src, title, width, ...props }: Props): JSX.Element {
+export const Image = ({ alt, height, src, title, width, ...props }: Props): JSX.Element => {
   return <img alt={alt} height={height} src={src} title={title} width={width} {...props} />
 }
