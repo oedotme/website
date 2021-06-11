@@ -9,7 +9,7 @@ type Props = {
   date?: string
 }
 
-export default function Head(props: Props): null {
+export const Head = (props: Props): null => {
   const [location] = useLocation()
 
   const base = 'https://omarelhawary.me'

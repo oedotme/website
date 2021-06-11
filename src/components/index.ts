@@ -1,3 +1,3 @@
-export { default as Head } from './head'
-export { default as Header } from './header'
-export { default as Redirect } from './redirect'
+export * from './head'
+export * from './header'
+export * from './redirect'
