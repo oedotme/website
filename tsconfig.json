@@ -17,5 +17,5 @@
     "paths": { "@/*": ["src/*"] },
     "types": ["node", "vite/client"]
   },
-  "include": ["./src", "./prerender.ts"]
+  "include": ["src", "prerender.ts"]
 }
