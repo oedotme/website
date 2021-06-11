@@ -18,7 +18,7 @@
     "prerender": "node -r esbuild-register prerender.ts",
     "compile": "tsc",
     "format": "prettier --write 'src/**/*.{css,html,json,md,mdx,js,jsx,ts,tsx}'",
-    "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint --config eslint.config.js --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "prepare": "husky install"
   },
   "dependencies": {
