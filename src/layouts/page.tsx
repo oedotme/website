@@ -3,7 +3,7 @@ import { Head } from '@/components'
 type Props = {
   title: string
   description?: string
-  children: React.ReactNode
+  children: Children
 }
 
 export default function Page({ title, description, children }: Props): JSX.Element {

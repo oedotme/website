@@ -1,4 +1,4 @@
-type Props = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
+type Props = JSX.HTMLAttributes<HTMLImageElement> & {
   alt: string
   height: string
   src: string

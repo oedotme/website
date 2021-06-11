@@ -1,2 +1,3 @@
 import JSX = preact.JSX
-export default JSX
+
+type Children = preact.ComponentChildren
