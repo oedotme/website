@@ -1,5 +1,4 @@
-import 'tailwindcss/tailwind.css'
-
+import '@/styles'
 import { Routes } from '@/config'
 import { Main } from '@/layouts'
 
