@@ -1,11 +1,13 @@
 import '@/styles'
+import { Container, Footer, Header } from '@/components'
 import { Routes } from '@/config'
-import { Main } from '@/layouts'
 
 export function App(): JSX.Element {
   return (
-    <Main>
+    <Container>
+      <Header />
       <Routes />
-    </Main>
+      <Footer />
+    </Container>
   )
 }

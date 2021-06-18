@@ -10,7 +10,7 @@ export default function Page({ title, description, children }: Props): JSX.Eleme
   return (
     <>
       <Head title={title} description={description} />
-      {children}
+      <main>{children}</main>
     </>
   )
 }
