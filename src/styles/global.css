@@ -5,8 +5,3 @@
   font-display: optional;
   src: url(/fonts/inter-var-latin.woff2) format('woff2');
 }
-
-html {
-  min-width: 360px;
-  scroll-behavior: smooth;
-}
