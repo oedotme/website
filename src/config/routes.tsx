@@ -1,13 +1,13 @@
 import { Switch, Route } from 'wouter-preact'
 
-const files = import.meta.globEager(`../pages/**/*.tsx`)
+const files = import.meta.globEager(`../pages/**/*.(md|mdx|tsx)`)
 
 const paths = { '/404': '' }
 
 const routes = Object.keys(files)
   .reverse()
   .map((file) => {
-    const url = file.replace(/\.\.\/pages|index|\]|\.tsx$/g, '').replace(/\[/g, ':')
+    const url = file.replace(/\.\.\/pages|index|\.(mdx?|tsx)$/g, '').replace(/\[(.+)\]/, ':$1')
     const path = url.length === 1 ? url : url.replace(/\/$/, '')
 
     return {
