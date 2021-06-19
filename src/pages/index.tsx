@@ -11,7 +11,7 @@ export default function Home(): JSX.Element {
   const scrollToContact = () => contact?.current?.scrollIntoView()
 
   return (
-    <Page title="Omar Elhawary — Frontend developer">
+    <Page title="Omar Elhawary">
       <section className="flex flex-col justify-center font-medium min-h-screen py-28">
         <h1 className="leading-loose text-2xl xl:w-3/4">
           I’m a frontend developer interested in user/dev experience, design systems, statically typed languages and
