@@ -6,6 +6,11 @@ module.exports = {
   darkMode: 'media',
   theme: {
     extend: {
+      colors: {
+        default: '#111111',
+        primary: '#055ad4',
+        surface: '#fdfdfd',
+      },
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
       },
