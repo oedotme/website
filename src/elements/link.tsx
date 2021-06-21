@@ -6,19 +6,22 @@ type Props = JSX.HTMLAttributes<HTMLAnchorElement> & { to: string }
 
 const styles = {
   base: 'outline-none',
-  decoration: 'underline',
   states: {
-    active: 'active:opacity-80',
-    focus: 'focus-visible:ring-1 ring-black',
+    focus: 'focus-visible:ring-1 ring-black ring-offset-2',
+    hover: 'hover:opacity-100',
+  },
+  type: {
+    internal: 'p-2',
+    external: 'text-primary underline ring-primary',
   },
 }
 
-export const Link = ({ children, to, ...props }: Props): JSX.Element => {
-  const { base, decoration, states } = styles
+export const Link = ({ children, className, to, ...props }: Props): JSX.Element => {
+  const { base, states, type } = styles
 
   if (to.startsWith('/')) {
     return (
-      <InternalLink className={classNames(base, states.active, states.focus)} to={to}>
+      <InternalLink className={classNames(base, states.focus, states.hover, type.internal, className)} to={to}>
         {children}
       </InternalLink>
     )
@@ -27,7 +30,7 @@ export const Link = ({ children, to, ...props }: Props): JSX.Element => {
   return (
     <a
       {...props}
-      className={classNames(base, decoration, states.active, states.focus)}
+      className={classNames(base, states.focus, states.hover, type.external)}
       href={to}
       target="_blank"
       rel="noopener noreferrer"
