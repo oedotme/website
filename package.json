@@ -8,10 +8,10 @@
     "url": "https://github.com/oedotme/website"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "npm run compile && npm run client",
     "export": "npm run static && npm run server && npm run compile && npm run prerender",
-    "start": "vite preview build/client",
+    "start": "vite preview build/client --host",
     "client": "vite build --outDir build/client/dist",
     "static": "vite build --outDir build/static/dist",
     "server": "vite build --outDir build/server/dist --ssr src/server.tsx",
