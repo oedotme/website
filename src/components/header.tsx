@@ -5,8 +5,8 @@ import { classNames } from '@/utils'
 
 const links = [
   { content: 'Home', to: '/' },
-  { content: 'Projects', to: '/projects' },
   { content: 'Blog', to: '/blog' },
+  { content: 'Uses', to: '/uses' },
 ]
 
 export const Header = (): JSX.Element => {
