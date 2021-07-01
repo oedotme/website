@@ -7,11 +7,11 @@ type Props = JSX.HTMLAttributes<HTMLAnchorElement> & { href: string }
 const styles = {
   base: 'outline-none',
   states: {
-    focus: 'focus-visible:ring-1 ring-black ring-offset-2',
+    focus: 'focus-visible:ring-1 ring-offset-2 ring-offset-surface',
     hover: 'hover:opacity-100',
   },
   type: {
-    internal: 'py-2',
+    internal: 'p-2 ring-default',
     external: 'text-primary underline ring-primary',
   },
 }
