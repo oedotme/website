@@ -1,7 +1,7 @@
 import { useLocation } from 'wouter-preact'
 
 import { Link } from '@/elements'
-import { classNames } from '@/utils'
+import { classNames, theme } from '@/utils'
 
 const links = [
   { content: 'Home', to: '/' },
@@ -11,6 +11,8 @@ const links = [
 
 export const Header = (): JSX.Element => {
   const [location] = useLocation()
+
+  const toggleTheme = () => theme.set(['auto', 'light'].includes(theme.get() || '') ? 'dark' : 'light')
 
   return (
     <header>

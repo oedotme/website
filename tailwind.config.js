@@ -7,10 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        default: '#19253d',
-        primary: '#2a6cea',
-        neutral: '#f6f9ff',
-        surface: '#fcfcfc',
+        default: 'var(--default)',
+        primary: 'var(--primary)',
+        neutral: 'var(--neutral)',
+        surface: 'var(--surface)',
       },
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
