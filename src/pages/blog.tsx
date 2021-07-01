@@ -1,5 +1,5 @@
-export const title = "Omar Elhawary's Blog"
-export const description = "Omar Elhawary's Blog"
+export const title = 'Blog | Omar Elhawary'
+export const description = "Omar Elhawary's personal blog"
 
 export default function Blog(): JSX.Element {
   return (
