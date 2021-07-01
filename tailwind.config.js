@@ -16,6 +16,7 @@ module.exports = {
         sans: ['Inter', ...fontFamily.sans],
       },
       minHeight: {
+        xs: '20rem',
         sm: '40rem',
       },
     },
