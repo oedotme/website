@@ -2,7 +2,7 @@ import { Link as InternalLink } from 'wouter-preact'
 
 import { classNames } from '@/utils'
 
-type Props = JSX.HTMLAttributes<HTMLAnchorElement> & { to: string }
+type Props = JSX.HTMLAttributes<HTMLAnchorElement> & { href: string }
 
 const styles = {
   base: 'outline-none',
@@ -11,17 +11,17 @@ const styles = {
     hover: 'hover:opacity-100',
   },
   type: {
-    internal: 'p-2',
+    internal: 'py-2',
     external: 'text-primary underline ring-primary',
   },
 }
 
-export const Link = ({ children, className, to, ...props }: Props): JSX.Element => {
+export const Link = ({ children, className, href, ...props }: Props): JSX.Element => {
   const { base, states, type } = styles
 
-  if (to.startsWith('/')) {
+  if (href?.startsWith('/')) {
     return (
-      <InternalLink className={classNames(base, states.focus, states.hover, type.internal, className)} to={to}>
+      <InternalLink className={classNames(base, states.focus, states.hover, type.internal, className)} to={href}>
         {children}
       </InternalLink>
     )
@@ -31,7 +31,7 @@ export const Link = ({ children, className, to, ...props }: Props): JSX.Element 
     <a
       {...props}
       className={classNames(base, states.focus, states.hover, type.external)}
-      href={to}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
