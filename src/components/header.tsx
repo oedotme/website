@@ -1,5 +1,6 @@
 import { useLocation } from 'wouter-preact'
 
+import { Icons } from '@/config'
 import { Link } from '@/elements'
 import { classNames, theme } from '@/utils'
 
@@ -16,7 +17,7 @@ export const Header = (): JSX.Element => {
 
   return (
     <header>
-      <nav>
+      <nav className="flex justify-between">
         <ul className="flex flex-wrap gap-6 items-center font-medium text-base sm:gap-8">
           {links.map(({ content, to }) => (
             <li key={content}>
@@ -29,6 +30,10 @@ export const Header = (): JSX.Element => {
             </li>
           ))}
         </ul>
+
+        <button onClick={toggleTheme}>
+          <Icons.Theme />
+        </button>
       </nav>
     </header>
   )
