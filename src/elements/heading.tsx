@@ -4,12 +4,12 @@ const Heading = ({ as, ...props }: Props): JSX.Element => {
   const H = as
 
   const className = {
-    h1: 'font-extrabold leading-loose mb-10 text-4xl',
-    h2: 'font-bold leading-loose my-5 text-2xl max-w-6xl',
-    h3: 'font-semibold leading-loose my-5 text-xl max-w-6xl',
-    h4: 'font-semibold leading-loose my-5 text-lg max-w-6xl',
-    h5: 'font-medium leading-loose my-5 text-md max-w-6xl',
-    h6: 'font-medium leading-loose my-5 text-sm max-w-6xl',
+    h1: 'font-extrabold mt-12 mb-5 text-4xl',
+    h2: 'font-bold mt-12 mb-5 text-2xl max-w-6xl',
+    h3: 'font-semibold mt-10 mb-4 text-xl max-w-6xl',
+    h4: 'font-semibold mt-10 mb-4 text-lg max-w-6xl',
+    h5: 'font-medium mt-8 mb-3 text-md max-w-6xl',
+    h6: 'font-medium mt-6 mb-2 text-sm max-w-6xl',
   }
 
   return (
