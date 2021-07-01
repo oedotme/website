@@ -4,10 +4,10 @@
   --light-neutral: #f6f9ff;
   --light-surface: #fcfcfc;
 
-  --dark-default: #ededed;
+  --dark-default: #dddddd;
   --dark-primary: #759de8;
   --dark-neutral: #2e3748;
-  --dark-surface: #19253d;
+  --dark-surface: #0f1727;
 }
 
 :root {
