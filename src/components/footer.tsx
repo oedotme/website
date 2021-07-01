@@ -10,7 +10,7 @@ const links = [
 
 export const Footer = (): JSX.Element => {
   return (
-    <footer className="flex flex-col-reverse items-center gap-8 text-sm md:flex-row md:gap-32">
+    <footer className="flex flex-col-reverse items-center justify-between gap-8 text-sm md:flex-row md:gap-32">
       <span className="opacity-25">&copy; 2021 Omar Elhawary</span>
 
       <nav>
