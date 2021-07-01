@@ -18,7 +18,7 @@ export const Header = (): JSX.Element => {
   return (
     <header>
       <nav className="flex justify-between">
-        <ul className="flex flex-wrap gap-6 items-center font-medium text-base sm:gap-8">
+        <ul className="flex flex-wrap gap-2 items-center font-medium text-base sm:gap-6">
           {links.map(({ content, to }) => (
             <li key={content}>
               <Link
