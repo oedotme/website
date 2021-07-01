@@ -1,11 +1,13 @@
 import '@/styles'
-import { Container } from '@/components'
+import { Container, MDX } from '@/components'
 import { Routes } from '@/config'
 
 export function App(): JSX.Element {
   return (
     <Container>
-      <Routes />
+      <MDX>
+        <Routes />
+      </MDX>
     </Container>
   )
 }
