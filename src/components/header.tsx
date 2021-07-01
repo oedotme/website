@@ -15,11 +15,11 @@ export const Header = (): JSX.Element => {
   return (
     <header>
       <nav>
-        <ul className="flex flex-wrap gap-6 items-center font-medium text-base">
+        <ul className="flex flex-wrap gap-6 items-center font-medium text-base sm:gap-8">
           {links.map(({ content, to }) => (
             <li key={content}>
               <Link
-                to={to}
+                href={to}
                 className={classNames(location === to ? 'opacity-100' : 'opacity-50', 'transition-opacity delay-75')}
               >
                 {content}

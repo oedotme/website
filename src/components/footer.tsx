@@ -10,16 +10,18 @@ const links = [
 
 export const Footer = (): JSX.Element => {
   return (
-    <footer className="flex flex-col-reverse items-center gap-16 text-sm md:flex-row md:gap-32">
+    <footer className="flex flex-col-reverse items-center gap-8 text-sm md:flex-row md:gap-32">
       <span className="opacity-25">&copy; 2021 Omar Elhawary</span>
 
-      <ul className="flex flex-wrap gap-10 justify-center">
-        {links.map(({ content, to }) => (
-          <li key={content}>
-            <Link to={to}>{content}</Link>
-          </li>
-        ))}
-      </ul>
+      <nav>
+        <ul className="flex flex-wrap gap-4 justify-center sm:gap-10">
+          {links.map(({ content, to }) => (
+            <li key={content}>
+              <Link href={to}>{content}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </footer>
   )
 }
