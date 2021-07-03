@@ -1,4 +1,4 @@
-export const title = 'Omar Elhawary'
+export const title = 'Home | Omar Elhawary'
 export const description = "Omar Elhawary's personal website | Frontend developer"
 
 export default function Home(): JSX.Element {
