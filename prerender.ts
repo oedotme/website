@@ -13,7 +13,7 @@ const ls = (entry: string): string[] => {
 
 const files = ls('./src/pages')
 
-const routes = files.map((file: string) => file.replace(/^src\/pages|index|\.(mdx?|tsx$)/g, ''))
+const routes = files.map((file: string) => file.replace(/^src\/pages|index|\.(mdx?|tsx)$/g, ''))
 
 const colors = { cyan: '\x1b[36m', gray: '\x1b[37m', green: '\x1b[32m', magenta: '\x1b[35m', reset: '\x1b[0m' }
 const padding = Math.max(...routes.map((route: string) => route.length)) * 2
