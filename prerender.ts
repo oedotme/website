@@ -31,7 +31,7 @@ for (const url of routes) {
 
   const dist = 'build/static/dist'
   const file = `./${dist}${url.replace(/\/$/, '/index')}.html`
-  const dir = file.replace(/\/\[?[\w|\d]+\]?.html$/, '')
+  const dir = file.replace(/\/\[?[-|\w|\d]+\]?.html$/, '')
 
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
   fs.writeFileSync(path.resolve(file), html)
