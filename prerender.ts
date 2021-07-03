@@ -16,7 +16,7 @@ const files = ls('./src/pages')
 const routes = files.map((file: string) => file.replace(/^src\/pages|index|\.(mdx?|tsx)$/g, ''))
 
 const colors = { cyan: '\x1b[36m', gray: '\x1b[37m', green: '\x1b[32m', magenta: '\x1b[35m', reset: '\x1b[0m' }
-const padding = Math.max(...routes.map((route: string) => route.length)) * 2
+const padding = Math.max(...routes.map((route: string) => route.length)) * 1.2
 
 console.log(`${colors.cyan}prerender v0.1.0 ${colors.green}prerendering...${colors.reset}`)
 console.log(`${colors.green}✓${colors.reset} ${routes.length} pages prerendered.`)
@@ -37,7 +37,7 @@ for (const url of routes) {
   fs.writeFileSync(path.resolve(file), html)
 
   console.log(
-    `${colors.green}${url.length > 1 ? url.replace(/\/$/, '\t') : `${url}\t`}`.padEnd(padding),
+    `${colors.green}${url.length > 1 ? url.replace(/\/$/, '\t') : url}`.padEnd(padding),
     `\t${colors.reset}${Math.round((fs.lstatSync(file).size / 1024) * 100) / 100}kb`
   )
 }
