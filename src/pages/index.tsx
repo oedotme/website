@@ -1,4 +1,4 @@
-export const title = 'Home | Omar Elhawary'
+export const title = 'Home'
 export const description = "Omar Elhawary's personal website | Frontend developer"
 
 export default function Index(): JSX.Element {

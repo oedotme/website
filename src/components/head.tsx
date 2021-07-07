@@ -17,14 +17,14 @@ export const Head = (props: Props): null => {
   const handler = ''
 
   const {
-    title = 'Omar Elhawary',
+    title,
     description = 'Frontend developer working with TypeScript and React',
     image = base + '/assets/logo.svg',
     type = 'website',
     date = '',
   } = props
 
-  useTitle(title)
+  useTitle(title ? `${title} | Omar Elhawary` : 'Omar Elhawary')
   useMeta({ name: 'robots', content: 'follow, index' })
   useMeta({ name: 'description', content: description })
   useMeta({ property: 'og:url', content: url })

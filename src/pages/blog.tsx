@@ -3,7 +3,7 @@ import { useLocation } from 'wouter-preact'
 
 import { classNames } from '@/utils'
 
-export const title = 'Blog | Omar Elhawary'
+export const title = 'Blog'
 export const description = "Omar Elhawary's personal blog"
 
 const posts = [
