@@ -2,7 +2,7 @@ import { Switch, Route } from 'wouter-preact'
 
 import { Head } from '@/components'
 
-const files = import.meta.globEager(`../pages/**/*.(md|mdx|tsx)`)
+const files = import.meta.globEager('../pages/**/*.{md,mdx,tsx}')
 
 const paths = { '/404': '' }
 
