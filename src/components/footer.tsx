@@ -1,11 +1,11 @@
 import { Link } from '@/elements'
 
 const links = [
-  { content: 'Email', to: 'mailto:oedotme@gmail.com' },
-  { content: 'Resume', to: 'https://omarelhawary.me/files/omar-elhawary-resume.pdf' },
-  { content: 'GitHub', to: 'https://github.com/oedotme' },
-  { content: 'Twitter', to: 'https://twitter.com/oedotme' },
-  { content: 'LinkedIn', to: 'https://linkedin.com/in/oedotme' },
+  { content: 'Email', href: 'mailto:oedotme@gmail.com' },
+  { content: 'Resume', href: 'https://omarelhawary.me/files/omar-elhawary-resume.pdf' },
+  { content: 'GitHub', href: 'https://github.com/oedotme' },
+  { content: 'Twitter', href: 'https://twitter.com/oedotme' },
+  { content: 'LinkedIn', href: 'https://linkedin.com/in/oedotme' },
 ]
 
 export const Footer = (): JSX.Element => {
@@ -15,9 +15,9 @@ export const Footer = (): JSX.Element => {
 
       <nav>
         <ul className="flex flex-wrap gap-4 justify-center sm:gap-10">
-          {links.map(({ content, to }) => (
+          {links.map(({ content, href }) => (
             <li key={content}>
-              <Link href={to}>{content}</Link>
+              <Link href={href}>{content}</Link>
             </li>
           ))}
         </ul>

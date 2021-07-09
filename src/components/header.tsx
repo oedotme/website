@@ -5,9 +5,9 @@ import { Link } from '@/elements'
 import { classNames, theme } from '@/utils'
 
 const links = [
-  { content: 'Home', to: '/' },
-  { content: 'Blog', to: '/blog' },
-  { content: 'Uses', to: '/uses' },
+  { content: 'Home', href: '/' },
+  { content: 'Blog', href: '/blog' },
+  { content: 'Uses', href: '/uses' },
 ]
 
 export const Header = (): JSX.Element => {
@@ -19,12 +19,14 @@ export const Header = (): JSX.Element => {
     <header>
       <nav className="flex justify-between">
         <ul className="flex flex-wrap gap-2 items-center font-medium text-base sm:gap-6">
-          {links.map(({ content, to }) => (
+          {links.map(({ content, href }) => (
             <li
               key={content}
-              className={classNames(location === to ? 'opacity-100' : 'opacity-50', 'transition-opacity delay-75')}
+              className={classNames(location === href ? 'opacity-100' : 'opacity-50', 'transition-opacity delay-75')}
             >
-              <Link href={to}>{content}</Link>
+              <Link href={href} className="p-2">
+                {content}
+              </Link>
             </li>
           ))}
         </ul>
