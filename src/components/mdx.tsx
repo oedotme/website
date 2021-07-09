@@ -14,9 +14,9 @@ const components = {
   h4: H4,
   h5: H5,
   h6: H6,
+  li: List.Item,
   p: Text,
   ul: List,
-  li: List.Item,
 }
 
 export const MDX = ({ children }: Props): JSX.Element => {
