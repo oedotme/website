@@ -11,7 +11,7 @@ const styles = {
     hover: 'hover:opacity-100',
   },
   type: {
-    internal: 'p-2 ring-default',
+    internal: 'ring-default',
     external: 'text-primary underline ring-primary',
   },
 }
