@@ -1,6 +1,6 @@
 import { Switch, Route } from 'wouter-preact'
 
-import { Head } from '@/components'
+import { Head, Post } from '@/components'
 
 const files = import.meta.globEager('../pages/**/*.{md,mdx,tsx}')
 
@@ -17,17 +17,20 @@ const routes = Object.keys(files)
       component: files[file]?.default as () => JSX.Element,
       title: files[file]?.title as string,
       description: files[file]?.description as string,
+      tags: files[file]?.tags as string[],
+      date: files[file]?.date as string,
     }
   })
 
 export function Routes(): JSX.Element {
   return (
     <Switch>
-      {routes.map(({ path, component: Component, title, description }) => (
+      {routes.map(({ path, component: Component, title, description, tags, date }) => (
         <Route key={path} path={path}>
           {(params) => (
             <>
-              {path !== paths['/404'] && <Head title={title} description={description}></Head>}
+              {path !== paths['/404'] && <Head title={title} description={description} date={date}></Head>}
+              {path.startsWith('/blog/') && <Post.Header {...{ title, date, tags }} />}
               <Component {...params} />
             </>
           )}
