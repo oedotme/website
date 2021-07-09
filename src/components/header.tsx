@@ -22,7 +22,12 @@ export const Header = (): JSX.Element => {
           {links.map(({ content, href }) => (
             <li
               key={content}
-              className={classNames(location === href ? 'opacity-100' : 'opacity-50', 'transition-opacity delay-75')}
+              className={classNames(
+                'transition-opacity delay-75',
+                (location === href && href.length === 1) || (location.startsWith(href) && href.length > 1)
+                  ? 'opacity-100'
+                  : 'opacity-50'
+              )}
             >
               <Link href={href} className="p-2">
                 {content}
