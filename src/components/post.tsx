@@ -7,14 +7,14 @@ export const Post = ({ children }: Props): JSX.Element => {
   return <>{children}</>
 }
 
-const PostHeader = ({ title, published, tags }: { title: string; published: string; tags: string[] }): JSX.Element => {
+const PostHeader = ({ title, tags, date }: { title: string; tags: string[]; date: string }): JSX.Element => {
   return (
     <section>
       <Link className="inline-block mb-6 -mx-4 py-2 px-4" href="/blog">
         ⟵
       </Link>
       <H1>{title}</H1>
-      <span className="text-sm">{published}</span>
+      <span className="text-sm">{date}</span>
       <Tags tags={tags} />
     </section>
   )
