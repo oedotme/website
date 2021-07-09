@@ -1,7 +1,7 @@
-type Props = JSX.HTMLAttributes<HTMLHeadingElement> & { as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' }
+type Props = JSX.HTMLAttributes<HTMLHeadingElement> & { as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' }
 
 const Heading = ({ as, children, ...props }: Props): JSX.Element => {
-  const H = as
+  const H = as || 'h1'
 
   const className = {
     h1: 'font-extrabold mb-5 text-4xl',
@@ -13,7 +13,7 @@ const Heading = ({ as, children, ...props }: Props): JSX.Element => {
   }
 
   return (
-    <H className={className[as]} {...props}>
+    <H className={className[H]} {...props}>
       {children}
     </H>
   )
