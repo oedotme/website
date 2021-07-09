@@ -1,23 +1,28 @@
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'wouter-preact'
 
+import { Tags } from '@/components'
+import { Link } from '@/elements'
 import { classNames } from '@/utils'
 
 export const title = 'Blog'
 export const description = "Omar Elhawary's personal blog"
 
-const posts = [
-  { id: '1', title: 'First title', description: 'First description', updated: 'July 1, 2021', tags: ['web'] },
-  { id: '2', title: 'Second title', description: 'Second description', updated: 'July 2, 2021', tags: ['linux'] },
-  { id: '3', title: 'Third title', description: 'Third description', updated: 'July 3, 2021', tags: ['vim'] },
-  {
-    id: '4',
-    title: 'Fourth title',
-    description: 'Fourth description',
-    updated: 'July 4, 2021',
-    tags: ['linux', 'productivity'],
-  },
-]
+const files = import.meta.globEager('../pages/**/*.{md,mdx}')
+
+const posts = Object.keys(files)
+  .filter((file) => file.includes('/blog/'))
+  .map((file) => {
+    const path = file.replace(/\.\.\/pages|\.mdx?$/g, '')
+
+    return {
+      path,
+      title: files[file]?.title as string,
+      description: files[file]?.description as string,
+      tags: files[file]?.tags as string[],
+      date: files[file]?.date as string,
+    }
+  })
 
 const tags = [...new Set(posts.flatMap((post) => post.tags))].sort()
 
@@ -80,17 +85,13 @@ export default function Blog(): JSX.Element {
       <ul className="mt-20 mb-16">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
-            <li key={post.id} className="flex flex-col mt-10">
-              <h3 className="font-semibold leading-loose text-xl max-w-6xl">{post.title}</h3>
-              <span className="text-sm">{post.updated}</span>
-              <p className="mt-2">{post.description}</p>
-              <ul className="flex gap-3 mt-2">
-                {post.tags.map((tag) => (
-                  <li key={tag} className="bg-neutral font-medium text-default py-1 px-2 rounded-sm text-sm">
-                    {tag}
-                  </li>
-                ))}
-              </ul>
+            <li key={post.path} className="flex flex-col mt-10">
+              <Link href={post.path}>
+                <h3 className="font-semibold leading-loose text-xl max-w-6xl">{post.title}</h3>
+                <span className="text-sm">{post.date}</span>
+                <p className="mt-2">{post.description}</p>
+                <Tags tags={post.tags} />
+              </Link>
             </li>
           ))
         ) : (
