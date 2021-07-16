@@ -1,13 +1,17 @@
 :root {
   --light-default: #19253d;
   --light-primary: #2a6cea;
-  --light-neutral: #dee3ee;
+  --light-neutral: #fefeff;
   --light-surface: #fcfcfc;
+  --light-elevate: #e7ebf2;
+  --light-comment: #d3dae7;
 
-  --dark-default: #dddddd;
-  --dark-primary: #759de8;
-  --dark-neutral: #2e3748;
-  --dark-surface: #0f1727;
+  --dark-default: #dee3ee;
+  --dark-primary: #81a7f1;
+  --dark-neutral: #070e1d;
+  --dark-surface: #091121;
+  --dark-elevate: #1b263c;
+  --dark-comment: #3b4b6b;
 }
 
 :root {
@@ -16,6 +20,8 @@
   --primary: var(--light-primary);
   --neutral: var(--light-neutral);
   --surface: var(--light-surface);
+  --elevate: var(--light-elevate);
+  --comment: var(--light-comment);
 }
 
 [color-scheme='light'] {
@@ -24,6 +30,8 @@
   --primary: var(--light-primary);
   --neutral: var(--light-neutral);
   --surface: var(--light-surface);
+  --elevate: var(--light-elevate);
+  --comment: var(--light-comment);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +41,8 @@
     --primary: var(--dark-primary);
     --neutral: var(--dark-neutral);
     --surface: var(--dark-surface);
+    --elevate: var(--dark-elevate);
+    --comment: var(--dark-comment);
   }
 }
 
@@ -42,4 +52,6 @@
   --primary: var(--dark-primary);
   --neutral: var(--dark-neutral);
   --surface: var(--dark-surface);
+  --elevate: var(--dark-elevate);
+  --comment: var(--dark-comment);
 }

@@ -11,6 +11,8 @@ module.exports = {
         primary: 'var(--primary)',
         neutral: 'var(--neutral)',
         surface: 'var(--surface)',
+        elevate: 'var(--elevate)',
+        comment: 'var(--comment)',
       },
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
