@@ -22,6 +22,7 @@ const posts = Object.keys(files)
       date: files[file]?.date as string,
     }
   })
+  .sort((a, b) => +new Date(b.date) - +new Date(a.date))
 
 const tags = [...new Set(posts.flatMap((post) => post.tags))].sort()
 
