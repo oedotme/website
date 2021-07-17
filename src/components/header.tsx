@@ -24,7 +24,7 @@ export const Header = (): JSX.Element => {
           ))}
         </ul>
 
-        <button className="outline-none focus:ring-1 ring-default" onClick={toggleTheme}>
+        <button className="mx-1" onClick={toggleTheme}>
           <Icons.Theme />
         </button>
       </nav>
