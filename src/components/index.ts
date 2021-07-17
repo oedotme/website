@@ -1,3 +1,4 @@
+export * from './code'
 export * from './container'
 export * from './footer'
 export * from './head'
