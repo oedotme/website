@@ -62,7 +62,7 @@ export default function Blog(): JSX.Element {
       <h1 className="font-extrabold mb-10 text-4xl">All Posts</h1>
 
       <input
-        className="p-2 border-2 border-neutral focus:border-default outline-none w-full rounded bg-surface"
+        className="bg-neutral border border-elevate p-2 placeholder-comment outline-none rounded w-full focus:border-default"
         type="text"
         placeholder="Search posts..."
         value={input}
@@ -74,9 +74,10 @@ export default function Blog(): JSX.Element {
           <li key={tag} className="text-sm">
             <button
               className={classNames(
-                'font-medium',
-                active.includes(tag) ? 'bg-default text-neutral' : 'bg-neutral text-default',
-                'py-1 px-2 rounded-sm'
+                'border border-elevate font-medium py-1 px-2 rounded-sm',
+                active.includes(tag)
+                  ? 'bg-default border-default text-elevate'
+                  : 'bg-elevate text-default hover:border-default'
               )}
               onClick={() => handleClick(tag)}
             >
