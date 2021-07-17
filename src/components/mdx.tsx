@@ -1,5 +1,6 @@
 import { MDXProvider } from '@mdx-js/preact'
 
+import { Code, Pre } from '@/components'
 import { H1, H2, H3, H4, H5, H6, Link, List, Text } from '@/elements'
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
 
 const components = {
   a: Link,
+  inlineCode: Code,
   h1: H1,
   h2: H2,
   h3: H3,
@@ -17,6 +19,7 @@ const components = {
   li: List.Item,
   p: Text,
   ul: List,
+  pre: Pre,
 }
 
 export const MDX = ({ children }: Props): JSX.Element => {
