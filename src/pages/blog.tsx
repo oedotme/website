@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'wouter-preact'
 
-import { Tags } from '@/components'
 import { Link } from '@/elements'
 import { classNames } from '@/utils'
 
@@ -90,7 +89,6 @@ export default function Blog(): JSX.Element {
                 <h3 className="font-semibold leading-loose text-xl max-w-6xl">{post.title}</h3>
                 <span className="text-sm">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
-                <Tags tags={post.tags} />
               </Link>
             </li>
           ))
