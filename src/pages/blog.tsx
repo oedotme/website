@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useMemo, useState } from 'preact/hooks'
 import { useLocation } from 'wouter-preact'
 
 import { Link } from '@/elements'
@@ -48,9 +48,13 @@ export default function Blog(): JSX.Element {
       : (setActive((values) => [...values, tag]), setMounted(true))
   }
 
-  const filteredPosts = posts
-    .filter((post) => !active.length || active.every((tag) => post.tags.includes(tag)))
-    .filter((post) => JSON.stringify(post).toLowerCase().includes(input.toLowerCase()))
+  const filteredPosts = useMemo(
+    () =>
+      posts
+        .filter((post) => !active.length || active.every((tag) => post.tags.includes(tag)))
+        .filter((post) => JSON.stringify(post).toLowerCase().includes(input.toLowerCase())),
+    [active, input]
+  )
 
   return (
     <>
