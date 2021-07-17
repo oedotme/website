@@ -61,13 +61,16 @@ export default function Blog(): JSX.Element {
     <>
       <h1 className="font-extrabold mb-10 text-4xl">All Posts</h1>
 
-      <input
-        className="bg-neutral border border-elevate p-2 placeholder-comment outline-none rounded w-full focus:border-default"
-        type="text"
-        placeholder="Search posts..."
-        value={input}
-        onInput={handleInput}
-      />
+      <div className="relative">
+        <input
+          className="bg-neutral border border-elevate p-2 placeholder-comment outline-none rounded w-full focus:border-default"
+          type="text"
+          placeholder="Search posts..."
+          value={input}
+          onInput={handleInput}
+        />
+        <span className="absolute top-1 right-2 bg-neutral py-1 px-2 text-comment">{filteredPosts.length}</span>
+      </div>
 
       <ul className="flex gap-3 my-6">
         {tags.map((tag) => (
