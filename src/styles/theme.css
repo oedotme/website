@@ -3,15 +3,15 @@
   --light-primary: #2a6cea;
   --light-neutral: #fefeff;
   --light-surface: #fcfcfc;
-  --light-elevate: #e7ebf2;
-  --light-comment: #d3dae7;
+  --light-elevate: #edf0f6;
+  --light-comment: #72809a;
 
   --dark-default: #dee3ee;
   --dark-primary: #81a7f1;
   --dark-neutral: #070e1d;
   --dark-surface: #091121;
   --dark-elevate: #1b263c;
-  --dark-comment: #3b4b6b;
+  --dark-comment: #72809a;
 }
 
 :root {
