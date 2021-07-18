@@ -1,6 +1,9 @@
 const dev = import.meta.env.DEV
 
 export const env = {
+  mode: {
+    dev,
+  },
   api: {
     url: dev ? 'http://localhost:4000/api' : 'https://omarelhawary.me/api',
   },
