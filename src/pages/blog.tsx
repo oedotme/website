@@ -7,29 +7,18 @@ import { classNames } from '@/utils'
 export const title = 'Blog'
 export const description = "Omar Elhawary's personal blog"
 
-const files = import.meta.globEager('../pages/**/*.{md,mdx}')
-
-const posts = Object.keys(files)
-  .filter((file) => file.includes('/blog/'))
-  .map((file) => {
-    const path = file.replace(/\.\.\/pages|\.mdx?$/g, '')
-
-    return {
-      path,
-      title: files[file]?.title as string,
-      description: files[file]?.description as string,
-      tags: files[file]?.tags as string[],
-      date: files[file]?.date as string,
-    }
-  })
-  .sort((a, b) => +new Date(b.date) - +new Date(a.date))
-
-const tags = [...new Set(posts.flatMap((post) => post.tags))].sort()
-
 const getQuery = () => (typeof window !== 'undefined' ? window.location.search : undefined)
 const getTags = () => new URLSearchParams(getQuery()).get('tags')?.split(',') || []
 
-export default function Blog(): JSX.Element {
+type Post = { path: string; title: string; description: string; tags: string[]; date: string }
+
+type Props = {
+  posts?: Post[]
+  titles?: Record<string, number[]>
+  tags?: string[]
+}
+
+export default function Blog({ posts, tags }: Props): JSX.Element {
   const [mounted, setMounted] = useState(false)
   const [input, setInput] = useState('')
   const [active, setActive] = useState<string[]>(getQuery() === '?tags=' ? [] : getTags())
@@ -52,9 +41,9 @@ export default function Blog(): JSX.Element {
   const filteredPosts = useMemo(
     () =>
       posts
-        .filter((post) => !active.length || active.every((tag) => post.tags.includes(tag)))
+        ?.filter((post) => !active.length || active.every((tag) => post.tags.includes(tag)))
         .filter((post) => JSON.stringify(post).toLowerCase().includes(input.toLowerCase())),
-    [active, input]
+    [posts, active, input]
   )
 
   return (
@@ -69,11 +58,11 @@ export default function Blog(): JSX.Element {
           value={input}
           onInput={handleInput}
         />
-        <span className="absolute top-1 right-2 bg-neutral py-1 px-2 text-comment">{filteredPosts.length}</span>
+        <span className="absolute top-1 right-2 bg-neutral py-1 px-2 text-comment">{filteredPosts?.length}</span>
       </div>
 
       <ul className="flex gap-3 my-6">
-        {tags.map((tag) => (
+        {tags?.map((tag) => (
           <li key={tag} className="text-sm">
             <button
               className={classNames(
@@ -91,8 +80,8 @@ export default function Blog(): JSX.Element {
       </ul>
 
       <ul className="mt-20 mb-16">
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
+        {filteredPosts?.length ? (
+          filteredPosts?.map((post) => (
             <li key={post.path} className="flex flex-col mt-10">
               <Link href={post.path}>
                 <h3 className="font-semibold leading-loose text-xl max-w-6xl">{post.title}</h3>
