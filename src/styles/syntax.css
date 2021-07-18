@@ -1,0 +1,63 @@
+pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+.token {
+  color: var(--default);
+  background: var(--neutral);
+}
+
+.token.graphql .token.operator,
+.token.keyword,
+.token.rule {
+  color: var(--syntax-keywords);
+}
+
+.token.selector,
+.token.tag {
+  color: var(--syntax-selector);
+}
+
+.token.graphql .token.attr-name {
+  color: var(--syntax-warnings);
+}
+
+.token.attr-name,
+.token.boolean,
+.token.class,
+.token.constant,
+.token.doctype-tag,
+.token.function-variable,
+.token.graphql .token.class-name,
+.token.name,
+.token.nil,
+.token.number,
+.token.operator,
+.token.property,
+.token.property-access,
+.token.regex-delimiter,
+.token.scalar {
+  color: var(--syntax-property);
+}
+
+.token.entry.string,
+.token.function,
+.token.template-string {
+  color: var(--syntax-function);
+}
+
+.token.attr-value,
+.token.regex-source,
+.token.string {
+  color: var(--syntax-surround);
+}
+
+.token.comment,
+.token.shebang {
+  color: var(--syntax-comments);
+}

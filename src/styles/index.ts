@@ -1,4 +1,4 @@
 import './theme.css'
 import './global.css'
-import './prism.css'
+import './syntax.css'
 import './tailwind.css'
