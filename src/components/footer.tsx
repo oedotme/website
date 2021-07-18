@@ -14,7 +14,7 @@ export const Footer = (): JSX.Element => {
       <span className="text-comment opacity-50">&copy; 2021 Omar Elhawary</span>
 
       <nav>
-        <ul className="flex flex-wrap gap-4 justify-center sm:gap-10">
+        <ul className="flex flex-wrap gap-4 justify-center sm:gap-8">
           {links.map(({ content, href }) => (
             <li key={content}>
               <Link href={href}>{content}</Link>
