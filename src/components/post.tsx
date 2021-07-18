@@ -24,6 +24,22 @@ export const Post = ({ children, posts, titles, title, tags, date }: Props & Pos
       {children}
 
       <section className="my-8 text-sm">
+        <div className="flex justify-center gap-4 my-8 sm:justify-end sm:gap-6">
+          <Link
+            href={
+              `https://twitter.com/intent/tweet` +
+              `?text=${posts[current].title}` +
+              `&url=${env.web.url + posts[current].path}` +
+              `&via=oedotme` +
+              `&hashtags=${tags.join(',')}`
+            }
+          >
+            Share on Twitter
+          </Link>
+
+          <Link href={`https://twitter.com/search?q=${env.web.url + posts[current].path}`}>Discuss on Twitter</Link>
+        </div>
+
         <div className="flex gap-4 text-sm my-4">
           {prev <= posts.length - 1 && (
             <Link
