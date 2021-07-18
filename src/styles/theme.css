@@ -1,4 +1,4 @@
-:root {
+* {
   --light-default: #19253d;
   --light-primary: #2a6cea;
   --light-neutral: #fefeff;
@@ -24,16 +24,6 @@
   --comment: var(--light-comment);
 }
 
-[color-scheme='light'] {
-  color-scheme: light;
-  --default: var(--light-default);
-  --primary: var(--light-primary);
-  --neutral: var(--light-neutral);
-  --surface: var(--light-surface);
-  --elevate: var(--light-elevate);
-  --comment: var(--light-comment);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
@@ -44,6 +34,16 @@
     --elevate: var(--dark-elevate);
     --comment: var(--dark-comment);
   }
+}
+
+[color-scheme='light'] {
+  color-scheme: light;
+  --default: var(--light-default);
+  --primary: var(--light-primary);
+  --neutral: var(--light-neutral);
+  --surface: var(--light-surface);
+  --elevate: var(--light-elevate);
+  --comment: var(--light-comment);
 }
 
 [color-scheme='dark'] {
