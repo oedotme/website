@@ -12,6 +12,22 @@
   --dark-surface: #091121;
   --dark-elevate: #1b263c;
   --dark-comment: #72809a;
+
+  --light-syntax-keywords: #d73a49;
+  --light-syntax-selector: #22863a;
+  --light-syntax-warnings: #e36209;
+  --light-syntax-property: #005cc5;
+  --light-syntax-function: #6f42c1;
+  --light-syntax-surround: #032f62;
+  --light-syntax-comments: #6a737d;
+
+  --dark-syntax-keywords: #ff7b72;
+  --dark-syntax-selector: #7ee787;
+  --dark-syntax-warnings: #ffa657;
+  --dark-syntax-property: #79c0ff;
+  --dark-syntax-function: #d2a8ff;
+  --dark-syntax-surround: #a5d6ff;
+  --dark-syntax-comments: #8b949e;
 }
 
 :root {
@@ -22,6 +38,14 @@
   --surface: var(--light-surface);
   --elevate: var(--light-elevate);
   --comment: var(--light-comment);
+
+  --syntax-keywords: var(--light-syntax-keywords);
+  --syntax-selector: var(--light-syntax-selector);
+  --syntax-warnings: var(--light-syntax-warnings);
+  --syntax-property: var(--light-syntax-property);
+  --syntax-function: var(--light-syntax-function);
+  --syntax-surround: var(--light-syntax-surround);
+  --syntax-comments: var(--light-syntax-comments);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +57,14 @@
     --surface: var(--dark-surface);
     --elevate: var(--dark-elevate);
     --comment: var(--dark-comment);
+
+    --syntax-keywords: var(--dark-syntax-keywords);
+    --syntax-selector: var(--dark-syntax-selector);
+    --syntax-warnings: var(--dark-syntax-warnings);
+    --syntax-property: var(--dark-syntax-property);
+    --syntax-function: var(--dark-syntax-function);
+    --syntax-surround: var(--dark-syntax-surround);
+    --syntax-comments: var(--dark-syntax-comments);
   }
 }
 
@@ -44,6 +76,14 @@
   --surface: var(--light-surface);
   --elevate: var(--light-elevate);
   --comment: var(--light-comment);
+
+  --syntax-keywords: var(--light-syntax-keywords);
+  --syntax-selector: var(--light-syntax-selector);
+  --syntax-warnings: var(--light-syntax-warnings);
+  --syntax-property: var(--light-syntax-property);
+  --syntax-function: var(--light-syntax-function);
+  --syntax-surround: var(--light-syntax-surround);
+  --syntax-comments: var(--light-syntax-comments);
 }
 
 [color-scheme='dark'] {
@@ -54,4 +94,12 @@
   --surface: var(--dark-surface);
   --elevate: var(--dark-elevate);
   --comment: var(--dark-comment);
+
+  --syntax-keywords: var(--dark-syntax-keywords);
+  --syntax-selector: var(--dark-syntax-selector);
+  --syntax-warnings: var(--dark-syntax-warnings);
+  --syntax-property: var(--dark-syntax-property);
+  --syntax-function: var(--dark-syntax-function);
+  --syntax-surround: var(--dark-syntax-surround);
+  --syntax-comments: var(--dark-syntax-comments);
 }
