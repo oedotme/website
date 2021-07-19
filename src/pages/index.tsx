@@ -3,7 +3,7 @@ export const description = "Omar Elhawary's personal website | Frontend develope
 
 export default function Index(): JSX.Element {
   return (
-    <section className="flex flex-col justify-center gap-6 min-h-[68vh]">
+    <section className="flex flex-col justify-center gap-6 min-h-[50vh]">
       <h1 className="font-extrabold leading-loose mb-2 text-2xl sm:text-4xl sm:mb-6">Hi! Iʼm Omar Elhawary</h1>
 
       <h2 className="font-normal leading-loose text-lg max-w-6xl sm:text-xl sm:leading-loose ">
