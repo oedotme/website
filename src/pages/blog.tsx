@@ -32,6 +32,11 @@ export default function Blog({ posts, tags }: Props): JSX.Element {
   }, [mounted, active, setLocation])
 
   const handleInput = (event: Event) => setInput((event.target as HTMLInputElement).value)
+  const handleSubmit = (event: Event) => {
+    event.preventDefault()
+    const input = (event.target as HTMLFormElement)?.firstChild as HTMLInputElement
+    input?.blur()
+  }
   const handleClick = (tag: string) => {
     active.includes(tag)
       ? (setActive((values) => values.filter((value) => value !== tag)), setMounted(true))
@@ -50,7 +55,7 @@ export default function Blog({ posts, tags }: Props): JSX.Element {
     <>
       <h1 className="font-extrabold mb-10 text-4xl">All Posts</h1>
 
-      <div className="relative">
+      <form className="relative" onSubmit={handleSubmit}>
         <input
           className="bg-neutral border border-elevate p-2 placeholder-comment outline-none rounded w-full focus:border-default"
           type="text"
@@ -59,7 +64,7 @@ export default function Blog({ posts, tags }: Props): JSX.Element {
           onInput={handleInput}
         />
         <span className="absolute top-1 right-2 bg-neutral py-1 px-2 text-comment">{filteredPosts?.length}</span>
-      </div>
+      </form>
 
       <ul className="flex gap-3 my-6">
         {tags?.map((tag) => (
