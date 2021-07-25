@@ -1,5 +1,14 @@
-import { Redirect } from '@/components'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-export default function NotFound(): JSX.Element {
-  return <Redirect to="/" />
+import { default as Index } from '@/pages'
+
+export default function NotFound() {
+  const { replace } = useRouter()
+
+  useEffect(() => {
+    replace('/')
+  }, [replace])
+
+  return <Index />
 }
