@@ -1,9 +1,9 @@
-pre {
+code {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-pre::-webkit-scrollbar {
+code::-webkit-scrollbar {
   display: none;
 }
 

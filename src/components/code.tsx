@@ -1,20 +1,14 @@
-import { useRef, useState } from 'preact/hooks'
+import { useRef, useState } from 'react'
 
-export const Code = ({ children, ...props }: JSX.HTMLAttributes<HTMLElement>): JSX.Element => {
-  return (
-    <code {...props} className="bg-neutral border border-elevate font-medium text-sm rounded py-1 px-2">
-      {children}
-    </code>
-  )
-}
+type Props = HTMLCodeProps
 
-export const Pre = ({ children, ...props }: JSX.HTMLAttributes<HTMLPreElement>): JSX.Element => {
-  const ref = useRef<HTMLPreElement>(null)
+export const Code = ({ children, ...props }: Props) => {
+  const ref = useRef<HTMLElement>(null)
   const [copy, setCopy] = useState('Copy')
 
   const handleClick = () => {
     try {
-      const code = ref.current?.firstChild
+      const code = ref?.current
       const range = document.createRange()
       const selection = window.getSelection()
 
@@ -30,6 +24,14 @@ export const Pre = ({ children, ...props }: JSX.HTMLAttributes<HTMLPreElement>):
     }
   }
 
+  if (typeof children === 'string') {
+    return (
+      <code {...props} className="bg-neutral border border-elevate font-medium text-sm rounded py-1 px-2">
+        {children}
+      </code>
+    )
+  }
+
   return (
     <div className="relative group">
       <button
@@ -40,13 +42,13 @@ export const Pre = ({ children, ...props }: JSX.HTMLAttributes<HTMLPreElement>):
         {copy}
       </button>
 
-      <pre
+      <code
         {...props}
-        className="bg-neutral border border-elevate my-7 leading-normal overflow-x-scroll rounded text-sm p-5 pr-6"
+        className="bg-neutral block border border-elevate my-7 leading-normal overflow-x-scroll rounded text-sm p-5 pr-6"
         ref={ref}
       >
         {children}
-      </pre>
+      </code>
     </div>
   )
 }

@@ -1,5 +1,7 @@
-import { useLocation } from 'wouter-preact'
-import { useLink, useMeta, useTitle } from 'hoofd/preact'
+import NextHead from 'next/head'
+import { useRouter } from 'next/router'
+
+import { env } from '@/config'
 
 type Props = {
   title: string
@@ -9,37 +11,36 @@ type Props = {
   date?: string
 }
 
-export const Head = (props: Props): null => {
-  const [location] = useLocation()
-
-  const base = 'https://omarelhawary.me'
-  const url = base + location
-  const handler = ''
+export const Head = (props: Props) => {
+  const router = useRouter()
+  const url = env.web.url + router.asPath
 
   const {
     title,
     description = 'Frontend developer working with TypeScript and React',
-    image = base + '/assets/logo.svg',
+    image = env.web.url + '/assets/logo.svg',
     type = 'website',
     date = '',
   } = props
 
-  useTitle(title ? `${title} | Omar Elhawary` : 'Omar Elhawary')
-  useMeta({ name: 'robots', content: 'follow, index' })
-  useMeta({ name: 'description', content: description })
-  useMeta({ property: 'og:url', content: url })
-  useMeta({ property: 'og:type', content: type })
-  useMeta({ property: 'og:site_name', content: title })
-  useMeta({ property: 'og:title', content: title })
-  useMeta({ property: 'og:description', content: description })
-  useMeta({ property: 'og:image', content: image })
-  useMeta({ name: 'twitter:card', content: 'summary_large_image' })
-  useMeta({ name: 'twitter:site', content: handler })
-  useMeta({ name: 'twitter:title', content: title })
-  useMeta({ name: 'twitter:description', content: description })
-  useMeta({ name: 'twitter:image', content: image })
-  useMeta({ property: 'article:published_time', content: date })
-  useLink({ rel: 'canonical', href: url })
-
-  return null
+  return (
+    <NextHead>
+      <title> {title} | Omar Elhawary </title>
+      <link rel="canonical" href={url} />
+      <meta name="robots" content="follow, index" />
+      <meta name="description" content={description} />
+      <meta property="og:site_name" content="Omar Elhawary" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={url} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@oedotme" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
+      {date && <meta property="article:published_time" content={new Date(date).toISOString()} />}
+    </NextHead>
+  )
 }
