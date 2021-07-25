@@ -1,6 +1,8 @@
-type Props = JSX.HTMLAttributes<HTMLHeadingElement> & { as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' }
+type Props = HTMLHeadingProps & {
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+}
 
-const Heading = ({ as, children, ...props }: Props): JSX.Element => {
+const Heading = ({ as, children, ...props }: Props) => {
   const H = as || 'h1'
 
   const className = {
@@ -19,9 +21,9 @@ const Heading = ({ as, children, ...props }: Props): JSX.Element => {
   )
 }
 
-export const H1 = (props: Props): JSX.Element => <Heading {...props} as="h1" />
-export const H2 = (props: Props): JSX.Element => <Heading {...props} as="h2" />
-export const H3 = (props: Props): JSX.Element => <Heading {...props} as="h3" />
-export const H4 = (props: Props): JSX.Element => <Heading {...props} as="h4" />
-export const H5 = (props: Props): JSX.Element => <Heading {...props} as="h5" />
-export const H6 = (props: Props): JSX.Element => <Heading {...props} as="h6" />
+export const H1 = (props: Props) => <Heading {...props} as="h1" />
+export const H2 = (props: Props) => <Heading {...props} as="h2" />
+export const H3 = (props: Props) => <Heading {...props} as="h3" />
+export const H4 = (props: Props) => <Heading {...props} as="h4" />
+export const H5 = (props: Props) => <Heading {...props} as="h5" />
+export const H6 = (props: Props) => <Heading {...props} as="h6" />
