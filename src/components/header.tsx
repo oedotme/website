@@ -9,7 +9,7 @@ const content = [
 ]
 
 export const Header = () => {
-  const toggleTheme = () => theme.set(['auto', 'light'].includes(theme.get() || '') ? 'dark' : 'light')
+  const toggleTheme = () => theme.set(theme.get() === 'light' ? 'dark' : 'light')
 
   return (
     <header>
