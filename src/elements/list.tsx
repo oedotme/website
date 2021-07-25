@@ -1,6 +1,6 @@
-type Props = JSX.HTMLAttributes<HTMLUListElement>
+type Props = HTMLUListProps
 
-export const List = ({ children, ...props }: Props): JSX.Element => {
+export const List = ({ children, ...props }: Props) => {
   return (
     <ul {...props} className="flex flex-col gap-4">
       {children}
@@ -8,7 +8,9 @@ export const List = ({ children, ...props }: Props): JSX.Element => {
   )
 }
 
-const Item = ({ children, ...props }: JSX.HTMLAttributes<HTMLLIElement>): JSX.Element => {
+type ItemProps = HTMLLIProps
+
+const Item = ({ children, ...props }: ItemProps) => {
   return (
     <li {...props} className="leading-relaxed text-base">
       {children}
