@@ -1,8 +1,8 @@
-import { Link as InternalLink } from 'wouter-preact'
+import InternalLink from 'next/link'
 
 import { classNames } from '@/utils'
 
-type Props = JSX.HTMLAttributes<HTMLAnchorElement> & { href: string }
+type Props = HTMLAnchorProps & { as?: string }
 
 const styles = {
   base: 'outline-none text-primary underline',
@@ -11,13 +11,15 @@ const styles = {
   },
 }
 
-export const Link = ({ children, className, href, ...props }: Props): JSX.Element => {
+export const Link = ({ children, className, href, as, ...props }: Props) => {
   const { base, states } = styles
 
   if (href?.startsWith('/')) {
     return (
-      <InternalLink className={className} to={href}>
-        {children}
+      <InternalLink href={href} as={as}>
+        <a className={className} href={href}>
+          {children}
+        </a>
       </InternalLink>
     )
   }
