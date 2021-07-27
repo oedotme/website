@@ -14,9 +14,9 @@ export default function Index() {
         </h2>
 
         <h3 className="font-normal leading-loose text-lg max-w-6xl sm:text-xl sm:leading-loose">
-          Iʼm currently working at Wuzzuf as a frontend engineer using{' '}
-          <span className="font-semibold">TypeScript </span>
-          and <span className="font-semibold">React</span>.
+          Iʼm currently working at Wuzzuf as a frontend engineer using
+          <span className="font-semibold"> TypeScript </span>
+          and <span className="font-semibold"> React</span>.
         </h3>
 
         <h3 className="font-normal leading-loose text-lg max-w-6xl sm:text-xl sm:leading-loose">
