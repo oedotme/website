@@ -51,13 +51,13 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
         <div className="flex gap-4 text-sm my-4">
           {prev && (
             <Link className="font-medium rounded-sm truncate py-2 w-40 mr-auto" href={prev}>
-              &larr;&ensp; Previous post
+              <span className="mr-2">{'<--'}</span> Previous post
             </Link>
           )}
 
           {next && (
             <Link className="font-medium rounded-sm truncate py-2 w-40 text-right ml-auto" href={next}>
-              Next post &ensp;&rarr;
+              Next post <span className="ml-2">{'-->'}</span>
             </Link>
           )}
         </div>
