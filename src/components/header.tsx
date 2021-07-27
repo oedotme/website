@@ -24,7 +24,7 @@ export const Header = () => {
           ))}
         </ul>
 
-        <button className="mx-1" onClick={toggleTheme}>
+        <button aria-label="Toggle Theme" className="mx-1" onClick={toggleTheme}>
           <Icons.ThemeToggle />
         </button>
       </nav>
