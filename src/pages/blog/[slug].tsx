@@ -79,8 +79,7 @@ export const getStaticProps = async (context: { params: { slug: string } }) => {
   const { posts } = await getPostsMeta()
 
   const index = posts.map((post) => post.slug).indexOf(meta.slug)
-  const [prev, next] = [posts[index + 1]?.slug || null, posts[index - 1]?.slug || null]
-  const position = [prev, next]
+  const position = [posts[index + 1]?.slug || null, posts[index - 1]?.slug || null]
 
   return { props: { post: { meta, code, position } } }
 }
