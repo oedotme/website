@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { Head } from '@/components'
+import { Head, Tags } from '@/components'
 import { Link } from '@/elements'
 import { getPostsMeta, Post } from '@/lib'
 import { classNames } from '@/utils'
@@ -63,7 +63,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
               className={classNames(
                 'border border-elevate font-medium py-1 px-2 rounded-sm',
                 active.includes(tag)
-                  ? 'bg-default border-default text-elevate'
+                  ? 'bg-default border-default text-elevate focus:opacity-90 hover:opacity-90'
                   : 'bg-elevate text-default hover:border-default'
               )}
               onClick={() => handleClick(tag)}
@@ -82,6 +82,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
                 <h3 className="font-semibold leading-loose text-xl max-w-6xl">{post.title}</h3>
                 <span className="text-sm">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
+                <Tags tags={post.tags} />
               </Link>
             </li>
           ))
