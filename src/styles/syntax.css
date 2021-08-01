@@ -45,6 +45,7 @@ code::-webkit-scrollbar {
   color: var(--syntax-property);
 }
 
+.token.builtin,
 .token.entry.string,
 .token.function,
 .token.template-string {
