@@ -26,7 +26,7 @@ export const Code = ({ children, ...props }: Props) => {
 
   if (typeof children === 'string') {
     return (
-      <code {...props} className="bg-neutral border border-elevate font-medium text-sm rounded py-1 px-2">
+      <code {...props} className="bg-neutral border border-elevate font-bold text-sm rounded py-1 px-2">
         {children}
       </code>
     )
@@ -44,7 +44,7 @@ export const Code = ({ children, ...props }: Props) => {
 
       <code
         {...props}
-        className="bg-neutral block border border-elevate my-7 leading-normal overflow-x-scroll rounded text-sm p-5 pr-6"
+        className="bg-neutral block border border-elevate font-medium my-7 leading-normal overflow-x-scroll rounded text-sm p-5 pr-6"
         ref={ref}
       >
         {children}
