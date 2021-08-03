@@ -61,10 +61,8 @@ export default function Blog({ posts = [], tags = [] }: Props) {
           <li key={tag} className="text-sm">
             <button
               className={classNames(
-                'border border-elevate font-medium py-1 px-2 rounded-sm',
-                active.includes(tag)
-                  ? 'bg-default border-default text-elevate focus:opacity-90 hover:opacity-90'
-                  : 'bg-elevate text-default hover:border-default'
+                'border border-elevate font-medium py-1 px-2 rounded-sm hover:border-default',
+                active.includes(tag) ? 'bg-default text-elevate' : 'bg-elevate text-default'
               )}
               onClick={() => handleClick(tag)}
             >
