@@ -5,7 +5,7 @@ import { classNames } from '@/utils'
 type Props = HTMLAnchorProps & { as?: string }
 
 const styles = {
-  base: 'outline-none text-primary underline',
+  base: 'border-b border-elevate outline-none text-primary',
   states: {
     focus: 'ring-primary ring-offset-2 ring-offset-surface focus-visible:ring-1',
   },
