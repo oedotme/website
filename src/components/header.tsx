@@ -1,4 +1,4 @@
-import { Icons } from '@/config'
+import { ThemeToggle } from '@/components'
 import { Link } from '@/elements'
 import { theme } from '@/utils'
 
@@ -25,7 +25,7 @@ export const Header = () => {
         </ul>
 
         <button aria-label="Toggle Theme" className="mx-1" onClick={toggleTheme}>
-          <Icons.ThemeToggle />
+          <ThemeToggle />
         </button>
       </nav>
     </header>
