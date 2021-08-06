@@ -1,5 +1,5 @@
 import { Head } from '@/components'
-import { H1, H2, Link, List } from '@/elements'
+import { H1, H2, Link, List, ListItem } from '@/elements'
 
 const content = [
   ['Outline', 'Video/Chat web application', 'https://outlineapp.netlify.app'],
@@ -16,9 +16,9 @@ export default function Lab() {
       <H2>Links</H2>
       <List>
         {content.map(([name, description, link]) => (
-          <List.Item key={name}>
+          <ListItem key={name}>
             <Link href={link}>{name}</Link> - {description}
-          </List.Item>
+          </ListItem>
         ))}
       </List>
     </>

@@ -1,5 +1,5 @@
 import { Head } from '@/components'
-import { H1, H2, Link, List } from '@/elements'
+import { H1, H2, Link, List, ListItem } from '@/elements'
 
 const content = {
   environment: [
@@ -31,18 +31,18 @@ export default function Uses() {
       <H2>Environment</H2>
       <List>
         {content.environment.map(([name, description, link]) => (
-          <List.Item key={name}>
+          <ListItem key={name}>
             <Link href={link}>{name}</Link> - {description}
-          </List.Item>
+          </ListItem>
         ))}
       </List>
 
       <H2>CLI</H2>
       <List>
         {content.cli.map(([name, description, link]) => (
-          <List.Item key={name}>
+          <ListItem key={name}>
             <Link href={link}>{name}</Link> - {description}
-          </List.Item>
+          </ListItem>
         ))}
       </List>
     </>

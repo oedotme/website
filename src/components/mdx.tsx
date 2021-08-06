@@ -1,5 +1,4 @@
-import { Code } from '@/components'
-import { H1, H2, H3, H4, H5, H6, Link, List, Text } from '@/elements'
+import { Code, H1, H2, H3, H4, H5, H6, Link, List, ListItem, Strong, Text } from '@/elements'
 
 export const MDXComponents = {
   a: Link,
@@ -10,7 +9,8 @@ export const MDXComponents = {
   h4: H4,
   h5: H5,
   h6: H6,
-  li: List.Item,
+  li: ListItem,
   p: Text,
+  strong: Strong,
   ul: List,
 }
