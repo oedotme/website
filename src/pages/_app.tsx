@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import '@/styles/theme.css'
+import '@/styles/colors.css'
 import '@/styles/global.css'
 import '@/styles/syntax.css'
 import '@/styles/layers.css'
