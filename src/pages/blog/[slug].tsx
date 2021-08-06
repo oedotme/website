@@ -23,13 +23,15 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
     <>
       <Head title={meta.title} description={meta.description} type="article" date={meta.date} />
 
-      <section className="mb-16">
-        <H1>{meta.title}</H1>
-        <span className="text-sm">{meta.date}</span>
-        <Tags tags={meta.tags} />
-      </section>
+      <H1>{meta.title}</H1>
+      <span className="text-sm">{meta.date}</span>
+      <Tags tags={meta.tags} />
+
+      <hr className="border-0 h-16" />
 
       <Component components={MDXComponents} />
+
+      <hr className="border-0 h-4" />
 
       <section className="my-8 text-sm">
         <div className="flex justify-center gap-4 my-8 sm:justify-end sm:gap-6">
