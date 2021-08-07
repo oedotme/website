@@ -1,1 +1,1 @@
-export * from './mdx'
+export * from './posts'
