@@ -6,8 +6,8 @@ const styles = {
   h5: 'font-bold mt-8 mb-2 text-base',
   h6: 'font-bold mt-6 mb-2 text-base',
   hr: 'my-5 border-surface',
-  list: 'mb-6 list-disc list-inside',
-  listItem: 'mb-4 leading-relaxed text-base marker:text-elevate',
+  list: 'mb-6 ml-4 list-disc list-inside',
+  listItem: 'mb-4 leading-relaxed text-base marker:text-default',
   strong: 'font-semibold',
   text: 'mb-5 text-base leading-loose',
 }
