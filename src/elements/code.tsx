@@ -26,7 +26,7 @@ export const Code = ({ children, ...props }: Props) => {
 
   if (!props.className?.includes('language-')) {
     return (
-      <code {...props} className="bg-neutral border border-elevate font-bold rounded py-1 px-2">
+      <code {...props} className="bg-element rounded py-1 px-1">
         {children}
       </code>
     )
