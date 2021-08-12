@@ -14,7 +14,7 @@ export default function Lab() {
       <H1>Lab</H1>
 
       <H2>Links</H2>
-      <List>
+      <List className="list-none">
         {content.map(([name, description, link]) => (
           <ListItem key={name}>
             <Link href={link}>{name}</Link> - {description}

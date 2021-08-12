@@ -29,7 +29,7 @@ export default function Uses() {
       <H1>Uses</H1>
 
       <H2>Environment</H2>
-      <List>
+      <List className="list-none">
         {content.environment.map(([name, description, link]) => (
           <ListItem key={name}>
             <Link href={link}>{name}</Link> - {description}
@@ -38,7 +38,7 @@ export default function Uses() {
       </List>
 
       <H2>CLI</H2>
-      <List>
+      <List className="list-none">
         {content.cli.map(([name, description, link]) => (
           <ListItem key={name}>
             <Link href={link}>{name}</Link> - {description}
