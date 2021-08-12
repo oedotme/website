@@ -18,8 +18,8 @@ export const H3 = (props: HTMLHeadingProps) => <h3 className={styles.h3} {...pro
 export const H4 = (props: HTMLHeadingProps) => <h4 className={styles.h4} {...props} />
 export const H5 = (props: HTMLHeadingProps) => <h5 className={styles.h5} {...props} />
 export const H6 = (props: HTMLHeadingProps) => <h6 className={styles.h6} {...props} />
-export const ListItem = (props: HTMLLIProps) => <li className={styles.listItem} {...props} />
 export const HR = (props: HTMLHRProps) => <hr className={styles.hr} {...props} />
 export const List = (props: HTMLUListProps) => <ul className={styles.list} {...props} />
+export const ListItem = (props: HTMLLIProps) => <li className={styles.listItem} {...props} />
 export const Strong = (props: HTMLStrongProps) => <strong className={styles.strong} {...props} />
 export const Text = (props: HTMLParagraphProps) => <p className={styles.text} {...props} />
