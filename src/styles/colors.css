@@ -3,6 +3,7 @@
   --light-primary: #2a6cea;
   --light-neutral: #fefeff;
   --light-surface: #fcfcfc;
+  --light-element: #f5f6f7;
   --light-elevate: #edf0f6;
   --light-comment: #72809a;
 
@@ -10,6 +11,7 @@
   --dark-primary: #81a7f1;
   --dark-neutral: #070e1d;
   --dark-surface: #091121;
+  --dark-element: #0f182c;
   --dark-elevate: #1b263c;
   --dark-comment: #72809a;
 
@@ -36,6 +38,7 @@
   --primary: var(--light-primary);
   --neutral: var(--light-neutral);
   --surface: var(--light-surface);
+  --element: var(--light-element);
   --elevate: var(--light-elevate);
   --comment: var(--light-comment);
 
@@ -55,6 +58,7 @@
     --primary: var(--dark-primary);
     --neutral: var(--dark-neutral);
     --surface: var(--dark-surface);
+    --element: var(--dark-element);
     --elevate: var(--dark-elevate);
     --comment: var(--dark-comment);
 
@@ -74,6 +78,7 @@
   --primary: var(--light-primary);
   --neutral: var(--light-neutral);
   --surface: var(--light-surface);
+  --element: var(--light-element);
   --elevate: var(--light-elevate);
   --comment: var(--light-comment);
 
@@ -92,6 +97,7 @@
   --primary: var(--dark-primary);
   --neutral: var(--dark-neutral);
   --surface: var(--dark-surface);
+  --element: var(--dark-element);
   --elevate: var(--dark-elevate);
   --comment: var(--dark-comment);
 

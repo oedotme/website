@@ -12,6 +12,7 @@ module.exports = {
         neutral: 'var(--neutral)',
         surface: 'var(--surface)',
         elevate: 'var(--elevate)',
+        element: 'var(--element)',
         comment: 'var(--comment)',
       },
       fontFamily: {
