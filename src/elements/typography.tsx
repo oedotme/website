@@ -5,6 +5,7 @@ const styles = {
   h4: 'font-bold mt-10 mb-4 text-lg',
   h5: 'font-bold mt-8 mb-2 text-base',
   h6: 'font-bold mt-6 mb-2 text-base',
+  hr: 'my-5 border-surface',
   list: 'mb-6 list-disc list-inside',
   listItem: 'mb-4 leading-relaxed text-base marker:text-elevate',
   strong: 'font-semibold',
@@ -18,6 +19,7 @@ export const H4 = (props: HTMLHeadingProps) => <h4 className={styles.h4} {...pro
 export const H5 = (props: HTMLHeadingProps) => <h5 className={styles.h5} {...props} />
 export const H6 = (props: HTMLHeadingProps) => <h6 className={styles.h6} {...props} />
 export const ListItem = (props: HTMLLIProps) => <li className={styles.listItem} {...props} />
+export const HR = (props: HTMLHRProps) => <hr className={styles.hr} {...props} />
 export const List = (props: HTMLUListProps) => <ul className={styles.list} {...props} />
 export const Strong = (props: HTMLStrongProps) => <strong className={styles.strong} {...props} />
 export const Text = (props: HTMLParagraphProps) => <p className={styles.text} {...props} />
