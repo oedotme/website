@@ -9,9 +9,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "export": "next build && next export -o build",
+    "build": "next build && npm run sitemap",
+    "static": "next export -o build",
+    "export": "npm run build && npm run static",
     "start": "next start",
+    "sitemap": "node -r esbuild-register sitemap.js",
     "compile": "tsc",
     "format": "prettier -w 'src/**/*.{css,html,json,md,mdx,js,jsx,ts,tsx}'",
     "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
