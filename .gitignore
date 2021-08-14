@@ -1,5 +1,6 @@
 .next
 build
 node_modules
-.env
-draft
+content/draft
+public/sitemap.xml
+.env.local
