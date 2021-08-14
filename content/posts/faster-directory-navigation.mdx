@@ -1,0 +1,137 @@
+---
+title: Faster directory navigation
+description: Running one-line command for fast interactive directory changing with fzf
+tags: [cli, fzf, productivity]
+date: August 14, 2021
+---
+
+Changing directories is something we do **many** times while using the command-line, almost every time you've the headache of keeping track of directories you visit often or you'd just guess.
+
+Well, if you use shell completion it will give you useful suggestions so no more guessing, but it's still **slow** as you move directories **one by one**.
+
+What if you can run **one-line** command, that lists **all the directories** and you only need to type the directory name and hit the `Enter` key to **select** it and finally you'll be in this target directory.
+
+You'd be surprised how **easy** it's to compose such command, today we'll discuss about combining `cd` with `fzf` to have **faster** navigation **experience**.
+
+Let me introduce you to `fzf`, it's a general purpose command-line **fuzzy finder**. It provides a very **fast** **interactive** interface that can be used with any type of **list**.
+
+Take a look at the final command before we dive in :
+
+```shell
+cd $(find * -type d | fzf)
+```
+
+Don't worry in case it doesn't make sense just yet, let's break down this command into three steps before we discuss all in details shortly :
+
+- `find * -type d` — will give us list of directories
+- `fzf` — will provide us an input to filter this list
+- `cd` — will change directory taking `fzf` output as an argument
+
+If you're want to **follow along**, you can get `fzf` from this [installation guide](https://github.com/junegunn/fzf#installation).
+
+## Listing directories
+
+At the beginning we would to **list directories** we need to search in before **filtering** them, there are many tools to do that and for today we'll use `find` as it usually already installed on most systems.
+
+Let's now see how to use it in action and take a look at its output :
+
+```shell
+find * -type d
+```
+
+```shell
+~/files
+~/files/personal
+~/files/personal/photos
+~/files/personal/notes
+~/files/work
+~/files/work/notes
+~/files/work/docs
+```
+
+`find` will list directories **recursively** starting from your current directory.
+
+Here we used `*` as an argument to ignore the **hidden** directories, you could replace `*` with `.` to include **all** directories.
+
+You've also noticed we used `-type d` flag and that's to tell `find` to search for only directories as it searches both files and directories by default. So we have to specify that option to look only for directories.
+
+Depending on your files structure, `find` output could vary from **hundreds** to **thousands** of directories, and here comes `fzf` to filter this result to the target directory path.
+
+## Choosing directory
+
+So the second step is to search through those directories and select our target destination.
+
+`fzf` works with lists, now we just need to pass the list of directories we got from `find` and `fzf` then we can type, filter and go `Up` and `Down` with the arrow keys.
+
+Let's now pipe `find` output into `fzf` and see its output :
+
+```shell
+find * -type d | fzf
+```
+
+```shell
+» |
+  7/7 (0)
+› ~/files
+  ~/files/personal
+  ~/files/personal/photos
+  ~/files/personal/notes
+  ~/files/work
+  ~/files/work/notes
+  ~/files/work/docs
+```
+
+It doesn't look so much different than what we saw with `find` output, but the **cool** thing is now you can start typing and it will be filtered to match your input.
+
+If we are looking for `notes/` directory for example, let's then type `notes` and see the list updating :
+
+```shell
+» notes
+  2/7 (0)
+› ~/files/personal/notes
+  ~/files/work/notes
+```
+
+If you **select** a directory by hitting `Enter`, it'll be only printed to the console :
+
+```shell
+~/files/personal/notes
+```
+
+## Changing directory
+
+Now comes the last step, let's now take the result of `fzf` and pass it to `cd` :
+
+```shell
+cd $(find * -type d | fzf)
+```
+
+Again by **typing** `notes` then **selecting** its path, the expression `$(find * -type d | fzf)` will be evaluated to `~/files/personal/notes` to become the argument of `cd`, and finally the current directory will be changed to the selected directory.
+
+## Additional tips
+
+I would recommend setting an **alias** to access this command easily, it might also make sense to start searching from the home directory : `cd ~`.
+
+```shell
+# bash | zsh
+alias go="cd ~ && cd \$(find * -type d | fzf)"
+
+# fish
+alias go "cd ~ && cd (find * -type d | fzf)"
+```
+
+You could set this alias permanently by adding the line above to your shell configuration file as `.bashrc`, `.zshrc` or `config.fish` depending on what you're using.
+
+If you want to **ignore** some directories with `find` you'll need a flag with an ignore pattern, or you can replace `find` with [`fd`](https://github.com/sharkdp/fd) or [`rg`](https://github.com/BurntSushi/ripgrep) as a search tool with a global `.ignore` file and both are very fast.
+
+There are also some [key bindings](https://github.com/junegunn/fzf#key-bindings-for-command-line) and widgets comes with `fzf` that might **not** be enabled by default, it would enable you to press `ATL-C` or run the command `fzf-cd-widget` to change directories.
+
+## What's next
+
+As you can see in case you work with **hundreds** or even **thousands** of directories, searching for a one directory with `fzf` would be much more **efficient** than just using `cd`.
+
+I'm currently using `fzf` with `nvim`, `npm` scripts and `git` commands, shell scripts and basically **anything** I could think of to make my life **easier**. Let me know if you are interested to know more about some of those use cases in future posts.
+
+I'm curious to know if you've used `fzf` before and how it fits in your current workflow or if you have ideas to optimize your workflow with `fzf`.
+
+Share this post if you find it useful and stay tuned for upcoming posts. If you have questions or got stuck at some point, leave a comment on the discussion and I'd be happy to help.
