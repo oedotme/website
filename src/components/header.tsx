@@ -5,6 +5,7 @@ import { theme } from '@/utils'
 const content = [
   ['Home', '/'],
   ['Blog', '/blog'],
+  ['Projects', '/projects'],
   ['Uses', '/uses'],
 ]
 
