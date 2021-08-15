@@ -45,7 +45,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
     <>
       <Head title={title} description={description} />
 
-      <h1 className="font-extrabold mb-10 text-4xl">All Posts</h1>
+      <h1 className="font-bold mb-10 text-4xl">All Posts</h1>
 
       <form className="relative" onSubmit={handleSubmit}>
         <input
