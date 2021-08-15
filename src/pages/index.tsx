@@ -11,7 +11,7 @@ const content = {
   projects: [
     ['Outline', 'Video/Chat web application', 'https://outlineapp.netlify.app'],
     ['Render', 'Opinionated React template', 'https://github.com/oedotme/render'],
-    ['ST', 'Fork of st - simple terminal emulator', 'https://github.com/oedotme/st'],
+    ['Simple terminal', 'Fork of st - simple terminal', 'https://github.com/oedotme/st'],
   ],
 }
 
