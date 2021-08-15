@@ -1,6 +1,9 @@
 import { Head } from '@/components'
 import { H1, H2, Link, List, ListItem } from '@/elements'
 
+const title = 'Uses'
+const description = 'Application and tools I use for my software development environment'
+
 const content = {
   environment: [
     ['Arch', 'Lightweight Linux distribution', 'https://archlinux.org'],
@@ -24,7 +27,7 @@ const content = {
 export default function Uses() {
   return (
     <>
-      <Head title="Uses" description="Tools Omar Elhawary uses at software development" />
+      <Head title={title} description={description} />
 
       <H1>Uses</H1>
 

@@ -2,13 +2,14 @@ import { Head } from '@/components'
 import { env } from '@/config'
 import { Link } from '@/elements'
 
+const title = 'Home'
+const description =
+  'Frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming'
+
 export default function Home() {
   return (
     <>
-      <Head
-        title="Home"
-        description="I'm a frontend developer and a linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming"
-      />
+      <Head title={title} description={description} />
 
       <section className="flex flex-col justify-center gap-6 min-h-[50vh]">
         <h1 className="font-extrabold leading-loose mb-2 text-4xl sm:mb-6">Hi! Iʼm Omar!</h1>

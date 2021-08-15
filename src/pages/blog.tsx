@@ -6,6 +6,9 @@ import { Link } from '@/elements'
 import { getPostsMeta, Post } from '@/lib'
 import { classNames } from '@/utils'
 
+const title = 'Blog'
+const description = 'Thoughts about web development, tooling, linux and vim'
+
 type Props = {
   posts: Post[]
   tags: string[]
@@ -40,7 +43,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
 
   return (
     <>
-      <Head title="Blog" description="Omar Elhawary's personal blog" />
+      <Head title={title} description={description} />
 
       <h1 className="font-extrabold mb-10 text-4xl">All Posts</h1>
 
