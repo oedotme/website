@@ -1,8 +1,9 @@
+import { env } from '@/config'
 import { Link } from '@/elements'
 
 const content = [
   ['Email', 'mailto:oedotme@gmail.com'],
-  ['Resume', 'https://omarelhawary.me/files/omar-elhawary-resume.pdf'],
+  ['Resume', env.web.url + '/files/omar-elhawary-resume.pdf'],
   ['GitHub', 'https://github.com/oedotme'],
   ['Twitter', 'https://twitter.com/oedotme'],
   ['LinkedIn', 'https://linkedin.com/in/oedotme'],

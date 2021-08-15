@@ -1,6 +1,8 @@
 import fs from 'fs/promises'
 import prettier from 'prettier'
 
+import { env } from './src/config'
+
 const getFiles = (path) => fs.readdir(process.cwd() + path)
 
 const generateSitemap = async () => {
@@ -17,7 +19,7 @@ const generateSitemap = async () => {
         .map(
           (url) => `
             <url>
-              <loc>${'https://omarelhawary.me' + `${url === '/index' ? '' : url}`}</loc>
+              <loc>${env.web.url + `${url === '/index' ? '' : url}`}</loc>
             </url>
           `
         )
