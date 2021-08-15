@@ -30,7 +30,10 @@ const generateSitemap = async () => {
   const config = await prettier.resolveConfig('./prettier.config.js')
   const formatted = prettier.format(sitemap, { ...config, parser: 'html' })
 
-  await fs.writeFile(process.cwd() + '/public/sitemap.xml', formatted)
+  await fs.writeFile(process.cwd() + '/public/sitemap.xml', formatted).catch(() => process.exit(1))
+
+  const { cyan, green, reset } = { cyan: '\x1b[36m', green: '\x1b[32m', reset: '\x1b[0m' }
+  console.log(`${cyan}info${reset}  - Updated ${green}public/sitemap.xml${reset}`)
 }
 
 generateSitemap()
