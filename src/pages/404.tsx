@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { default as Index } from '@/pages'
+import { default as Home } from '@/pages'
 
 export default function NotFound() {
   const { replace } = useRouter()
@@ -10,5 +10,5 @@ export default function NotFound() {
     replace('/')
   }, [replace])
 
-  return <Index />
+  return <Home />
 }
