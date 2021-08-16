@@ -2,12 +2,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Head, Tags } from '@/components'
-import { Link } from '@/elements'
+import { H1, Link, Text } from '@/elements'
 import { getPostsMeta, Post } from '@/lib'
 import { classNames } from '@/utils'
 
 const title = 'Blog'
-const description = 'Thoughts about web development, tooling, linux and vim'
+const description = 'Sharing about web development, tooling, linux and productivity.'
 
 type Props = {
   posts: Post[]
@@ -45,9 +45,10 @@ export default function Blog({ posts = [], tags = [] }: Props) {
     <>
       <Head title={title} description={description} />
 
-      <h1 className="font-bold mb-10 text-4xl">All Posts</h1>
+      <H1>Blog</H1>
+      <Text className="opacity-60">{description}</Text>
 
-      <form className="relative" onSubmit={handleSubmit}>
+      <form className="relative mt-8" onSubmit={handleSubmit}>
         <input
           className="bg-neutral border border-elevate p-2 placeholder-comment outline-none rounded w-full focus:border-default"
           type="text"
