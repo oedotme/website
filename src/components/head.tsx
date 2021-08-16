@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { env } from '@/config'
 
 type Props = {
-  title: string
+  title?: string
   description?: string
   image?: string
   type?: string
@@ -15,17 +15,16 @@ export const Head = (props: Props) => {
   const router = useRouter()
   const url = env.web.url + router.asPath
 
-  const {
-    title,
-    description = 'Frontend developer working with TypeScript and React',
-    image = env.web.url + '/assets/logo.svg',
-    type = 'website',
-    date = '',
-  } = props
+  const title = props.title ? props.title + ' | Omar Elhawary' : 'Omar Elhawary'
+  const description = props.description
+    ? props.description
+    : "I'm frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming."
+
+  const { image = env.web.url + '/assets/logo.svg', type = 'website', date = '' } = props
 
   return (
     <NextHead>
-      <title> {title} | Omar Elhawary </title>
+      <title>{title}</title>
       <link rel="canonical" href={url} />
       <meta name="robots" content="follow, index" />
       <meta name="description" content={description} />
