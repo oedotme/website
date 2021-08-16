@@ -1,8 +1,8 @@
 import { Head } from '@/components'
-import { H1, H2, Link, List, ListItem } from '@/elements'
+import { H1, H2, Link, List, ListItem, Text } from '@/elements'
 
 const title = 'Uses'
-const description = 'Application and tools I use for my software development environment'
+const description = "Tools I'm using for software development."
 
 const content = {
   environment: [
@@ -30,6 +30,7 @@ export default function Uses() {
       <Head title={title} description={description} />
 
       <H1>Uses</H1>
+      <Text className="opacity-60">{description}</Text>
 
       <H2>Environment</H2>
       <List className="list-none">
