@@ -3,15 +3,11 @@ import { env } from '@/config'
 import { Link, List, ListItem } from '@/elements'
 import { getPostsMeta, Post } from '@/lib'
 
-const title = 'Home'
-const description =
-  'Frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming'
-
 const content = {
   projects: [
-    ['Outline', 'Video/Chat web application', 'https://outlineapp.netlify.app'],
-    ['Render', 'Opinionated React template', 'https://github.com/oedotme/render'],
-    ['Simple terminal', 'Fork of st - simple terminal', 'https://github.com/oedotme/st'],
+    ['Outline', 'Video/Chat web application.', 'https://outlineapp.netlify.app'],
+    ['Render', 'Opinionated React template.', 'https://github.com/oedotme/render'],
+    ['Simple terminal', 'Fork of st - simple terminal.', 'https://github.com/oedotme/st'],
   ],
 }
 
@@ -22,7 +18,7 @@ type Props = {
 export default function Home({ posts = [] }: Props) {
   return (
     <>
-      <Head title={title} description={description} />
+      <Head />
 
       <h1 className="font-bold mb-10 text-4xl">Hi! Iʼm Omar!</h1>
 
@@ -33,7 +29,7 @@ export default function Home({ posts = [] }: Props) {
         </h2>
 
         <h3 className="font-normal leading-loose text-xl sm:leading-loose">
-          I <Link href={env.web.url + '/blog'}>blog</Link> about web development, tooling, linux and vim.
+          I <Link href={env.web.url + '/blog'}>blog</Link> about web development, tooling, linux and productivity.
         </h3>
       </section>
 
@@ -55,8 +51,8 @@ export default function Home({ posts = [] }: Props) {
         <h2 className="font-bold mt-28 text-2xl">Recent posts</h2>
 
         <ul className="mt-12 mb-16">
-          {posts.slice(0, 5).map((post) => (
-            <li key={post.slug} className="mt-10">
+          {posts.slice(0, 3).map((post) => (
+            <li key={post.slug} className="flex flex-col mt-10">
               <Link href={post.slug}>
                 <h3 className="font-semibold leading-loose text-lg max-w-6xl">{post.title}</h3>
                 <span className="text-sm">{post.date}</span>
@@ -65,8 +61,8 @@ export default function Home({ posts = [] }: Props) {
             </li>
           ))}
 
-          <Link href="/blog" className="block font-medium mt-10">
-            Read all posts <span className="ml-2">{'—>'}</span>
+          <Link href="/blog" className="inline-block font-medium mt-10">
+            View all posts <span className="ml-2">{'—>'}</span>
           </Link>
         </ul>
       </section>
@@ -83,7 +79,7 @@ export default function Home({ posts = [] }: Props) {
             ))}
           </List>
 
-          <Link href="/projects" className="block font-medium mt-10">
+          <Link href="/projects" className="inline-block font-medium mt-10">
             View all projects <span className="ml-2">{'—>'}</span>
           </Link>
         </ul>
