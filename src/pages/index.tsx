@@ -1,16 +1,8 @@
 import { Email, GitHub, Twitter } from '@/components'
-import { env } from '@/config'
+import { constants, env } from '@/config'
 import { Link, List, ListItem } from '@/elements'
 import { Page } from '@/layouts'
 import { getPostsMeta, Post } from '@/lib'
-
-const content = {
-  projects: [
-    ['Outline', 'Video/Chat web application.', 'https://outlineapp.netlify.app'],
-    ['Render', 'Opinionated React template.', 'https://github.com/oedotme/render'],
-    ['Simple terminal', 'Fork of st - simple terminal.', 'https://github.com/oedotme/st'],
-  ],
-}
 
 type Props = {
   posts?: Post[]
@@ -19,7 +11,7 @@ type Props = {
 export default function Home({ posts = [] }: Props) {
   return (
     <Page>
-      <h1 className="font-bold mb-10 text-4xl">Hi! Iʼm Omar!</h1>
+      <h1 className="font-bold mb-10 text-4xl">Hi, Iʼm Omar!</h1>
 
       <section className="mt-14 space-y-2">
         <h2 className="font-normal leading-loose text-xl sm:leading-loose ">
@@ -33,15 +25,15 @@ export default function Home({ posts = [] }: Props) {
       </section>
 
       <section className="mt-12 space-x-4">
-        <Link href="mailto:oedotme@gmail.com" className="text-default">
+        <Link href={constants.profile.links.email} className="text-default">
           <Email />
         </Link>
 
-        <Link href="https://github.com/oedotme" className="text-default">
+        <Link href={constants.profile.links.github} className="text-default">
           <GitHub />
         </Link>
 
-        <Link href="https://twitter.com/oedotme" className="text-default">
+        <Link href={constants.profile.links.twitter} className="text-default">
           <Twitter />
         </Link>
       </section>
@@ -71,9 +63,9 @@ export default function Home({ posts = [] }: Props) {
 
         <ul className="mt-12 mb-16">
           <List className="list-none space-y-4">
-            {content.projects.map(([name, description, link]) => (
+            {constants.projects.slice(0, 3).map(({ name, description, link }) => (
               <ListItem key={name}>
-                <Link href={link}>{name}</Link> - {description}
+                <Link href={link}>{name}</Link> — {description}
               </ListItem>
             ))}
           </List>

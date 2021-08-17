@@ -1,13 +1,5 @@
-import { env } from '@/config'
+import { constants } from '@/config'
 import { Link } from '@/elements'
-
-const content = [
-  ['Email', 'mailto:oedotme@gmail.com'],
-  ['Resume', env.web.url + '/files/omar-elhawary-resume.pdf'],
-  ['GitHub', 'https://github.com/oedotme'],
-  ['Twitter', 'https://twitter.com/oedotme'],
-  ['LinkedIn', 'https://linkedin.com/in/oedotme'],
-]
 
 export const Footer = () => {
   return (
@@ -16,7 +8,7 @@ export const Footer = () => {
 
       <nav>
         <ul className="flex flex-wrap gap-4 justify-center sm:gap-8">
-          {content.map(([name, link]) => (
+          {constants.links.external.map(({ name, link }) => (
             <li key={name}>
               <Link href={link}>{name}</Link>
             </li>

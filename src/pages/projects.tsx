@@ -1,24 +1,9 @@
+import { constants } from '@/config'
 import { H1, H2, Link, List, ListItem, Text } from '@/elements'
 import { Page } from '@/layouts'
 
 const title = 'Projects'
-const description = 'List of some personal projects and tools.'
-
-const content = [
-  [
-    'Outline',
-    'Video/Chat web application',
-    'https://outlineapp.netlify.app',
-    ['TypeScript', 'React', 'Node.js', 'GraphQL', 'WebRTC'],
-  ],
-  [
-    'Render',
-    'Opinionated React template',
-    'https://github.com/oedotme/render',
-    ['TypeScript', 'React', 'React Router', 'Tailwind', 'Vite'],
-  ],
-  ['Simple terminal', 'Fork of st - simple terminal', 'https://github.com/oedotme/st', ['C']],
-] as const
+const description = 'Some personal projects and tools'
 
 export default function Projects() {
   return (
@@ -28,10 +13,10 @@ export default function Projects() {
 
       <H2>Personal</H2>
       <List className="list-none">
-        {content.map(([name, description, link, tech]) => (
+        {constants.projects.map(({ name, description, link, using }) => (
           <ListItem key={name}>
-            <Link href={link}>{name}</Link> — <span>{description}&ensp;</span>
-            <Text className="text-sm inline leading-relaxed opacity-60">{tech?.join(', ')}</Text>
+            <Link href={link}>{name}</Link> — <span>{description} </span>
+            <Text className="text-sm inline leading-relaxed opacity-60"> - {using?.join(', ')}</Text>
           </ListItem>
         ))}
       </List>

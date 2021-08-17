@@ -8,7 +8,7 @@ import { getPostsMeta, Post } from '@/lib'
 import { classNames } from '@/utils'
 
 const title = 'Blog'
-const description = 'Sharing about web development, tooling, linux and productivity.'
+const description = 'Sharing about web development, tooling, linux and productivity'
 
 type Props = {
   posts: Post[]
