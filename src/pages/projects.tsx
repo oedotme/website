@@ -15,8 +15,8 @@ export default function Projects() {
       <List className="list-none">
         {constants.projects.map(({ name, description, link, using }) => (
           <ListItem key={name}>
-            <Link href={link}>{name}</Link> — <span>{description} </span>
-            <Text className="text-sm inline leading-relaxed opacity-60"> - {using?.join(', ')}</Text>
+            <Link href={link}>{name}</Link> — <span>{description}&ensp;</span>
+            <Text className="text-sm inline leading-relaxed opacity-60">{using?.join(', ')}</Text>
           </ListItem>
         ))}
       </List>

@@ -49,7 +49,7 @@ export const constants = {
     },
     {
       name: 'Simple terminal',
-      description: 'Fork of st',
+      description: 'Fork of st with additional features',
       link: 'https://github.com/oedotme/st',
       using: ['C'],
     },
