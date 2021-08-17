@@ -1,5 +1,5 @@
-import { Head } from '@/components'
 import { H1, H2, Link, List, ListItem, Text } from '@/elements'
+import { Page } from '@/layouts'
 
 const title = 'Projects'
 const description = 'List of some personal projects and tools.'
@@ -22,9 +22,7 @@ const content = [
 
 export default function Projects() {
   return (
-    <>
-      <Head title={title} description={description} />
-
+    <Page title={title} description={description}>
       <H1>Projects</H1>
       <Text className="opacity-60">{description}</Text>
 
@@ -37,6 +35,6 @@ export default function Projects() {
           </ListItem>
         ))}
       </List>
-    </>
+    </Page>
   )
 }

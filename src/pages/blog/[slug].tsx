@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import { getMDXComponent } from 'mdx-bundler/client'
 
-import { Head, MDXComponents, Tags } from '@/components'
+import { MDXComponents, Tags } from '@/components'
 import { H1, Link } from '@/elements'
 import { env } from '@/config'
+import { Page } from '@/layouts'
 import { getPostBySlug, getPostsMeta, Post } from '@/lib'
 
 type Props = {
@@ -20,9 +21,7 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
   const Component = useMemo(() => getMDXComponent(code), [code])
 
   return (
-    <>
-      <Head title={meta.title} description={meta.description} type="article" date={meta.date} />
-
+    <Page title={meta.title} description={meta.description} type="article" date={meta.date}>
       <H1>{meta.title}</H1>
       <span className="text-sm">{meta.date}</span>
       <Tags tags={meta.tags} />
@@ -52,7 +51,7 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
 
         <div className="flex gap-4 text-sm my-4">
           {prev && (
-            <Link className="font-medium rounded-sm truncate py-2 w-40 mr-auto" href={prev}>
+            <Link className="font-medium rounded-sm truncate py-2 w-40 text-left mr-auto" href={prev}>
               <span className="mr-2">{'<—'}</span> Previous post
             </Link>
           )}
@@ -64,7 +63,7 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
           )}
         </div>
       </section>
-    </>
+    </Page>
   )
 }
 

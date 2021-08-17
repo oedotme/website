@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { Head, Tags } from '@/components'
+import { Tags } from '@/components'
 import { H1, Link, Text } from '@/elements'
+import { Page } from '@/layouts'
 import { getPostsMeta, Post } from '@/lib'
 import { classNames } from '@/utils'
 
@@ -42,9 +43,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
   )
 
   return (
-    <>
-      <Head title={title} description={description} />
-
+    <Page title={title} description={description}>
       <H1>Blog</H1>
       <Text className="opacity-60">{description}</Text>
 
@@ -92,7 +91,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
           <li className="mt-10">No posts found</li>
         )}
       </ul>
-    </>
+    </Page>
   )
 }
 

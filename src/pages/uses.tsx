@@ -1,5 +1,5 @@
-import { Head } from '@/components'
 import { H1, H2, Link, List, ListItem, Text } from '@/elements'
+import { Page } from '@/layouts'
 
 const title = 'Uses'
 const description = "Tools I'm using for software development."
@@ -26,9 +26,7 @@ const content = {
 
 export default function Uses() {
   return (
-    <>
-      <Head title={title} description={description} />
-
+    <Page title={title} description={description}>
       <H1>Uses</H1>
       <Text className="opacity-60">{description}</Text>
 
@@ -49,6 +47,6 @@ export default function Uses() {
           </ListItem>
         ))}
       </List>
-    </>
+    </Page>
   )
 }

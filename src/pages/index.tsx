@@ -1,6 +1,7 @@
-import { Email, GitHub, Head, Twitter } from '@/components'
+import { Email, GitHub, Twitter } from '@/components'
 import { env } from '@/config'
 import { Link, List, ListItem } from '@/elements'
+import { Page } from '@/layouts'
 import { getPostsMeta, Post } from '@/lib'
 
 const content = {
@@ -17,9 +18,7 @@ type Props = {
 
 export default function Home({ posts = [] }: Props) {
   return (
-    <>
-      <Head />
-
+    <Page>
       <h1 className="font-bold mb-10 text-4xl">Hi! Iʼm Omar!</h1>
 
       <section className="mt-14 space-y-2">
@@ -84,7 +83,7 @@ export default function Home({ posts = [] }: Props) {
           </Link>
         </ul>
       </section>
-    </>
+    </Page>
   )
 }
 
