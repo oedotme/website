@@ -3,11 +3,11 @@ import prettier from 'prettier'
 
 import { env } from './src/config'
 
-const getFiles = (path) => fs.readdir(process.cwd() + path)
+const getFiles = (path: string) => fs.readdir(process.cwd() + path)
 
 const generateSitemap = async () => {
-  const valid = /^[a-z].+\.tsx$/
-  const pages = (await getFiles('/src/pages')).map((page) => (valid.test(page) ? `/${page.replace('.tsx', '')}` : ''))
+  const tsx = /^[a-z].+\.tsx$/
+  const pages = (await getFiles('/src/pages')).map((page) => (tsx.test(page) ? `/${page.replace('.tsx', '')}` : ''))
   const posts = (await getFiles('/content/posts')).map((post) => `/blog/${post.replace('.mdx', '')}`)
 
   const urls = [...pages, ...posts].filter(Boolean)
@@ -19,7 +19,7 @@ const generateSitemap = async () => {
         .map(
           (url) => `
             <url>
-              <loc>${env.web.url + `${url === '/index' ? '' : url}`}</loc>
+              <loc>${env.web.url + url === '/index' ? '' : url}</loc>
             </url>
           `
         )
