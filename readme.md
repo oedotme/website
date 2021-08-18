@@ -1,8 +1,10 @@
 # Personal website and blog
 
-Second iteration of my personal website built using Next.js, Preact, MDX and Tailwind CSS.
+[https://omarelhawary.me](https://omarelhawary.me)
 
-## Technologies used
+New iteration of my personal website and blog built with Next.js, Preact, MDX and Tailwind CSS. Hosted on Vercel.
+
+## Technologies
 
 - [Next.js](https://nextjs.org)
 - [Preact](https://preactjs.com)
