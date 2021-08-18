@@ -18,7 +18,7 @@ export const Head = (props: Props) => {
   const title = props.title ? `${props.title} | ${constants.profile.title}` : constants.profile.title
   const description = props.description ? props.description : constants.profile.description
 
-  const { image = constants.profile.url + '/images/avatar.jpg', type = 'website', date = '' } = props
+  const { image = '/images/avatar.jpg', type = 'website', date = '' } = props
 
   return (
     <NextHead>
