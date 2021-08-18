@@ -1,7 +1,7 @@
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 
-import { constants, env } from '@/config'
+import { constants } from '@/config'
 
 type Props = {
   title?: string
@@ -13,12 +13,12 @@ type Props = {
 
 export const Head = (props: Props) => {
   const router = useRouter()
-  const url = env.web.url + router.asPath
+  const url = constants.profile.url + router.asPath
 
   const title = props.title ? `${props.title} | ${constants.profile.title}` : constants.profile.title
   const description = props.description ? props.description : constants.profile.description
 
-  const { image = env.web.url + '/assets/logo.svg', type = 'website', date = '' } = props
+  const { image = constants.profile.url + '/assets/logo.svg', type = 'website', date = '' } = props
 
   return (
     <NextHead>

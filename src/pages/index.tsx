@@ -20,7 +20,8 @@ export default function Home({ posts = [] }: Props) {
         </h2>
 
         <h3 className="font-normal leading-loose text-xl sm:leading-loose">
-          I <Link href={env.web.url + '/blog'}>blog</Link> about web development, tooling, linux and productivity.
+          I <Link href={constants.profile.url + '/blog'}>blog</Link> about web development, tooling, linux and
+          productivity.
         </h3>
       </section>
 

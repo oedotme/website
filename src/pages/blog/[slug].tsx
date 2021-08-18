@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import { getMDXComponent } from 'mdx-bundler/client'
 
 import { MDXComponents, Tags } from '@/components'
+import { constants } from '@/config'
 import { H1, Link } from '@/elements'
-import { env } from '@/config'
 import { Page } from '@/layouts'
 import { getPostBySlug, getPostsMeta, Post } from '@/lib'
 
@@ -37,8 +37,8 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
           <Link
             href={
               `https://twitter.com/intent/tweet` +
-              `?text=${meta.title}` +
-              `&url=${env.web.url + meta.slug}` +
+              `?text=${meta.title} — ${meta.description}` +
+              `&url=${constants.profile.url + meta.slug}` +
               `&via=oedotme` +
               `&hashtags=${meta.tags.join(',')}`
             }
@@ -46,10 +46,10 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
             Share on Twitter
           </Link>
 
-          <Link href={`https://twitter.com/search?q=${env.web.url + meta.slug}`}>Discuss on Twitter</Link>
+          <Link href={`https://twitter.com/search?q=${constants.profile.url + meta.slug}`}>Discuss on Twitter</Link>
         </div>
 
-        <div className="flex gap-4 text-sm my-4">
+        <div className="flex gap-4 my-4 text-sm">
           {prev && (
             <Link className="font-medium rounded-sm truncate py-2 w-40 text-left mr-auto" href={prev}>
               <span className="mr-2">{'<—'}</span> Previous post
