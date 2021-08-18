@@ -1,5 +1,5 @@
 import { Email, GitHub, Twitter } from '@/components'
-import { constants, env } from '@/config'
+import { constants } from '@/config'
 import { Link, List, ListItem } from '@/elements'
 import { Page } from '@/layouts'
 import { getPostsMeta, Post } from '@/lib'
