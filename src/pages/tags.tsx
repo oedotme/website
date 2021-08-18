@@ -4,40 +4,50 @@ import { Page } from '@/layouts'
 import { classNames } from '@/utils'
 
 const TAGS = [
+  'bash',
   'cli',
   'docker',
+  'dotfiles',
+  'fish',
+  'framer-motion',
   'fzf',
   'git',
   'graphql',
+  'javascript',
+  'jest',
   'linux',
   'mongodb',
   'neovim',
   'node',
   'npm',
+  'plugin',
   'productivity',
   'react',
+  'react-native',
+  'react-query',
+  'redis',
+  'redux',
   'rescript',
+  'storybook',
   'tailwind',
+  'tmux',
+  'tool',
   'typescript',
+  'vifm',
   'vite',
+  'webpack',
   'webrtc',
 ]
 
 const shuffle = (list: string[]) => list.sort(() => 0.5 - Math.random())
 
-const tags = [
-  ...shuffle(TAGS),
-  ...shuffle(TAGS),
-  ...shuffle(TAGS),
-  ...shuffle(TAGS),
-  ...shuffle(TAGS),
-  ...shuffle(TAGS),
-  ...shuffle(TAGS),
-]
-
 export default function Tags() {
+  const [tags, setTags] = useState(TAGS)
   const [active, setActive] = useState<string[]>([])
+  const [frame, setFrame] = useState(false)
 
+  const toggleFrame = () => setFrame((value) => !value)
+  const shuffleTags = () => setTags((value) => [...shuffle(value)])
   const handleClick = (tag: string) => {
     active.includes(tag)
       ? setActive((values) => values.filter((value) => value !== tag))
@@ -46,25 +56,44 @@ export default function Tags() {
 
   return (
     <Page title="Tags">
-      <ul className="flex flex-wrap justify-center gap-3 my-6">
-        {tags.map((tag, index) => (
-          <li key={`${tag}/${index}`} className="text-sm">
-            <button
-              className={classNames(
-                'border border-elevate font-medium py-1 px-2 rounded-sm hover:border-default',
-                active.includes(`${tag}/${index}`)
-                  ? active[0] === `${tag}/${index}`
-                    ? 'bg-default text-elevate'
-                    : 'bg-elevate border-default'
-                  : 'bg-elevate text-default'
-              )}
-              onClick={() => handleClick(`${tag}/${index}`)}
-            >
-              {tag}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <section className="relative">
+        <ul className="flex flex-wrap justify-center content-start gap-3 my-6 mx-auto h-72 px-28">
+          {tags.map((tag) => (
+            <li key={tag} className="text-sm">
+              <button
+                className={classNames(
+                  'border border-elevate font-medium py-1 px-2 rounded-sm hover:border-default',
+                  active.includes(tag)
+                    ? active[0] === tag
+                      ? 'bg-default text-elevate'
+                      : 'bg-elevate border-default'
+                    : 'bg-elevate text-default'
+                )}
+                onClick={() => handleClick(tag)}
+              >
+                {tag}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div
+          className={classNames(
+            'absolute inset-0 -top-3 left-4 mx-auto h-[220px] w-[440px] pointer-events-none',
+            frame && 'border border-default border-dashed'
+          )}
+        />
+
+        <div className="text-center space-x-4">
+          <button className="font-medium text-sm py-2 px-4" onClick={toggleFrame}>
+            Toggle frame
+          </button>
+
+          <button className="font-medium text-sm py-2 px-4" onClick={shuffleTags}>
+            Shuffle
+          </button>
+        </div>
+      </section>
     </Page>
   )
 }
