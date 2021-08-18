@@ -1,6 +1,6 @@
 # Personal website and blog
 
-My new [personal website and blog](https://omarelhawary.me) built with Next.js, Preact, MDX and Tailwind CSS. Hosted on Vercel.
+My new [personal website and blog](https://omarelhawary.me) built with Next.js, Preact, MDX, Tailwind CSS and hosted on Vercel.
 
 ## Technologies
 
