@@ -2,7 +2,7 @@
 
 My new [personal website and blog](https://omarelhawary.me) built with Next.js, Preact, MDX, Tailwind CSS and hosted on Vercel.
 
-## Technologies
+## Stack
 
 - [Next.js](https://nextjs.org)
 - [Preact](https://preactjs.com)
@@ -27,3 +27,7 @@ npm run dev
 # static client build for production
 npm run export
 ```
+
+## License
+
+MIT
