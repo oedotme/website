@@ -18,6 +18,7 @@ const TAGS = [
   'linux',
   'mongodb',
   'neovim',
+  'nextjs',
   'node',
   'npm',
   'plugin',
@@ -67,7 +68,7 @@ export default function Tags() {
                     ? active[0] === tag
                       ? 'bg-default text-elevate'
                       : 'bg-elevate border-default'
-                    : 'bg-elevate text-default'
+                    : 'bg-elevate text-default opacity-30'
                 )}
                 onClick={() => handleClick(tag)}
               >
