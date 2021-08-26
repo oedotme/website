@@ -38,7 +38,10 @@ export default function Blog({ posts = [], tags = [] }: Props) {
     () =>
       posts
         .filter((post) => !active.length || active.every((tag) => post.tags.includes(tag)))
-        .filter((post) => JSON.stringify(post).toLowerCase().includes(input.toLowerCase())),
+        .filter((post) =>
+          input.split(/\s+/).every((word) => JSON.stringify(post).toLowerCase().includes(word.toLowerCase()))
+        ),
+
     [posts, active, input]
   )
 
