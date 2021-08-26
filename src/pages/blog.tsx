@@ -56,7 +56,14 @@ export default function Blog({ posts = [], tags = [] }: Props) {
           onChange={handleChange}
           ref={ref}
         />
-        <span className="absolute top-1 right-2 bg-neutral py-1 px-2 text-comment">{filteredPosts?.length}</span>
+        <span
+          className={classNames(
+            'absolute top-1 right-2 bg-neutral py-1 px-2',
+            input.length || active.length ? 'text-comment' : 'text-neutral'
+          )}
+        >
+          {filteredPosts.length}
+        </span>
       </form>
 
       <ul className="flex gap-3 my-6">
