@@ -1,6 +1,6 @@
 ---
 title: Faster directory navigation with fzf
-description: How a one-line command will help you improve your CLI workflow.
+description: How a one-line command will help you improve your CLI workflow
 tags: [cli, fzf, productivity]
 image: /images/tags/fzf-cli-productivity.png
 date: August 14, 2021
@@ -124,11 +124,13 @@ I would recommend **setting an alias to access this command quickly.** It also m
 
 ```shell
 # bash | zsh
-alias go="cd ~ && cd \$(find * -type d | fzf)"
+alias sd="cd ~ && cd \$(find * -type d | fzf)"
 
 # fish
-alias go "cd ~ && cd (find * -type d | fzf)"
+alias sd "cd ~ && cd (find * -type d | fzf)"
 ```
+
+Here `sd` alias would stand for search directories and it's similar to the good old `cd` command.
 
 You could set this alias permanently by adding the line above to your shell configuration file i.e. `.bashrc`, `.zshrc` or `config.fish` depending on what you're using.
 
