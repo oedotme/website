@@ -46,7 +46,7 @@
     "preact-render-to-string": "^5.1.19",
     "prettier": "^2.3.2",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0",
-    "tailwindcss": "^2.2.7",
-    "typescript": "^4.3.5"
+    "tailwindcss": "^2.2.8",
+    "typescript": "^4.4.2"
   }
 }
