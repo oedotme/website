@@ -4,12 +4,9 @@ import { Page } from '@/layouts'
 import { classNames } from '@/utils'
 
 const TAGS = [
-  'animation',
   'astro',
   'bash',
   'cli',
-  'config',
-  'deno',
   'docker',
   'dotfiles',
   'expo',
@@ -36,8 +33,6 @@ const TAGS = [
   'redux',
   'rescript',
   'script',
-  'skypack',
-  'snowpack',
   'storybook',
   'tailwind',
   'tmux',
@@ -69,15 +64,15 @@ export default function Tags() {
       <section className="relative">
         <ul className="flex flex-wrap justify-center content-start gap-3 my-6 mx-auto h-72 px-28">
           {tags.map((tag) => (
-            <li key={tag} className="text-xs">
+            <li key={tag} className="text-sm">
               <button
                 className={classNames(
                   'border border-elevate font-medium py-1 px-2 rounded-sm hover:border-default',
                   active.includes(tag)
                     ? active[0] === tag
                       ? 'bg-default text-elevate'
-                      : 'bg-elevate'
-                    : 'bg-elevate text-default opacity-30'
+                      : 'bg-elevate border-default'
+                    : 'bg-elevate text-default opacity-50'
                 )}
                 onClick={() => handleClick(tag)}
               >
