@@ -3,7 +3,7 @@ import { env } from './env'
 const profile = {
   title: 'Omar Elhawary',
   description:
-    'Frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
+    'Iʼm a frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
   image: '/images/avatar.jpg',
   url: env.web.url,
   links: {
