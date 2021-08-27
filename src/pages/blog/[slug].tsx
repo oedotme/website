@@ -46,7 +46,9 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
             Share on Twitter
           </Link>
 
-          <Link href={`https://twitter.com/search?q=${constants.profile.url + meta.slug}`}>Discuss on Twitter</Link>
+          <Link href={`https://twitter.com/search?q=${constants.profile.url + meta.slug}&src=typed_query`}>
+            Discuss on Twitter
+          </Link>
         </div>
 
         <div className="flex gap-4 my-4 text-sm">
