@@ -9,7 +9,7 @@ export default class Document extends NextDocument {
           <meta name="theme-color" content="#fcfcfc" />
           <meta name="color-scheme" content="light dark" />
           <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-          <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+          <link rel="shortcut icon" type="image/svg+xml" href="/favicons/favicon.svg" />
         </Head>
 
         <body className="bg-surface text-default overflow-y-scroll selection:bg-default selection:text-surface">
