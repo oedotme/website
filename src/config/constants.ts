@@ -6,6 +6,7 @@ const profile = {
     'Iʼm a frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
   image: '/images/avatar.jpg',
   url: env.web.url,
+  handle: '@oedotme',
   links: {
     email: 'mailto:oedotme@gmail.com',
     resume: env.web.url + '/files/omar-elhawary-resume.pdf',
