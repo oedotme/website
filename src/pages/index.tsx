@@ -26,15 +26,15 @@ export default function Home({ posts = [] }: Props) {
       </section>
 
       <section className="mt-12 space-x-4">
-        <Link href={constants.profile.links.email} className="text-default">
+        <Link href={constants.profile.links.email} className="text-default" aria-label="Email">
           <Email />
         </Link>
 
-        <Link href={constants.profile.links.github} className="text-default">
+        <Link href={constants.profile.links.github} className="text-default" aria-label="GitHub">
           <GitHub />
         </Link>
 
-        <Link href={constants.profile.links.twitter} className="text-default">
+        <Link href={constants.profile.links.twitter} className="text-default" aria-label="Twitter">
           <Twitter />
         </Link>
       </section>
