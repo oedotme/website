@@ -52,7 +52,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
 
       <form className="relative mt-8" onSubmit={handleSubmit}>
         <input
-          className="bg-neutral border border-elevate p-2 placeholder-comment outline-none rounded w-full focus:border-default"
+          className="bg-neutral border border-elevate p-3 outline-none rounded w-full text-sm focus:border-default"
           type="text"
           placeholder="Search posts..."
           value={input}
@@ -61,7 +61,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
         />
         <span
           className={classNames(
-            'absolute top-1 right-2 bg-neutral py-1 px-2',
+            'absolute top-2 right-2 bg-neutral py-1 px-2',
             input.length || active.length ? 'text-comment' : 'text-neutral'
           )}
         >
