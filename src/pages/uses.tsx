@@ -9,7 +9,7 @@ export default function Uses() {
   return (
     <Page title={title} description={description}>
       <H1>Uses</H1>
-      <Text className="opacity-60">{description}</Text>
+      <Text className="opacity-70">{description}</Text>
 
       <H2>Environment</H2>
       <List className="list-none">

@@ -48,7 +48,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
   return (
     <Page title={title} description={description}>
       <H1>Blog</H1>
-      <Text className="opacity-60">{description}</Text>
+      <Text className="opacity-70">{description}</Text>
 
       <form className="relative mt-8" onSubmit={handleSubmit}>
         <input
