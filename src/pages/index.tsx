@@ -39,42 +39,40 @@ export default function Home({ posts = [] }: Props) {
         </Link>
       </section>
 
-      <section>
+      <section className="mb-16">
         <h2 className="font-bold mt-28 text-2xl">Recent posts</h2>
 
-        <ul className="mt-12 mb-16">
+        <List className="mt-12">
           {posts.slice(0, 3).map((post) => (
-            <li key={post.slug} className="flex flex-col mt-10">
+            <ListItem key={post.slug} className="flex flex-col mt-10">
               <Link href={post.slug}>
-                <h3 className="font-semibold leading-loose text-lg max-w-6xl">{post.title}</h3>
+                <h3 className="font-semibold leading-loose text-lg">{post.title}</h3>
                 <span className="text-sm">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
               </Link>
-            </li>
+            </ListItem>
           ))}
+        </List>
 
-          <Link href="/blog" className="inline-block font-medium mt-10">
-            View all posts <span className="ml-2">{'—>'}</span>
-          </Link>
-        </ul>
+        <Link href="/blog" className="inline-block font-medium mt-10">
+          View all posts <span className="ml-2">{'—>'}</span>
+        </Link>
       </section>
 
-      <section>
+      <section className="mb-16">
         <h2 className="font-bold mt-28 text-2xl">Latest projects</h2>
 
-        <ul className="mt-12 mb-16">
-          <List className="list-none space-y-4">
-            {constants.projects.slice(0, 3).map(({ name, description, link }) => (
-              <ListItem key={name}>
-                <Link href={link}>{name}</Link> — {description}
-              </ListItem>
-            ))}
-          </List>
+        <List className="list-none mt-12 space-y-4">
+          {constants.projects.slice(0, 3).map(({ name, description, link }) => (
+            <ListItem key={name}>
+              <Link href={link}>{name}</Link> — {description}
+            </ListItem>
+          ))}
+        </List>
 
-          <Link href="/projects" className="inline-block font-medium mt-10">
-            View all projects <span className="ml-2">{'—>'}</span>
-          </Link>
-        </ul>
+        <Link href="/projects" className="inline-block font-medium mt-10">
+          View all projects <span className="ml-2">{'—>'}</span>
+        </Link>
       </section>
     </Page>
   )

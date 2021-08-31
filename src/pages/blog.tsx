@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Tags } from '@/components'
-import { H1, Link, Text } from '@/elements'
+import { H1, H2, Link, List, ListItem, Text } from '@/elements'
 import { Page } from '@/layouts'
 import { getPostsMeta, Post } from '@/lib'
 import { classNames } from '@/utils'
@@ -69,9 +69,9 @@ export default function Blog({ posts = [], tags = [] }: Props) {
         </span>
       </form>
 
-      <ul className="flex gap-3 my-6">
+      <List className="flex flex-wrap gap-3 my-6 mb-16">
         {tags.map((tag) => (
-          <li key={tag} className="text-sm">
+          <ListItem key={tag} className="text-sm">
             <button
               className={classNames(
                 'border border-elevate font-medium py-1 px-2 rounded-sm hover:border-default',
@@ -81,26 +81,30 @@ export default function Blog({ posts = [], tags = [] }: Props) {
             >
               {tag}
             </button>
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
 
-      <ul className="mt-20 mb-16">
+      <H2>Posts</H2>
+
+      <List className="mb-16">
         {filteredPosts.length ? (
-          filteredPosts.map((post) => (
-            <li key={post.slug} className="flex flex-col mt-10">
+          filteredPosts.map((post, index) => (
+            <ListItem key={post.slug} className={classNames('flex flex-col', index !== 0 ? 'mt-10' : 'mt-7')}>
               <Link href={post.slug}>
-                <h3 className="font-semibold leading-loose text-xl max-w-6xl">{post.title}</h3>
+                <h3 className="font-semibold leading-loose text-lg">{post.title}</h3>
                 <span className="text-sm">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
               </Link>
               <Tags tags={post.tags} />
-            </li>
+            </ListItem>
           ))
         ) : (
-          <li className="mt-10">No posts found</li>
+          <ListItem className="mt-7">
+            <Text className="opacity-70">No posts found</Text>
+          </ListItem>
         )}
-      </ul>
+      </List>
     </Page>
   )
 }
