@@ -1,3 +1,5 @@
 const withPreact = require('next-plugin-preact')
 
-module.exports = withPreact({})
+module.exports = withPreact({
+  reactStrictMode: true,
+})
