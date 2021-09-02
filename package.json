@@ -12,6 +12,7 @@
     "build": "next build",
     "export": "next export -o build",
     "start": "next start",
+    "preview": "serve build",
     "postbuild": "npm run sitemap",
     "preexport": "npm run build",
     "sitemap": "NODE_ENV=production node -r esbuild-register sitemap.ts",
@@ -46,6 +47,7 @@
     "preact-render-to-string": "^5.1.19",
     "prettier": "^2.3.2",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0",
+    "serve": "^12.0.0",
     "tailwindcss": "^2.2.9",
     "typescript": "^4.4.2"
   }
