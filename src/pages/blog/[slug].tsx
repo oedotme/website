@@ -7,6 +7,8 @@ import { H1, Link } from '@/elements'
 import { Page } from '@/layouts'
 import { getPostBySlug, getPostsMeta, Post } from '@/lib'
 
+const keywords = 'blog, post'
+
 type Props = {
   post: {
     meta: Post
@@ -24,7 +26,7 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
     <Page
       title={meta.title}
       description={meta.description}
-      keywords={'blog, post, ' + meta.tags.join(', ')}
+      keywords={keywords + ', ' + meta.tags.join(', ')}
       image={meta.image}
       type="article"
       date={meta.date}

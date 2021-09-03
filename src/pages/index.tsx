@@ -4,13 +4,15 @@ import { Link, List, ListItem } from '@/elements'
 import { Page } from '@/layouts'
 import { getPostsMeta, Post } from '@/lib'
 
+const keywords = 'personal, website, blog'
+
 type Props = {
   posts?: Post[]
 }
 
 export default function Home({ posts = [] }: Props) {
   return (
-    <Page keywords="personal, website, blog">
+    <Page keywords={keywords}>
       <h1 className="font-bold mb-10 text-4xl">Hi, Iʼm Omar!</h1>
 
       <section className="mt-14 space-y-2">
