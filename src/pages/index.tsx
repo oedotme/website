@@ -10,7 +10,7 @@ type Props = {
 
 export default function Home({ posts = [] }: Props) {
   return (
-    <Page>
+    <Page keywords="personal, website, blog">
       <h1 className="font-bold mb-10 text-4xl">Hi, Iʼm Omar!</h1>
 
       <section className="mt-14 space-y-2">
