@@ -33,7 +33,7 @@
     "@mapbox/rehype-prism": "^0.7.0",
     "@types/prettier": "^2.3.2",
     "@types/react": "^17.0.19",
-    "autoprefixer": "^10.3.3",
+    "autoprefixer": "^10.3.4",
     "esbuild-register": "^3.0.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
