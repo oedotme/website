@@ -1,12 +1,13 @@
 import { env } from './env'
 
 const profile = {
-  title: 'Omar Elhawary',
+  name: 'Omar Elhawary',
+  title: 'Omar Elhawary | Frontend Developer',
   description:
-    'Iʼm a frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
+    'Frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
   image: '/images/avatar.jpg',
   url: env.web.url,
-  handle: '@oedotme',
+  username: 'oedotme',
   links: {
     email: 'mailto:oedotme@gmail.com',
     resume: env.web.url + '/files/omar-elhawary-resume.pdf',
