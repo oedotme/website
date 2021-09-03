@@ -9,6 +9,7 @@ import { classNames } from '@/utils'
 
 const title = 'Blog'
 const description = 'Sharing about web development, tooling, linux and productivity'
+const keywords = 'blog, web, development, tooling, linux, productivity'
 
 type Props = {
   posts: Post[]
@@ -46,7 +47,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
   )
 
   return (
-    <Page title={title} description={description}>
+    <Page title={title} description={description} keywords={keywords}>
       <H1>Blog</H1>
       <Text className="opacity-70">{description}</Text>
 

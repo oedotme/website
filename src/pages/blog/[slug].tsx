@@ -21,7 +21,14 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
   const Component = useMemo(() => getMDXComponent(code), [code])
 
   return (
-    <Page title={meta.title} description={meta.description} image={meta.image} type="article" date={meta.date}>
+    <Page
+      title={meta.title}
+      description={meta.description}
+      keywords={'blog, post, ' + meta.tags.join(', ')}
+      image={meta.image}
+      type="article"
+      date={meta.date}
+    >
       <H1>{meta.title}</H1>
       <span className="text-sm">{meta.date}</span>
       <Tags tags={meta.tags} />

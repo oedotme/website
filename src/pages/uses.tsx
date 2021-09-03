@@ -4,10 +4,11 @@ import { Page } from '@/layouts'
 
 const title = 'Uses'
 const description = "Tools I'm using for software development"
+const keywords = 'uses, tools, web, software, development, environment'
 
 export default function Uses() {
   return (
-    <Page title={title} description={description}>
+    <Page title={title} description={description} keywords={keywords}>
       <H1>Uses</H1>
       <Text className="opacity-70">{description}</Text>
 
