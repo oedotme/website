@@ -7,5 +7,6 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     }
   ],
-  "rewrites": [{ "source": "/([^.]+)", "destination": "/index" }]
+  "rewrites": [{ "source": "/([^.]+)", "destination": "/index" }],
+  "redirects": [{ "source": "/faster-directory-navigation", "destination": "/faster-directory-navigation-with-fzf" }]
 }
