@@ -13,7 +13,7 @@ type Props = {
   post: {
     meta: Post
     code: string
-    position: [string, string]
+    position: [Post, Post]
   }
 }
 
@@ -60,16 +60,18 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
           </Link>
         </div>
 
-        <div className="flex gap-4 my-4 text-sm">
+        <div className="flex gap-8 my-4 text-sm">
           {prev && (
-            <Link className="font-medium rounded-sm truncate py-2 w-40 text-left mr-auto" href={prev}>
-              <span className="mr-2">{'<—'}</span> Previous post
+            <Link className="font-medium rounded-sm flex w-1/2 py-2 text-left truncate mr-auto" href={prev.slug}>
+              <span className="mr-2">{'<—'}</span>
+              <span className="flex-1 truncate">{prev.title}</span>
             </Link>
           )}
 
           {next && (
-            <Link className="font-medium rounded-sm truncate py-2 w-40 text-right ml-auto" href={next}>
-              Next post <span className="ml-2">{'—>'}</span>
+            <Link className="font-medium rounded-sm flex w-1/2 py-2 text-right truncate ml-auto" href={next.slug}>
+              <span className="flex-1 truncate">{next.title}</span>
+              <span className="ml-2">{'—>'}</span>
             </Link>
           )}
         </div>
@@ -91,7 +93,7 @@ export const getStaticProps = async (context: { params: { slug: string } }) => {
   const { posts } = await getPostsMeta()
 
   const index = posts.map((post) => post.slug).indexOf(meta.slug)
-  const position = [posts[index + 1]?.slug || null, posts[index - 1]?.slug || null]
+  const position = [posts?.[index + 1] || null, posts?.[index - 1] || null]
 
   return { props: { post: { meta, code, position } } }
 }
