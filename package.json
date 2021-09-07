@@ -32,7 +32,7 @@
     "@commitlint/config-conventional": "^13.1.0",
     "@mapbox/rehype-prism": "^0.7.0",
     "@types/prettier": "^2.3.2",
-    "@types/react": "^17.0.19",
+    "@types/react": "^17.0.20",
     "autoprefixer": "^10.3.4",
     "esbuild-register": "^3.0.0",
     "eslint": "^7.32.0",
@@ -48,7 +48,7 @@
     "prettier": "^2.3.2",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0",
     "serve": "^12.0.0",
-    "tailwindcss": "^2.2.9",
+    "tailwindcss": "^2.2.11",
     "typescript": "^4.4.2"
   }
 }
