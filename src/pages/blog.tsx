@@ -55,7 +55,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
         <input
           className="bg-neutral border border-elevate p-3 outline-none rounded w-full text-sm focus:border-default"
           type="text"
-          placeholder="Search posts..."
+          placeholder="Search posts"
           value={input}
           onChange={handleChange}
           ref={ref}
