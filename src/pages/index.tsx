@@ -57,7 +57,7 @@ export default function Home({ posts = [] }: Props) {
         </List>
 
         <Link href="/blog" className="inline-block font-medium mt-10">
-          View all posts <span className="ml-2">{'—>'}</span>
+          View all posts <span className="ml-2">{'-->'}</span>
         </Link>
       </section>
 
@@ -73,7 +73,7 @@ export default function Home({ posts = [] }: Props) {
         </List>
 
         <Link href="/projects" className="inline-block font-medium mt-10">
-          View all projects <span className="ml-2">{'—>'}</span>
+          View all projects <span className="ml-2">{'-->'}</span>
         </Link>
       </section>
     </Page>
