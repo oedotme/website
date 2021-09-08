@@ -18,7 +18,7 @@ export const Head = (props: Props) => {
   const router = useRouter()
   const url = constants.profile.url + router.asPath
 
-  const title = props.title ? `${props.title} | ${profile.title}` : profile.title
+  const title = props.title ? `${props.title} | ${profile.name}` : profile.title
   const description = props.description ? props.description : profile.description
 
   const { image = profile.image, type = 'website', date = '', keywords = '' } = props
