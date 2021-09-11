@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Personal website and blog",
   "author": "Omar Elhawary <oedotme@gmail.com> (https://omarelhawary.me)",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "url": "https://github.com/oedotme/website"
   },
