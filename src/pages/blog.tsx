@@ -91,10 +91,10 @@ export default function Blog({ posts = [], tags = [] }: Props) {
       <List className="mb-16">
         {filteredPosts.length ? (
           filteredPosts.map((post, index) => (
-            <ListItem key={post.slug} className={classNames('flex flex-col', index !== 0 ? 'mt-10' : 'mt-7')}>
+            <ListItem key={post.slug} className={classNames('flex flex-col', index !== 0 ? 'mt-12' : 'mt-8')}>
               <Link href={post.slug}>
-                <h3 className="font-semibold leading-loose text-lg">{post.title}</h3>
-                <span className="text-sm">{post.date}</span>
+                <h3 className="font-semibold text-lg">{post.title}</h3>
+                <span className="block mt-1 opacity-70 text-sm">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
               </Link>
               <Tags tags={post.tags} />

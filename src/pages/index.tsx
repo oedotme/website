@@ -48,8 +48,8 @@ export default function Home({ posts = [] }: Props) {
           {posts.slice(0, 3).map((post) => (
             <ListItem key={post.slug} className="flex flex-col mt-10">
               <Link href={post.slug}>
-                <h3 className="font-semibold leading-loose text-lg">{post.title}</h3>
-                <span className="text-sm">{post.date}</span>
+                <h3 className="font-semibold text-lg">{post.title}</h3>
+                <span className="block mt-1 opacity-70 text-sm">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
               </Link>
             </ListItem>

@@ -32,7 +32,7 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
       date={meta.date}
     >
       <H1>{meta.title}</H1>
-      <span className="text-sm">{meta.date}</span>
+      <span className="text-sm opacity-70">{meta.date}</span>
       <Tags tags={meta.tags} />
 
       <hr className="border-0 h-16" />
