@@ -12,7 +12,7 @@
     "build": "next build",
     "export": "next export -o build",
     "start": "next start",
-    "preview": "serve build",
+    "serve": "serve build",
     "postbuild": "npm run sitemap",
     "preexport": "npm run build",
     "sitemap": "NODE_ENV=production node -r esbuild-register sitemap.ts",
