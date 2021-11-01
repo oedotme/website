@@ -22,7 +22,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "next": "^11.1.2",
+    "next": "^12.0.2",
     "preact": "^10.5.15",
     "react": "npm:@preact/compat@17.0.2",
     "react-dom": "npm:@preact/compat@17.0.2"
@@ -32,22 +32,22 @@
     "@commitlint/config-conventional": "^13.2.0",
     "@mapbox/rehype-prism": "^0.7.0",
     "@types/prettier": "^2.4.1",
-    "@types/react": "^17.0.28",
-    "autoprefixer": "^10.3.7",
+    "@types/react": "^17.0.33",
+    "autoprefixer": "^10.4.0",
     "esbuild-register": "^3.0.0",
-    "eslint": "^8.0.0",
-    "eslint-config-next": "^11.1.2",
+    "eslint": "^8.1.0",
+    "eslint-config-next": "^12.0.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.2",
-    "lint-staged": "^11.2.3",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
     "mdx-bundler": "^6.0.2",
     "next-plugin-preact": "^3.0.6",
-    "postcss": "^8.3.9",
+    "postcss": "^8.3.11",
     "preact-render-to-string": "^5.1.19",
     "prettier": "^2.4.1",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0",
-    "tailwindcss": "^2.2.16",
-    "typescript": "^4.4.3"
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.4.4"
   }
 }
