@@ -39,7 +39,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
-    "mdx-bundler": "^6.0.2",
+    "mdx-bundler": "^6.0.3",
     "next-plugin-preact": "^3.0.6",
     "postcss": "^8.3.11",
     "preact-render-to-string": "^5.1.19",
