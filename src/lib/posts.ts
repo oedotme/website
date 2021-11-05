@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import { bundleMDX } from 'mdx-bundler'
-import prism from '@mapbox/rehype-prism'
+import prism from 'rehype-prism-plus'
 
 export type Post = {
   title: string

@@ -44,7 +44,7 @@ export const Code = ({ children, ...props }: Props) => {
 
       <code
         {...props}
-        className="bg-neutral block border border-elevate font-medium my-7 leading-normal overflow-x-scroll rounded text-sm p-5 pr-6"
+        className="bg-neutral border border-elevate font-medium grid my-7 leading-normal overflow-x-scroll rounded text-sm p-5 pr-6"
         ref={ref}
       >
         {children}

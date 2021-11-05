@@ -11,9 +11,25 @@ code::-webkit-scrollbar {
   @apply font-medium text-sm;
 }
 
+code .highlight-line {
+  @apply relative block w-full min-w-[fit-content];
+  background: var(--surface);
+}
+
+code .highlight-line::before {
+  @apply absolute left-0 -top-0 content-[""] -ml-5 h-full w-5;
+  background: var(--surface);
+  border-left: 2.5px solid var(--primary);
+}
+
+code .highlight-line::after {
+  @apply absolute -right-6 top-0 content-[""] ml-6 h-full w-6;
+  background: var(--surface);
+}
+
 .token {
   color: var(--default);
-  background: var(--neutral);
+  background: transparent;
 }
 
 .token.graphql .token.operator,
