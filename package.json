@@ -28,11 +28,11 @@
     "react-dom": "npm:@preact/compat@17.0.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.2.1",
-    "@commitlint/config-conventional": "^13.2.0",
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
     "@mapbox/rehype-prism": "^0.7.0",
     "@types/prettier": "^2.4.1",
-    "@types/react": "^17.0.33",
+    "@types/react": "^17.0.34",
     "autoprefixer": "^10.4.0",
     "esbuild-register": "^3.0.0",
     "eslint": "^8.1.0",
