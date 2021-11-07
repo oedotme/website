@@ -21,7 +21,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "next": "^12.0.2",
+    "next": "^12.0.3",
     "preact": "^10.5.15",
     "react": "npm:@preact/compat@17.0.2",
     "react-dom": "npm:@preact/compat@17.0.2"
@@ -34,12 +34,12 @@
     "autoprefixer": "^10.4.0",
     "esbuild-register": "^3.0.0",
     "eslint": "^7.32.0",
-    "eslint-config-next": "^12.0.2",
+    "eslint-config-next": "^12.0.3",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
-    "mdx-bundler": "^6.0.3",
+    "mdx-bundler": "^7.0.0",
     "next-plugin-preact": "^3.0.6",
     "postcss": "^8.3.11",
     "preact-render-to-string": "^5.1.19",
