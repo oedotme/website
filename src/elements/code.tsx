@@ -35,7 +35,7 @@ export const Code = ({ children, ...props }: Props) => {
   return (
     <div className="relative group">
       <button
-        className="absolute bg-elevate font-medium hidden top-2 right-2 text-xs py-1 px-2 rounded-sm group-hover:block"
+        className="absolute bg-elevate font-medium hidden top-2 right-2 text-xs py-1 px-2 rounded-sm z-10 group-hover:block"
         onClick={handleClick}
         onBlur={() => setCopy('Copy')}
       >

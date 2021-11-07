@@ -12,19 +12,19 @@ code::-webkit-scrollbar {
 }
 
 code .highlight-line {
-  @apply relative block w-full min-w-[fit-content];
-  background: var(--surface);
+  @apply relative;
+  background: var(--syntax-highline);
 }
 
 code .highlight-line::before {
   @apply absolute left-0 -top-0 content-[""] -ml-5 h-full w-5;
-  background: var(--surface);
-  border-left: 2.5px solid var(--primary);
+  background: var(--syntax-highline);
+  border-left: 2.5px solid var(--syntax-modified);
 }
 
 code .highlight-line::after {
-  @apply absolute -right-6 top-0 content-[""] ml-6 h-full w-6;
-  background: var(--surface);
+  @apply absolute right-0 top-0 content-[""] -mr-6 h-full w-6;
+  background: var(--syntax-highline);
 }
 
 .token {

@@ -22,6 +22,8 @@
   --light-syntax-function: #6f42c1;
   --light-syntax-surround: #032f62;
   --light-syntax-comments: #6a737d;
+  --light-syntax-modified: #2a6cea;
+  --light-syntax-highline: #f8faff;
 
   --dark-syntax-keywords: #ff7b72;
   --dark-syntax-selector: #7ee787;
@@ -30,6 +32,8 @@
   --dark-syntax-function: #d2a8ff;
   --dark-syntax-surround: #a5d6ff;
   --dark-syntax-comments: #8b949e;
+  --dark-syntax-modified: #81a7f1;
+  --dark-syntax-highline: #0d1628;
 }
 
 :root {
@@ -49,6 +53,8 @@
   --syntax-function: var(--light-syntax-function);
   --syntax-surround: var(--light-syntax-surround);
   --syntax-comments: var(--light-syntax-comments);
+  --syntax-modified: var(--light-syntax-modified);
+  --syntax-highline: var(--light-syntax-highline);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -69,6 +75,8 @@
     --syntax-function: var(--dark-syntax-function);
     --syntax-surround: var(--dark-syntax-surround);
     --syntax-comments: var(--dark-syntax-comments);
+    --syntax-modified: var(--dark-syntax-modified);
+    --syntax-highline: var(--dark-syntax-highline);
   }
 }
 
@@ -89,6 +97,8 @@
   --syntax-function: var(--light-syntax-function);
   --syntax-surround: var(--light-syntax-surround);
   --syntax-comments: var(--light-syntax-comments);
+  --syntax-modified: var(--light-syntax-modified);
+  --syntax-highline: var(--light-syntax-highline);
 }
 
 [color-scheme='dark'] {
@@ -108,4 +118,6 @@
   --syntax-function: var(--dark-syntax-function);
   --syntax-surround: var(--dark-syntax-surround);
   --syntax-comments: var(--dark-syntax-comments);
+  --syntax-modified: var(--dark-syntax-modified);
+  --syntax-highline: var(--dark-syntax-highline);
 }
