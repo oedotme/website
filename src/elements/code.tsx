@@ -6,18 +6,10 @@ export const Code = ({ children, ...props }: Props) => {
   const ref = useRef<HTMLElement>(null)
   const [copy, setCopy] = useState('Copy')
 
-  const handleClick = () => {
+  const handleClick = async () => {
     try {
       const code = ref?.current
-      const range = document.createRange()
-      const selection = window.getSelection()
-
-      range.selectNodeContents(code as Node)
-      selection?.removeAllRanges()
-      selection?.addRange(range)
-      document.execCommand('copy')
-      selection?.removeAllRanges()
-
+      await navigator.clipboard.writeText(String(code?.textContent))
       setCopy('Copied!')
     } catch {
       setCopy('Not supported')
