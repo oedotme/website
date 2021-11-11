@@ -1,6 +1,6 @@
 const styles = {
   h1: 'font-bold mt-0 mb-4 text-4xl leading-tight',
-  h2: 'font-bold mt-10 text-2xl bg-surface leading-none sticky top-0 py-5 z-10',
+  h2: 'font-bold mt-10 text-2xl bg-surface leading-none sticky top-0 py-5 z-20',
   h3: 'font-bold mt-10 mb-4 text-xl',
   h4: 'font-bold mt-10 mb-4 text-lg',
   h5: 'font-bold mt-8 mb-2 text-base',
