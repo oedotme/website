@@ -20,7 +20,7 @@ export const getPostsMeta = async () => {
       files.map(async (file) => {
         const slug = `/blog/${file.replace('.mdx', '')}`
         const source = await fs.readFile(`${path}/${file}`, 'utf8')
-        const frontmatter = (await bundleMDX(source)).frontmatter as Post
+        const frontmatter = (await bundleMDX({ source })).frontmatter as Post
         return { ...frontmatter, slug }
       })
     )
@@ -35,7 +35,8 @@ export const getPostBySlug = async (slug: string) => {
   const path = `${process.cwd()}/content/posts`
   const source = await fs.readFile(`${path}/${slug}.mdx`, 'utf8')
 
-  const { frontmatter, code } = await bundleMDX(source, {
+  const { frontmatter, code } = await bundleMDX({
+    source,
     xdmOptions(options) {
       options.rehypePlugins = [...(options.rehypePlugins ?? []), prism]
       return options
