@@ -6,5 +6,17 @@
       "source": "/fonts/inter-var-latin.woff2",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/blog/faster-directory-navigation",
+      "destination": "/blog/faster-directory-navigation-with-fzf",
+      "permanent": true
+    },
+    {
+      "source": "/blog/file-based-routing-with-react-router-2",
+      "destination": "/blog/file-based-routing-with-react-router-code-splitting",
+      "permanent": true
+    }
   ]
 }

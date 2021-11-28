@@ -8,16 +8,4 @@ module.exports = {
     }
     return config
   },
-  redirects: () => [
-    {
-      source: '/blog/faster-directory-navigation',
-      destination: '/blog/faster-directory-navigation-with-fzf',
-      permanent: true,
-    },
-    {
-      source: '/blog/file-based-routing-with-react-router-2',
-      destination: '/blog/file-based-routing-with-react-router-code-splitting',
-      permanent: true,
-    },
-  ],
 }
