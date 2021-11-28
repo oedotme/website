@@ -32,8 +32,9 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
       date={meta.date}
     >
       <H1>{meta.title}</H1>
-      <span className="text-sm opacity-70">{meta.date}</span>
+      <p className="mb-6">{meta.description}</p>
       <Tags tags={meta.tags} />
+      <span className="block mt-4 opacity-70 text-sm">{meta.date}</span>
 
       <hr className="border-0 h-16" />
 
