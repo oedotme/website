@@ -1,0 +1,280 @@
+---
+title: File-based routing with React Router — Pre-loading
+description: Conditional routes pre-loading for faster routes switching
+tags: [next, react, react-router, vite]
+image: /images/tags/react-router-next-react-vite.png
+date: November 28, 2021
+---
+
+In the previous post we added [route-based code-splitting and lazy-loading](https://omarelhawary.me/blog/file-based-routing-with-react-router-code-splitting) to the [client-side file-based routing we've setup](https://omarelhawary.me/blog/file-based-routing-with-react-router).
+
+Although code-splitting helps with the initial load time and overall performance, it makes switching routes slower as each route bundle loads on-demand.
+
+**We can improve this experience by pre-loading the routes the user might be visiting next.** So when the user visits a pre-loaded route, it will render directly.
+
+With client-side routing, we usually switch routes by using a `Link` component. We'll extend the React Router's `Link` component by adding a `prefetch` prop and setting conditional pre-loading.
+
+The `prefetch` prop will be a `boolean`, if `true` **the route will pre-load once the `Link` component is at the browser viewport. Otherwise it will only pre-load on `Link` component hover**. We'll set the `prefetch` prop to be `true` by default.
+
+Here's a usage example of the `Link` component for the two cases we've just mentioned:
+
+- `<Link to="/settings" />` If the path provided by the `to` prop is an existing route path then it will pre-load once its `Link` component is in the viewport.
+- `<Link to="/settings" prefetch={false} />` In this case it will only pre-load when the user hovers over the `Link`.
+
+## Getting started
+
+We'll be using the React project with Vite we've setup in the previous two posts for the file-based routing.
+
+If you got started with the previous post, you're good to go. We'll be working mainly in a new file at `src/components/link.tsx` to build our custom `Link` component.
+
+## Updating configuration
+
+Before we start building the `Link` component we need to update our previous configuration.
+
+As we saw in the previous post the `ROUTES` variable is an object with each module name as a key, and a function that returns its dynamic import as value:
+
+```tsx
+ROUTES = {
+  '/src/pages/index.tsx': () => import('/src/pages/index.tsx'),
+}
+```
+
+So calling `() => import('/src/pages/index.tsx')` function will load the module above.
+
+Let's now add the `preload` property to each route object to pre-load its corresponding route when it's called:
+
+```tsx {3,9}
+// src/routes.tsx
+
+export const routes = Object.keys(ROUTES).map((route) => {
+  const path = route
+    .replace(/\/src\/pages|index|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+
+  return { path, component: lazy(ROUTES[route]), preload: ROUTES[route] }
+})
+```
+
+We've also exported the `routes` variable to use it in other files.
+
+## Link component
+
+We'll use the React Router's `Link` component as a base for our component. It will work exactly the same except it will support pre-loading.
+
+We can break down what we need to do next in few steps:
+
+- Adding the base component
+- Adding a function to match the provided path with its corresponding route
+- Triggering pre-loading automatically once the `Link` component is in the viewport
+- Handling pre-loading when the user hovers over a `Link` component
+
+### Adding the base component
+
+We'll add the `prefetch` prop to our component with `true` as the default value. Here's the initial boilerplate:
+
+```tsx
+// src/components/link.tsx
+
+import { Link as RouterLink, LinkProps } from 'react-router-dom'
+
+type Props = LinkProps & { prefetch: boolean }
+
+export const Link = ({ children, to, prefetch = true, ...props }: Props) => {
+  return (
+    <RouterLink to={to} {...props}>
+      {children}
+    </RouterLink>
+  )
+}
+```
+
+### Finding a route by its path
+
+Next we need to match the path passed to the `Link` component through the `to` prop. We'll write a function to find the route that matches that path. If a matching route is found, it will be returned.
+
+A static route path like `/settings` or `/about` is straight forward to match, but we also need to handle dynamic routes. For example, `src/pages/posts/[slug].tsx` will correspond to `/posts/:slug` in our routes configuration. When a dynamic path is passed to the `Link` component it will be an actual `slug` like `/posts/first-post`.
+
+We can handle static and dynamic route paths with the same logic. We'll use some regex to:
+
+- Find and replace the dynamic path segments with `.*`
+- Use the above result for the route path matching
+
+With dynamic paths we need to match `/posts/:slug` or `/posts/*` with `/posts/first-post`. We can specify those dynamic segments patterns like `:slug` or `*` -> `/:\w|\*/g` and replace them with the wildcard pattern `.*`:
+
+```tsx
+'posts/:slug'.replace(/:\w|\*/g, '.*') // posts/:slug || posts/* -> posts/.*
+```
+
+Then we can match the path with a regex based on the previously replaced result:
+
+```tsx
+'posts/first-post'.match(new RegExp('posts/.*'))?.[0] === 'posts/first-post' // true
+```
+
+Putting this matching logic together, we can define the function to get the matching route for the provided path:
+
+```tsx {5,7-10}
+// src/components/link.tsx
+
+import { Link as RouterLink, LinkProps } from 'react-router-dom'
+
+import { routes } from '../routes'
+
+const getMatchingRoute = (path: string) => {
+  const routeDynamicSegments = /:\w+|\*/g
+  return routes.find((route) => path.match(new RegExp(route.path.replace(routeDynamicSegments, '.*')))?.[0] === path)
+}
+
+type Props = LinkProps & { prefetch: boolean }
+
+export const Link = ({ children, to, prefetch = true, ...props }: Props) => {
+  // ...
+}
+```
+
+We'll keep this function in this file, but it can be extracted if needed.
+
+### Automatic pre-loading
+
+Let's start with the default behavior, when the `prefetch` prop is set to `true`.
+
+We'll use the `IntersectionObserver` API to check if the `Link` component is in the viewport. If there's a route matching the path passed to the `Link` component, it will pre-load in case it hasn't already.
+
+We can place this observation logic within a `useEffect` hook:
+
+```tsx {3,15-16,18-20,22-32,35}
+// src/components/link.tsx
+
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Link as RouterLink, LinkProps } from 'react-router-dom'
+
+import { routes } from '../routes'
+
+const getMatchingRoute = (path: string) => {
+  // ...
+}
+
+type Props = LinkProps & { prefetch: boolean }
+
+export const Link = ({ children, to, prefetch = true, ...props }: Props) => {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const [prefetched, setPrefetched] = useState(false)
+
+  const route = useMemo(() => getMatchingRoute(to), [to])
+  const preload = useCallback(() => route?.preload() && setPrefetched(true), [route])
+  const prefetchable = Boolean(route && !prefetched)
+
+  useEffect(() => {
+    if (prefetchable && prefetch && ref?.current) {
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((entry) => entry.isIntersecting && preload()),
+        { rootMargin: '200px' }
+      )
+
+      observer.observe(ref.current)
+      return () => observer.disconnect()
+    }
+  }, [prefetch, prefetchable, preload])
+
+  return (
+    <RouterLink ref={ref} to={to} {...props}>
+      {children}
+    </RouterLink>
+  )
+}
+```
+
+### Pre-loading on hover
+
+If the `prefetch` prop is set to `false`, the route will only pre-load when the user hovers over its `Link` component.
+
+We can simply add a `onMouseEnter` event handler to call the same `preload` function:
+
+```tsx {17,20}
+// src/components/link.tsx
+
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Link as RouterLink, LinkProps } from 'react-router-dom'
+
+import { routes } from '../routes'
+
+const getMatchingRoute = (path: string) => {
+  // ...
+}
+
+type Props = LinkProps & { prefetch: boolean }
+
+export const Link = ({ children, to, prefetch = true, ...props }: Props) => {
+  // ...
+
+  const handleMouseEnter = () => prefetchable && preload()
+
+  return (
+    <RouterLink ref={ref} to={to} onMouseEnter={handleMouseEnter} {...props}>
+      {children}
+    </RouterLink>
+  )
+}
+```
+
+## Final code
+
+The final code should be as following:
+
+```tsx
+// src/components/link.tsx
+
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Link as RouterLink, LinkProps } from 'react-router-dom'
+
+import { routes } from '../routes'
+
+const getMatchingRoute = (path: string) => {
+  const routeDynamicSegments = /:\w+|\*/g
+  return routes.find((route) => path.match(new RegExp(route.path.replace(routeDynamicSegments, '.*')))?.[0] === path)
+}
+
+type Props = LinkProps & { prefetch: boolean }
+
+export const Link = ({ children, to, prefetch = true, ...props }: Props) => {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const [prefetched, setPrefetched] = useState(false)
+
+  const route = useMemo(() => getMatchingRoute(to), [to])
+  const preload = useCallback(() => route?.preload() && setPrefetched(true), [route])
+  const prefetchable = Boolean(route && !prefetched)
+
+  useEffect(() => {
+    if (prefetchable && prefetch && ref?.current) {
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((entry) => entry.isIntersecting && preload()),
+        { rootMargin: '200px' }
+      )
+
+      observer.observe(ref.current)
+      return () => observer.disconnect()
+    }
+  }, [prefetch, prefetchable, preload])
+
+  const handleMouseEnter = () => prefetchable && preload()
+
+  return (
+    <RouterLink ref={ref} to={to} onMouseEnter={handleMouseEnter} {...props}>
+      {children}
+    </RouterLink>
+  )
+}
+```
+
+## What's next
+
+As we have access to all the routes from the configuration file, it's possible to pre-load routes in many different ways. Pre-loading group of routes based on certain analytics of how users navigate in the application could be interesting. But I've not tried that myself.
+
+If you want to see a working example of this client-side file-based routing setup with code-splitting and pre-loading, [Render](https://github.com/oedotme/render) should be updated by now.
+
+In the next post we'll cover updating this setup to use [React Router v6](https://reactrouter.com/). That should be straight forward as we only have to modify the routes configuration.
+
+I would love to hear what you think about this link component for pre-loading and if you have suggestions to improve it, feel free to leave a comment on the discussion. If you have questions or got stuck at some point I'll be happy to help.
+
+Share this post if you find it useful and stay tuned for upcoming posts.
