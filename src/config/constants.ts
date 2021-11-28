@@ -5,7 +5,7 @@ const profile = {
   title: 'Omar Elhawary | Frontend Developer',
   description:
     'Frontend developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
-  image: '/images/avatar.jpg',
+  image: '/images/cover.jpg',
   url: env.web.url,
   username: 'oedotme',
   links: {
