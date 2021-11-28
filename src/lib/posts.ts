@@ -34,6 +34,7 @@ export const getPostsMeta = async () => {
 export const getPostBySlug = async (slug: string) => {
   const path = `${process.cwd()}/content/posts`
   const source = await fs.readFile(`${path}/${slug}.mdx`, 'utf8')
+  const image = `/images/posts/${slug}.png`
 
   const { frontmatter, code } = await bundleMDX({
     source,
@@ -42,7 +43,7 @@ export const getPostBySlug = async (slug: string) => {
       return options
     },
   })
-  const meta = { ...frontmatter, slug: `/blog/${slug}` } as Post
+  const meta = { ...frontmatter, image, slug: `/blog/${slug}` } as Post
 
   return { meta, code }
 }
