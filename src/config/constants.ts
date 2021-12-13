@@ -10,7 +10,6 @@ const profile = {
   username: 'oedotme',
   links: {
     email: 'mailto:oedotme@gmail.com',
-    resume: env.web.url + '/files/omar-elhawary-resume.pdf',
     github: 'https://github.com/oedotme',
     twitter: 'https://twitter.com/oedotme',
     linkedin: 'https://linkedin.com/in/oedotme',
@@ -29,7 +28,6 @@ export const constants = {
     ],
     external: [
       { name: 'Email', link: profile.links.email },
-      { name: 'Resume', link: profile.links.resume },
       { name: 'GitHub', link: profile.links.github },
       { name: 'Twitter', link: profile.links.twitter },
       { name: 'LinkedIn', link: profile.links.linkedin },
@@ -50,8 +48,9 @@ export const constants = {
       using: ['TypeScript', 'React', 'React Router', 'Tailwind', 'Vite'],
     },
     {
-      name: 'Simple terminal',
-      description: 'Fork of st with additional features',
+      name: 'ST',
+      description: 'Custom build of Simple Terminal',
+
       link: 'https://github.com/oedotme/st',
       using: ['C'],
     },
@@ -70,6 +69,7 @@ export const constants = {
     ],
     cli: [
       { name: 'FZF', description: 'General purpose fuzzy finder', link: 'https://github.com/junegunn/fzf' },
+      { name: 'PNPM', description: 'JavaScript package manager', link: 'https://pnpm.io' },
       { name: 'Ripgrep', description: 'Better grep', link: 'https://github.com/BurntSushi/ripgrep' },
       { name: 'Stow', description: 'Dotfiles management', link: 'https://www.gnu.org/software/stow' },
       { name: 'Vifm', description: 'Vim-based file manager', link: 'https://vifm.info' },
