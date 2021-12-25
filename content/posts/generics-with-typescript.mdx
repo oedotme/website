@@ -1,0 +1,139 @@
+---
+title: Generics with TypeScript
+description: A quick introduction to generics with TypeScript
+tags: [typescript]
+date: December 25, 2021
+---
+
+In this quick post we'll cover what are generics and how to use them with TypeScript. It answers a question I got from a friend, and I thought it could also be useful for others. We'll go through the following points:
+
+- What are generics
+- Using generic types
+- Generics constraints
+- Generics with functions
+
+If you're familiar with the concept of code reuse, well it is just that. We can use generics to create reusable patterns for types. It results in flexible types that work with different variations, and also fewer types to maintain as you avoid duplication.
+
+Code reuse is an important part of building flexible components/functions that serve complex and large systems. Nevertheless, abstraction is hard to get right in general and could cause inflexibility in some cases.
+
+## What are generics
+
+You can think of generics as arguments to your types. When a type with generics is used, those generics are passed to it. As we mentioned above, this will allow us to reuse the common patterns of the type declarations.
+
+Many functions that you're already using could have optional generic types. For example the array methods like `Array.map()` and `Array.reduc()` accept a generic for elements type:
+
+```ts
+const numbers = [1, 2, 3]
+numbers.map((n) => n)
+numbers.map<number>((n) => n) // with a generic <number> type
+```
+
+You probably also came across generics while fixing Typescript type errors, without knowing what's going on. We've all been there. Once you learn about generics, you'll see them used everywhere, in the web APIs and third-party libraries.
+
+Hope that by the end of this post it’ll be more clear to you.
+
+## Generic types
+
+We can start by building our first type with generics. Let's say you have two functions `getUser` and `getProduct` that return some data for a user and a product:
+
+```ts
+type User = {
+  email: string
+}
+
+type Product = {
+  id: string
+}
+
+type UserResponse = {
+  data: User
+}
+
+type ProductResponse = {
+  data: Product
+}
+
+const user: UserResponse = getUser(id)
+const product: ProductResponse = getProduct(id)
+```
+
+You'll notice that the `UserResponse` and `ProductResponse` are kind of the same type declaration, both have `data` key but with different types. You can expect that if a new type is added it will also need to have its own `YetAnotherResponse` type which will result in duplicating same response type over and over again. And in the case you want to make a change across `...Responses` types, good luck with that.
+
+We can abstract this common pattern, so our `Response` will be a generic type and depending on the `Data` type passed, it will give the corresponding `Response` type.
+
+```ts
+type User = {
+  email: string
+}
+
+type Product = {
+  id: string
+}
+
+type GenericResponse<Data> = {
+  data: Data
+}
+
+const user: GenericResponse<User> = getUser(id)
+const product: GenericResponse<Product> = getProduct(id)
+```
+
+## Generics constraints
+
+You might notice that so far the generic type accepts any type. That could be what you need, but sometimes we would want to limit or add constraints to a certain type for the generic type passed.
+
+For a simple example, we can have an `Input` type that has a `Value` generic type. If we want to constrain the `Value` generic type possibilities to be only a `string` or a `number` type, we can specify that by adding an `extends` keyword after the generic name, then the specific constraints type:
+
+```ts
+type Input<Value extends string | number> = Value
+
+const input: Input<string> = 'text' // works
+const input: Input<number> = 123456 // works
+const input: Input<object> = {} // has error
+```
+
+## Generics with functions
+
+Generics are part of type definitions. You just need to know how to annotate functions whether it's a function declaration or an arrow function expression:
+
+```ts
+function getInput<Input>(input: Input): Input {
+  return input
+}
+
+const getInput = <Input>(input: Input): Input => {
+  return input
+}
+```
+
+## Additional example ⌁
+
+A few months back I wrote an over simplified version of React Query's `useQuery` hook to replace `useEffect` for data fetching in React. Here you'll find a generic `Query` type:
+
+```ts
+type Query<Data> = {
+  loading: boolean
+  error: boolean
+  data: Data
+}
+
+type Key = string | string[]
+type Fetcher<Data> = () => Promise<Data>
+type Options = { enabled?: boolean; cacheTime?: number }
+
+const useQuery = <Data>(key: Key, fetcher: Fetcher<Data>, options?: Options): Query<Data> => {
+  // ...
+}
+```
+
+You can find the entire version of this simplified `useQuery` hook on Render template at [src/hooks/query.ts](https://github.com/oedotme/render/blob/main/src/hooks/query.ts) if you want to take a look on the entire implementation.
+
+## What's next
+
+Hope that explained what are generics and how to start using them with TypeScript. You can find more details and examples at [TypeScript generics docs](https://www.typescriptlang.org/docs/handbook/2/generics.html).
+
+There are very useful [TypeScript utility types](https://www.typescriptlang.org/docs/handbook/utility-types.html), that you'll use generics with. I highly recommend you to check them out, it will help you a lot while using TypeScript in general.
+
+I would love to hear what you think about this post, feel free to leave a comment on the discussion. If you have questions or got stuck at some point I'll be happy to help.
+
+Share this post if you find it useful and stay tuned for upcoming posts.
