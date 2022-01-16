@@ -17,12 +17,12 @@ export default function Home({ posts = [] }: Props) {
 
       <section className="mt-14 space-y-2">
         <h2 className="font-normal leading-loose text-xl sm:leading-loose ">
-          Iʼm a frontend developer and linux enthusiast interested in user/dev experience, design systems, statically
-          typed languages and functional programming.
+          I’m a frontend developer and linux enthusiast interested in user/dev experience, software architecture, design
+          systems and functional programming.
         </h2>
 
         <h3 className="font-normal leading-loose text-xl sm:leading-loose">
-          I <Link href={constants.profile.url + '/blog'}>blog</Link> about web development, tooling, linux and
+          I <Link href={constants.profile.url + '/blog'}>blog</Link> about web development, tooling, linux and developer
           productivity.
         </h3>
       </section>
