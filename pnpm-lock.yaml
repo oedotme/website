@@ -13,7 +13,7 @@ specifiers:
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
   husky: ^7.0.4
-  lint-staged: ^12.1.7
+  lint-staged: ^12.2.0
   mdx-bundler: ^8.0.1
   next: ^12.0.8
   postcss: ^8.4.5
@@ -45,7 +45,7 @@ devDependencies:
   eslint-config-prettier: 8.3.0
   eslint-plugin-prettier: 4.0.0_4660519532e4c3b0a9e5bb6623cfedf6
   husky: 7.0.4
-  lint-staged: 12.1.7
+  lint-staged: 12.2.0
   mdx-bundler: 8.0.1_esbuild@0.14.11
   postcss: 8.4.5
   prettier: 2.5.1
@@ -1245,7 +1245,7 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       slice-ansi: 5.0.0
-      string-width: 5.0.1
+      string-width: 5.1.0
     dev: true
 
   /clipboardy/2.3.0:
@@ -1612,6 +1612,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       is-obj: 2.0.0
+    dev: true
+
+  /eastasianwidth/0.2.0:
+    resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
   /electron-to-chromium/1.4.38:
@@ -3102,8 +3106,8 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
-  /lint-staged/12.1.7:
-    resolution: {integrity: sha512-bltv/ejiLWtowExpjU+s5z8j1Byjg9AlmaAjMmqNbIicY69u6sYIwXGg0dCn0TlkrrY2CphtHIXAkbZ+1VoWQQ==}
+  /lint-staged/12.2.0:
+    resolution: {integrity: sha512-TnNciMBhmEqzqM+RvzqqdvrG4TsI8wCDMX1Vg9+rj2Y9uY70Nq84Mb1WOIiwxW9l5tUlCOqtY5La71RM2fSgfA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -3138,7 +3142,7 @@ packages:
       log-update: 4.0.0
       p-map: 4.0.0
       rfdc: 1.3.0
-      rxjs: 7.5.1
+      rxjs: 7.5.2
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
@@ -4544,8 +4548,8 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
-  /rxjs/7.5.1:
-    resolution: {integrity: sha512-KExVEeZWxMZnZhUZtsJcFwz8IvPvgu4G2Z2QyqjZQzUGr32KDYuSxrEYO4w3tFFNbfLozcrKUTvTPi+E9ywJkQ==}
+  /rxjs/7.5.2:
+    resolution: {integrity: sha512-PwDt186XaL3QN5qXj/H9DGyHhP3/RYYgZZwqBv9Tv8rsAaiwFH1IsJJlcgD37J7UW5a6O67qX0KWKS3/pu0m4w==}
     dependencies:
       tslib: 2.3.1
     dev: true
@@ -4765,12 +4769,12 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /string-width/5.0.1:
-    resolution: {integrity: sha512-5ohWO/M4//8lErlUUtrFy3b11GtNOuMOU0ysKCDXFcfXuuvUXu95akgj/i8ofmaGdN0hCqyl6uu9i8dS/mQp5g==}
+  /string-width/5.1.0:
+    resolution: {integrity: sha512-7x54QnN21P+XL/v8SuNKvfgsUre6PXpN7mc77N3HlZv+f1SBRGmjxtOud2Z6FZ8DmdkD/IdjCaf9XXbnqmTZGQ==}
     engines: {node: '>=12'}
     dependencies:
+      eastasianwidth: 0.2.0
       emoji-regex: 9.2.2
-      is-fullwidth-code-point: 4.0.0
       strip-ansi: 7.0.1
     dev: true
 
