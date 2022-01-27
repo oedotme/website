@@ -19,6 +19,7 @@ specifiers:
   postcss: ^8.4.5
   preact: ^10.6.4
   prettier: ^2.5.1
+  prettier-plugin-tailwindcss: ^0.1.4
   react: ^17.0.2
   react-dom: ^17.0.2
   rehype-prism-plus: ^1.3.1
@@ -49,6 +50,7 @@ devDependencies:
   mdx-bundler: 8.0.1_esbuild@0.14.14
   postcss: 8.4.5
   prettier: 2.5.1
+  prettier-plugin-tailwindcss: 0.1.4_prettier@2.5.1
   rehype-prism-plus: 1.3.1
   serve: 13.0.2
   tailwindcss: 3.0.16_ef48b3b8837f8a23677bffe8f9cd866d
@@ -4214,6 +4216,14 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       fast-diff: 1.2.0
+    dev: true
+
+  /prettier-plugin-tailwindcss/0.1.4_prettier@2.5.1:
+    resolution: {integrity: sha512-kt3YFWqxcG9+bilBI0hPF7RjQZNtgBRvjJZGw6B2MNAjPqlfcYIiZnNaIEnq4XimKLTzZYxz6jQnUXmSQ/5njg==}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.5.1
     dev: true
 
   /prettier/2.5.1:
