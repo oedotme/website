@@ -7,7 +7,7 @@ export const Footer = () => {
       <span className="text-default opacity-70">&copy; 2022 Omar Elhawary</span>
 
       <nav>
-        <ul className="flex flex-wrap gap-4 justify-center sm:gap-8">
+        <ul className="flex flex-wrap justify-center gap-4 sm:gap-8">
           {constants.links.external.map(({ name, link }) => (
             <li key={name}>
               <Link href={link}>{name}</Link>

@@ -12,7 +12,7 @@ export default class Document extends NextDocument {
           <link rel="shortcut icon" type="image/svg+xml" href="/favicons/favicon.svg" />
         </Head>
 
-        <body className="bg-surface text-default overflow-y-scroll selection:bg-default selection:text-surface">
+        <body className="overflow-y-scroll bg-surface text-default selection:bg-default selection:text-surface">
           <Main />
           <NextScript />
         </body>

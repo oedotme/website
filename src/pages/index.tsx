@@ -13,15 +13,15 @@ type Props = {
 export default function Home({ posts = [] }: Props) {
   return (
     <Page keywords={keywords}>
-      <h1 className="font-bold mb-10 text-4xl">Hi, Iʼm Omar!</h1>
+      <h1 className="mb-10 text-4xl font-bold">Hi, Iʼm Omar!</h1>
 
       <section className="mt-14 space-y-2">
-        <h2 className="font-normal leading-loose text-xl sm:leading-loose ">
+        <h2 className="text-xl font-normal leading-loose sm:leading-loose ">
           I’m a frontend developer and linux enthusiast interested in user/dev experience, software architecture, design
           systems and functional programming.
         </h2>
 
-        <h3 className="font-normal leading-loose text-xl sm:leading-loose">
+        <h3 className="text-xl font-normal leading-loose sm:leading-loose">
           I <Link href={constants.profile.url + '/blog'}>blog</Link> about web development, tooling, linux and developer
           productivity.
         </h3>
@@ -42,29 +42,29 @@ export default function Home({ posts = [] }: Props) {
       </section>
 
       <section className="mb-16">
-        <h2 className="font-bold mt-28 text-2xl">Recent posts</h2>
+        <h2 className="mt-28 text-2xl font-bold">Recent posts</h2>
 
         <List className="mt-12">
           {posts.slice(0, 3).map((post) => (
-            <ListItem key={post.slug} className="flex flex-col mt-10">
+            <ListItem key={post.slug} className="mt-10 flex flex-col">
               <Link href={post.slug}>
-                <h3 className="font-semibold text-lg">{post.title}</h3>
-                <span className="block mt-1 opacity-70 text-sm">{post.date}</span>
+                <h3 className="text-lg font-semibold">{post.title}</h3>
+                <span className="mt-1 block text-sm opacity-70">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
               </Link>
             </ListItem>
           ))}
         </List>
 
-        <Link href="/blog" className="inline-block font-medium mt-10">
+        <Link href="/blog" className="mt-10 inline-block font-medium">
           View all posts <span className="ml-2">{'-->'}</span>
         </Link>
       </section>
 
       <section className="mb-16">
-        <h2 className="font-bold mt-28 text-2xl">Latest projects</h2>
+        <h2 className="mt-28 text-2xl font-bold">Latest projects</h2>
 
-        <List className="list-none mt-12 space-y-4">
+        <List className="mt-12 list-none space-y-4">
           {constants.projects.slice(0, 3).map(({ name, description, link }) => (
             <ListItem key={name}>
               <Link href={link}>{name}</Link> — {description}
@@ -72,7 +72,7 @@ export default function Home({ posts = [] }: Props) {
           ))}
         </List>
 
-        <Link href="/projects" className="inline-block font-medium mt-10">
+        <Link href="/projects" className="mt-10 inline-block font-medium">
           View all projects <span className="ml-2">{'-->'}</span>
         </Link>
       </section>

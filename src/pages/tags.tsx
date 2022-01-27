@@ -62,16 +62,16 @@ export default function Tags() {
   return (
     <Page title="Tags">
       <section className="relative">
-        <ul className="flex flex-wrap justify-center content-start gap-3 my-6 mx-auto h-72 px-28">
+        <ul className="my-6 mx-auto flex h-72 flex-wrap content-start justify-center gap-3 px-28">
           {tags.map((tag) => (
             <li key={tag} className="text-sm">
               <button
                 className={classNames(
-                  'border border-elevate font-medium py-1 px-2 rounded-sm hover:border-default',
+                  'rounded-sm border border-elevate py-1 px-2 font-medium hover:border-default',
                   active.includes(tag)
                     ? active[0] === tag
                       ? 'bg-default text-elevate'
-                      : 'bg-elevate border-default'
+                      : 'border-default bg-elevate'
                     : 'bg-elevate text-default opacity-50'
                 )}
                 onClick={() => handleClick(tag)}
@@ -84,17 +84,17 @@ export default function Tags() {
 
         <div
           className={classNames(
-            'absolute inset-0 -top-3 left-4 mx-auto h-[220px] w-[440px] pointer-events-none',
-            frame && 'border border-default border-dashed'
+            'pointer-events-none absolute inset-0 -top-3 left-4 mx-auto h-[220px] w-[440px]',
+            frame && 'border border-dashed border-default'
           )}
         />
 
-        <div className="text-center space-x-4">
-          <button className="font-medium text-sm py-2 px-4" onClick={toggleFrame}>
+        <div className="space-x-4 text-center">
+          <button className="py-2 px-4 text-sm font-medium" onClick={toggleFrame}>
             Toggle frame
           </button>
 
-          <button className="font-medium text-sm py-2 px-4" onClick={shuffleTags}>
+          <button className="py-2 px-4 text-sm font-medium" onClick={shuffleTags}>
             Shuffle
           </button>
         </div>

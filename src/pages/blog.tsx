@@ -53,7 +53,7 @@ export default function Blog({ posts = [], tags = [] }: Props) {
 
       <form className="relative mt-8" onSubmit={handleSubmit}>
         <input
-          className="bg-neutral border border-elevate p-3 outline-none rounded w-full text-sm focus:border-default"
+          className="w-full rounded border border-elevate bg-neutral p-3 text-sm outline-none focus:border-default"
           type="text"
           placeholder="Search posts"
           value={input}
@@ -70,12 +70,12 @@ export default function Blog({ posts = [], tags = [] }: Props) {
         </span>
       </form>
 
-      <List className="flex flex-wrap gap-3 my-6 mb-16">
+      <List className="my-6 mb-16 flex flex-wrap gap-3">
         {tags.map((tag) => (
           <ListItem key={tag} className="text-sm">
             <button
               className={classNames(
-                'border border-elevate font-medium py-1 px-2 rounded-sm hover:border-default',
+                'rounded-sm border border-elevate py-1 px-2 font-medium hover:border-default',
                 active.includes(tag) ? 'bg-default text-elevate' : 'bg-elevate text-default'
               )}
               onClick={() => handleClick(tag)}
@@ -93,8 +93,8 @@ export default function Blog({ posts = [], tags = [] }: Props) {
           filteredPosts.map((post, index) => (
             <ListItem key={post.slug} className={classNames('flex flex-col', index !== 0 ? 'mt-12' : 'mt-8')}>
               <Link href={post.slug}>
-                <h3 className="font-semibold text-lg">{post.title}</h3>
-                <span className="block mt-1 opacity-70 text-sm">{post.date}</span>
+                <h3 className="text-lg font-semibold">{post.title}</h3>
+                <span className="mt-1 block text-sm opacity-70">{post.date}</span>
                 <p className="mt-2">{post.description}</p>
               </Link>
               <Tags tags={post.tags} />

@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <header>
       <nav className="flex justify-between">
-        <ul className="flex flex-wrap gap-2 items-center font-medium text-base sm:gap-6">
+        <ul className="flex flex-wrap items-center gap-2 text-base font-medium sm:gap-6">
           {constants.links.internal.map(({ name, link }) => (
             <li key={name}>
               <Link href={link} className="p-2">

@@ -18,16 +18,16 @@ export const Code = ({ children, ...props }: Props) => {
 
   if (!props.className?.includes('language-')) {
     return (
-      <code {...props} className="bg-element rounded py-1 px-1">
+      <code {...props} className="rounded bg-element py-1 px-1">
         {children}
       </code>
     )
   }
 
   return (
-    <div className="relative group">
+    <div className="group relative">
       <button
-        className="absolute bg-elevate font-medium hidden top-2 right-2 text-xs py-1 px-2 rounded-sm z-10 group-hover:block"
+        className="absolute top-2 right-2 z-10 hidden rounded-sm bg-elevate py-1 px-2 text-xs font-medium group-hover:block"
         onClick={handleClick}
         onBlur={() => setCopy('Copy')}
       >
@@ -36,7 +36,7 @@ export const Code = ({ children, ...props }: Props) => {
 
       <code
         {...props}
-        className="bg-neutral border border-elevate font-medium grid my-7 leading-normal overflow-x-scroll rounded text-sm p-5 pr-6"
+        className="my-7 grid overflow-x-scroll rounded border border-elevate bg-neutral p-5 pr-6 text-sm font-medium leading-normal"
         ref={ref}
       >
         {children}

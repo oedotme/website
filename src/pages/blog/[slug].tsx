@@ -34,16 +34,16 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
       <H1>{meta.title}</H1>
       <p className="mb-6">{meta.description}</p>
       <Tags tags={meta.tags} />
-      <span className="block mt-4 opacity-70 text-sm">{meta.date}</span>
+      <span className="mt-4 block text-sm opacity-70">{meta.date}</span>
 
-      <hr className="border-0 h-16" />
+      <hr className="h-16 border-0" />
 
       <Component components={MDXComponents} />
 
-      <hr className="border-0 h-4" />
+      <hr className="h-4 border-0" />
 
       <section className="my-8 text-sm">
-        <div className="flex justify-center gap-4 my-8 sm:justify-end sm:gap-6">
+        <div className="my-8 flex justify-center gap-4 sm:justify-end sm:gap-6">
           <Link
             href={
               `https://twitter.com/intent/tweet` +
@@ -61,16 +61,16 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
           </Link>
         </div>
 
-        <div className="flex gap-8 my-4 text-sm">
+        <div className="my-4 flex gap-8 text-sm">
           {prev && (
-            <Link className="font-medium rounded-sm flex w-1/2 py-2 text-left truncate mr-auto" href={prev.slug}>
+            <Link className="mr-auto flex w-1/2 truncate rounded-sm py-2 text-left font-medium" href={prev.slug}>
               <span className="mr-2">{'<--'}</span>
               <span className="flex-1 truncate">{prev.title}</span>
             </Link>
           )}
 
           {next && (
-            <Link className="font-medium rounded-sm flex w-1/2 py-2 text-right truncate ml-auto" href={next.slug}>
+            <Link className="ml-auto flex w-1/2 truncate rounded-sm py-2 text-right font-medium" href={next.slug}>
               <span className="flex-1 truncate">{next.title}</span>
               <span className="ml-2">{'-->'}</span>
             </Link>
