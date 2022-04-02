@@ -38,8 +38,8 @@ export const getPostBySlug = async (slug: string) => {
 
   const { frontmatter, code } = await bundleMDX({
     source,
-    xdmOptions(options) {
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), prism as any]
+    mdxOptions(options) {
+      options.rehypePlugins = [...(options.rehypePlugins ?? []), prism]
       return options
     },
   })
