@@ -1,0 +1,374 @@
+---
+title: File-based routing with React Location — Nested layouts
+description: File-based nested layouts with React Location and Vite
+tags: [react, react-location, remix, vite]
+date: April 05, 2022
+---
+
+In the previous post we covered [file-based routing using React Location and Vite with route-based data loaders](https://omarelhawary.me/blog/file-based-routing-with-react-location-data-loaders). Today we’ll add **nested layouts** to our previous file-based routing setup, another feature that is also inspired by Remix.
+
+A layout is a declaration of a page structure shared throughout multiple pages. You can nest layouts as they are just components. Instead of doing that manually we can make it declarative which plays well with file-based routing. That’s what we'll cover today.
+
+We'll be following the nested layouts conventions from Remix. **This setup will also support layout-based data loaders.**
+
+You can read more about nested layouts on [Remix's nested routes guide](https://remix.run/docs/en/v1/guides/routing#what-are-nested-routes).
+
+React Location comes with routes nesting support out-of-the-box so we'll only need to update the routes definition to get it to work with the previous setup.
+
+Before updating our setup, we'll compare the resulting routes array of the previous setup with today's one and see how they differ.
+
+## Getting started
+
+We'll be using the same React project with Vite we've setup in the previous post for the file-based routing with React Location and Vite.
+
+If you got started with the previous post, you're good to go. We'll only make one change in the `src/routes.tsx` file.
+
+## Overview
+
+In the previous post, the implementation of the routes definition was resulting in a flat array with one entry for each route.
+
+To enable nested layouts, **we'll just need to pass the routes nested to React Location**. We'll update the previous implementation to convert this flat routes definition to a tree-like structure.
+
+Let's go through an example of the resulting routes array for those two pages before and after introducing this update:
+
+- `src/pages/settings/account.tsx`
+- `src/pages/settings/profile/info.tsx`
+
+**Before nested layouts**, it was a flat structure:
+
+```tsx
+{ path: '/settings/account', element: ƒ, loader: ƒ },
+{ path: '/settings/profile/info', element: ƒ, loader: ƒ },
+```
+
+**With nested layouts**, any segment will be nested as a child of its previous segment:
+
+```tsx
+{
+  path: '/settings',
+  element: ƒ,
+  loader: ƒ,
+  children: [
+    { path: '/account', element: ƒ, loader: ƒ },
+    {
+      path: '/profile',
+      element: ƒ,
+      loader: ƒ,
+      children: [{ path: '/info', element: ƒ, loader: ƒ }],
+    },
+  ],
+},
+```
+
+⌁ Layout nesting will be a default behavior. In case we don't want to specify a layout for nested segments but we still want to have them nested in the route URL, we can replace the forward slashes `/` _(directory nesting)_ with dots:
+
+- `src/pages/settings/profile/info.tsx` -> `src/pages/settings/profile.info.tsx`
+
+That will result in the following:
+
+```tsx
+{
+  path: '/settings',
+  element: ƒ,
+  loader: ƒ,
+  children: [
+    { path: '/account', element: ƒ, loader: ƒ },
+    { path: '/profile/info', element: ƒ, loader: ƒ },
+  ],
+},
+```
+
+## Updating configuration
+
+We'll now update the previous configuration to pass the final routes structure to React Location as a tree-like structure instead of flat routes.
+
+In the previous setup, that was the implementation to build the routes array:
+
+```tsx
+// src/routes.tsx
+
+// ...
+
+const regularRoutes: Route[] = Object.keys(ROUTES).map((key) => {
+  const module = ROUTES[key]
+  const path = key
+    .replace(/\/src\/pages|index|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+
+  return {
+    path,
+    element: () => module().then((mod) => (mod?.default ? <mod.default /> : <></>)),
+    loader: (...args) => module().then((mod) => mod?.loader?.(...args)),
+  }
+})
+
+// ...
+```
+
+The new implementation for the `regularRoutes` needs more steps, but that's the only place we'll be updating. We'll keep each route's `element` and `loader` as we had previously:
+
+```tsx {4-5}
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  const module = ROUTES[key]
+  const route: Route = {
+    element: () => module().then((mod) => (mod?.default ? <mod.default /> : <></>)),
+    loader: (...args) => module().then((mod) => mod?.loader?.(...args)),
+  }
+}, [])
+```
+
+Handling paths will be different. We'll split each route segments at the forward slashes `/` and leave the `index` to be replaced with a forward slash `/` later:
+
+```tsx {4-9}
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  // ...
+
+  const segments = key
+    .replace(/\/src\/pages|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+    .split('/')
+    .filter(Boolean)
+}, [])
+```
+
+In the `segments` array, each segment could be one of three: `root`, `node` or `leaf`, depending on its position/index. There will be only one `root` and one `leaf` but there could be many `nodes` in between, here are some combinations examples:
+
+- `root`/`leaf`
+- `root`/`node`/`node`/`leaf`
+- `root`/`node`/`leaf`
+
+Let's now define those three variables for each route's segments:
+
+```tsx {4-9}
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  // ...
+
+  segments.reduce((parent, segment, index) => {
+    const path = segment.replace(/index|\./g, '/')
+    const root = index === 0
+    const leaf = index === segments.length - 1 && segments.length > 1
+    const node = !root && !leaf
+  }, {})
+}, [])
+```
+
+We'll use `Array.reduce()` method to build this nested routes structure. We'll be updating the `parent` accumulator by inserting into it the current route's segment. Also, we'll be using this accumulator to access the previous values and place each segment in its correct position.
+
+### Inserting segments
+
+Let's now take a look on how to place each segment. As we mentioned earlier each segment could be a `root`, `leaf` or `node`. We'll go through each, mentioning its conditions.
+
+#### Root segment
+
+That's the first segment in the segments array, here are some conditions we'll be handling:
+
+- Dynamic `root` segment -> ignored then skip to the next route
+- First and last segment -> added to the routes array with no children array
+- Otherwise -> added to the routes array making sure it has a children array even if empty
+
+```tsx {7-20}
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  // ...
+
+  segments.reduce((parent, segment, index) => {
+    // ...
+
+    if (root) {
+      const dynamic = path.startsWith(':') || path === '*'
+      if (dynamic) return parent
+
+      const last = segments.length === 1
+      if (last) {
+        routes.push({ path, ...route })
+        return parent
+      }
+
+      const found = routes?.find((route) => route.path === path)
+      if (found) found.children ??= []
+      else routes?.push({ path, children: [] })
+      return found || routes?.[routes.length - 1]
+    }
+  }, {})
+}, [])
+```
+
+As we mentioned, we made sure that the `root` segment has a children array if it has following segments, so that we can push the following nested segments into it.
+
+### Middle segment(s)
+
+The middle segment is anywhere between the `root` and `leaf` segments, and will be very similar to the third case of the `root` segment above:
+
+```tsx {6,12-18}
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  // ...
+
+  segments.reduce((parent, segment, index) => {
+    // ...
+    const insert = /^\w|\//.test(path) ? 'unshift' : 'push'
+
+    if (root) {
+      // ...
+    }
+
+    if (node) {
+      const current = parent.children
+      const found = current?.find((route) => route.path === path)
+      if (found) found.children ??= []
+      else current?.[insert]({ path, children: [] })
+      return found || (current?.[insert === 'unshift' ? 0 : current.length - 1] as Route)
+    }
+  }, {})
+}, [])
+```
+
+We defined an `insert` key so we can choose to push at the beginning or the end of the parent array, to define the regular segments before dynamic ones for routes ranking.
+
+As the middle `node` case is very similar to the `root` segment, we'll combine both in one condition in the final code.
+
+### Leaf segment
+
+The `leaf` case is the simplest, we'll just need to insert it in its parent:
+
+```tsx {15-17}
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  // ...
+
+  segments.reduce((parent, segment, index) => {
+    // ...
+
+    if (root) {
+      // ...
+    }
+
+    if (node) {
+      // ...
+    }
+
+    if (leaf) {
+      parent?.children?.[insert]({ path, ...route })
+    }
+  }, {})
+}, [])
+```
+
+Lastly, we'll return the routes array:
+
+```tsx {20}
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  // ...
+
+  segments.reduce((parent, segment, index) => {
+    // ...
+
+    if (root) {
+      // ...
+    }
+
+    if (node) {
+      // ...
+    }
+
+    if (leaf) {
+      // ...
+    }
+  }, {})
+
+  return routes
+}, [])
+```
+
+## Final code
+
+The final code should be as following, resulting in the tree-like routes structure that we'll pass to React Location:
+
+```tsx
+// src/routes.tsx
+
+const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {
+  const module = ROUTES[key]
+  const route: Route = {
+    element: () => module().then((mod) => (mod?.default ? <mod.default /> : <></>)),
+    loader: (...args) => module().then((mod) => mod?.loader?.(...args)),
+  }
+
+  const segments = key
+    .replace(/\/src\/pages|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+    .split('/')
+    .filter(Boolean)
+
+  segments.reduce((parent, segment, index) => {
+    const path = segment.replace(/index|\./g, '/')
+    const root = index === 0
+    const leaf = index === segments.length - 1 && segments.length > 1
+    const node = !root && !leaf
+    const insert = /^\w|\//.test(path) ? 'unshift' : 'push'
+
+    if (root) {
+      const dynamic = path.startsWith(':') || path === '*'
+      if (dynamic) return parent
+
+      const last = segments.length === 1
+      if (last) {
+        routes.push({ path, ...route })
+        return parent
+      }
+    }
+
+    if (root || node) {
+      const current = root ? routes : parent.children
+      const found = current?.find((route) => route.path === path)
+      if (found) found.children ??= []
+      else current?.[insert]({ path, children: [] })
+      return found || current?.[insert === 'unshift' ? 0 : current.length - 1]
+    }
+
+    if (leaf) {
+      parent?.children?.[insert]({ path, ...route })
+    }
+
+    return parent
+  }, {})
+
+  return routes
+}, [])
+```
+
+## Additional info ⌁
+
+In order to render layout's children, we'll need to use an `<Outlet/>` component in the layout to specify where the children will be rendered.
+
+Let's have a quick example on adding a layout component for the two following routes:
+
+- `src/pages/settings/account.tsx`
+- `src/pages/settings/profile/info.tsx`
+
+We'll add a `src/pages/settings.tsx` layout, and specify the `<Outlet/>` as a slot in the layout:
+
+```tsx {1,8}
+import { Outlet } from 'react-location'
+
+export default function SettingsLayout() {
+  return (
+    <>
+      <h1>Settings Layout</h1>
+      <div>
+        <Outlet />
+      </div>
+    </>
+  )
+}
+```
+
+## What's next
+
+Now we've combined nested layouts and layout-based data loaders. If you want to see an example, [Render](https://github.com/oedotme/render) is already updated with this setup.
+
+It's exciting to be able to use some framework features without using the actual framework while keeping similar developer experience and conventions. Tools/libraries like Vite and React Location unlock a lot of possibilities. Right now we've setup **file-based routing, route-based code-splitting and pre-loading, data loaders and nested layouts** and maybe more to come.
+
+I would love to hear what you think about this file-based routing setup with data loaders and nested layouts and if you have suggestions to improve it, feel free to reach out. If you have questions or got stuck at some point I'll be happy to help.
+
+Share this post if you find it useful and stay tuned for upcoming posts.
