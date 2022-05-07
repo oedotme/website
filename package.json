@@ -13,7 +13,7 @@
     "export": "npm run build && next export -o build",
     "start": "next start",
     "serve": "serve build -p 5000",
-    "check": "tsc",
+    "typecheck": "tsc",
     "format": "prettier -w 'src/**/*.{css,html,json,md,mdx,js,jsx,ts,tsx}'",
     "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "prepare": "husky install"
