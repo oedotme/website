@@ -19,7 +19,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "next": "^12.1.6",
+    "next": "^12.2.0",
     "preact": "^10.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -34,7 +34,7 @@
     "esbuild": "^0.14.47",
     "esbuild-register": "^3.3.3",
     "eslint": "^8.18.0",
-    "eslint-config-next": "^12.1.6",
+    "eslint-config-next": "^12.2.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.1.0",
     "husky": "^8.0.1",
