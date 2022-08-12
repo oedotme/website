@@ -19,7 +19,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "next": "^12.2.4",
+    "next": "^12.2.5",
     "preact": "^10.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -27,14 +27,14 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@types/node": "^18.7.1",
+    "@types/node": "^18.7.2",
     "@types/prettier": "^2.7.0",
     "@types/react": "^18.0.17",
     "autoprefixer": "^10.4.8",
-    "esbuild": "^0.15.1",
+    "esbuild": "^0.15.2",
     "esbuild-register": "^3.3.3",
     "eslint": "^8.21.0",
-    "eslint-config-next": "^12.2.4",
+    "eslint-config-next": "^12.2.5",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
