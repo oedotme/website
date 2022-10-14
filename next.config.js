@@ -1,4 +1,7 @@
-module.exports = {
+const path = require('path')
+const remoteRefresh = require('next-remote-refresh')
+
+const config = {
   reactStrictMode: true,
   swcMinify: true,
   // webpack: (config, { dev, isServer }) => {
@@ -9,3 +12,7 @@ module.exports = {
   //   return config
   // },
 }
+
+const withRemoteRefresh = remoteRefresh({ paths: path.resolve(__dirname, 'content') })
+
+module.exports = withRemoteRefresh(config)
