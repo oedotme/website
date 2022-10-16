@@ -1,6 +1,7 @@
 const path = require('path')
 const remoteRefresh = require('next-remote-refresh')
 
+/** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
   swcMinify: true,
