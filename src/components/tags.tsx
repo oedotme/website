@@ -4,7 +4,7 @@ type Props = { tags: string[] }
 
 export const Tags = ({ tags }: Props) => {
   return (
-    <ul className="mt-4 flex gap-3">
+    <ul className="mt-4 flex flex-wrap gap-3">
       {tags.map((tag) => (
         <li key={tag}>
           <Link
