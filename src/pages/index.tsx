@@ -13,11 +13,11 @@ type Props = {
 export default function Home({ posts = [] }: Props) {
   return (
     <Page keywords={keywords}>
-      <h1 className="mb-10 text-4xl font-bold">Hi, Iʼm Omar!</h1>
+      <h1 className="mb-10 text-4xl font-bold">Hi, I’m Omar!</h1>
 
       <section className="mt-14 space-y-2">
         <h2 className="text-xl font-normal leading-loose sm:leading-loose ">
-          I’m a frontend developer and linux enthusiast interested in user/dev experience, software architecture, design
+          I’m a software developer and linux enthusiast interested in user/dev experience, software architecture, design
           systems and functional programming.
         </h2>
 
