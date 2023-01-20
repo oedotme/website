@@ -36,10 +36,10 @@ export const constants = {
 
   projects: [
     {
-      name: 'Outline',
-      description: 'Video/Chat web application',
-      link: 'https://outlineapp.netlify.app',
-      using: ['TypeScript', 'React', 'Node.js', 'GraphQL', 'WebRTC'],
+      name: 'Generouted',
+      description: 'Generated client-side file-based routes',
+      link: 'https://github.com/oedotme/generouted',
+      using: ['TypeScript', 'Node.js', 'Vite', 'Plugin', 'Codegen'],
     },
     {
       name: 'Render',
@@ -53,6 +53,12 @@ export const constants = {
 
       link: 'https://github.com/oedotme/st',
       using: ['C'],
+    },
+    {
+      name: 'Outline',
+      description: 'Video/Chat web application',
+      link: 'https://outlineapp.netlify.app',
+      using: ['TypeScript', 'React', 'Node.js', 'GraphQL', 'WebRTC'],
     },
   ],
 
