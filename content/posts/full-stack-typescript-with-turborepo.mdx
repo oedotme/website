@@ -1,0 +1,574 @@
+---
+title: Building full stack TypeScript application with Turborepo
+description: Getting started with monorepos using Turborepo, TypeScript, React, Node.js and pnpm
+tags: [monorepo, node, pnpm, react, turborepo, typescript, vite]
+coauthored: true
+date: January 20, 2023
+---
+
+Whether you're building a fullstack application or an application composed of multiple frontend and backend projects, you'll probably need to share parts across projects to some extent.
+
+It could be types, utilities, validation schemas, components, design systems, development tools setup or configurations. Monorepos help managing all those parts together in one repository.
+
+Turborepo is one of the best monorepo tools in the JavaScript/TypeScript ecosystem. It's fast, easy to configure and use, independent from the application technologies, and can be adopted incrementally. It has a small learning curve and a low barrier to entry — whether you're starting out with monorepos or trying different tools in the ecosystem.
+
+In this article, we'll provide an overview of what monorepos are and what are the benefits of using Turborepo. We'll then build a simple full stack application with React and Node.js using pnpm workspaces and demonstrate how the process can be improved by using Turborepo.
+
+## Monorepo overview
+
+### What is a monorepo
+
+A monorepo is a single repository that contains multiple applications and/or libraries. Monorepos facilitate project management, code sharing, cross-repo changes with instant type-checking validation and more.
+
+### Polyrepo
+
+Let's say we're building a fullstack application, both the frontend and the backend are two separate projects, each of them placed in a different repository — this is a polyrepo.
+
+If we need to share types or utilities between the frontend and the backend and we don't want to duplicate that on both projects, we have to create a third repository for it and then consume it as an external package at both projects.
+
+Each time we modify the shared package, we have to build and publish a new version, and all projects using this package should update it to the newer version.
+
+In addition to the overhead of versioning and publishing, these multiple parts can quite easily become out of sync with a high possibility of frequent breakages.
+
+There are other [shortcomings to polyrepos](https://monorepo.tools/#polyrepo-concept) depending on your project, and using a monorepo is an alternative that addresses some of these issues.
+
+### Monorepo tooling
+
+Using monorepos without the right tooling, however, would make the applications more difficult to manage than using polyrepos. To have an optimized monorepo you'll need a caching system and an optimized tasks execution to save development and deployment time.
+
+There are many tools like [Lerna](https://lerna.js.org), [Nx](https://nx.dev), [Turborepo](https://turborepo.org), [Moon](https://moonrepo.dev), [Rush](https://rushjs.io) and [Bazel](https://bazel.build) to name a few. Today, we'll be using Turborepo as it's lightweight, flexible and easy to use.
+
+You can learn more about monorepos, when and why to use them, and a comparison between various tools at [monorepo.tools](https://monorepo.tools).
+
+### Turborepo
+
+Turborepo is a popular monorepo tool in the JavaScript/TypeScript ecosystem. It's written in Go (in Rust soon) and was authored by [Jared Palmer](https://twitter.com/jaredpalmer), it was [acquired by Vercel a year ago](https://vercel.com/blog/vercel-acquires-turborepo).
+
+Turborepo is fast, easy to use and configure, and serves as a lightweight layer that can be easily added or replaced. It's built on top of workspaces, a feature that comes with all major package managers. We'll cover workspaces in more details in the next section.
+
+Once Turborepo is installed and configured in your monorepo, it will understand how your projects depend on each other and maximize the running speed for your tasks.
+
+Turborepo doesn't do the same work twice, it has a caching system that allows for the skipping of the work that has already been done before. Also it creates multiple cached versions of the files. In case you rollback to a previous file content an older cached version will be used.
+
+[Turborepo documentation](https://turborepo.org/docs) is a great resource to learn more. Also the [official Turborepo handbook](https://turborepo.org/docs/handbook) covers important aspects of monorepos in general and related topics, like migrating to a monorepo, development workflows, code sharing, linting, testing, publishing, deployment and more.
+
+## Base monorepo setup
+
+### Workspaces with pnpm
+
+Workspaces are the base building blocks for a monorepo. All major package managers have built-in support for workspaces, including [npm](https://docs.npmjs.com/cli/v8/using-npm/workspaces), [yarn](https://classic.yarnpkg.com/lang/en/docs/workspaces) and [pnpm](https://pnpm.io/workspaces).
+
+Workspaces provide support for managing multiple projects in a single repository. Each project is contained in a workspace with its own `package.json`, source code and configuration files.
+
+There's also a `package.json` at the root-level of the monorepo and a lock-file. The lock-file keeps a reference of all packages installed across all workspaces, so you only need to run `pnpm install` or `npm install` once to install all workspaces dependencies.
+
+We'll be using pnpm, not only for it's efficiency, speed and disk space usage, but because it has also good support for managing workspaces and it's recommended by the Turborepo team.
+
+You can check this article to learn more about [managing a full stack monorepo with pnpm](https://blog.logrocket.com/managing-full-stack-monorepo-pnpm).
+
+If you don't have pnpm installed, check out their [installation guide](https://pnpm.io/installation). You can also use npm or yarn workspaces instead of pnpm workspaces if you prefer.
+
+### Structure overview
+
+We'll start by the general high-level structure.
+
+We'll place `api`, `web` and `types` inside a `packages` directory in the monorepo root. At the root-level, we'll also have a `package.json` and a `pnpm-workspace.yaml` configuration file for pnpm to specify which packages are workspaces:
+
+```shell
+.
+├── packages
+│   ├── api/
+│   ├── types/
+│   └── web/
+├── package.json
+└── pnpm-workspace.yaml
+```
+
+We can quickly create the `packages/` directory and its sub-directories with the following `mkdir` command:
+
+```shell
+mkdir -p packages/{api,types,web}
+```
+
+We'll then run `pnpm init` in the monorepo root and in the three packages:
+
+```shell
+pnpm init
+
+cd packages/api; pnpm init
+cd ../../packages/types; pnpm init
+cd ../../packages/web; pnpm init
+
+cd ../..
+```
+
+Notice we used `../..` to go back two directories after each `pnpm init` command, before finally going back to the monorepo root with the `cd ../..` command.
+
+We want any direct child directory inside the `packages` directory to be a workspace, but pnpm and other package managers don't recognize workspaces, until we explicitly define them.
+
+Configuring workspaces implies that we specify workspaces either by listing each workspace individually, or with a pattern to match multiple directories/workspaces at once. This configuration is written inside the root-level `pnpm-workspace.yaml` file.
+
+We'll use a glob pattern to match all `packages`' direct children directories. Here's the configuration:
+
+```yaml
+# pnpm-workspace.yaml
+
+packages:
+  - 'packages/*'
+```
+
+For performance reasons, it's better to avoid nested glob matching like `packages/**`, as it will match not only the direct children, but all the directories inside the `packages` directory.
+
+We chose the directory name `packages` for the directory to include our workspaces, but it can be named differently. `apps` and `libs` are my personal preferences (inspired by Nx).
+
+You can also have multiple workspaces directories by adding them to [`pnpm-workspace.yaml`](https://pnpm.io/pnpm-workspace_yaml).
+
+In the following sections we'll setup a base project for each workspace and install their dependencies.
+
+---
+
+### Shared types setup
+
+We'll start by setting up the types package at `packages/types`.
+
+`typescript` is the only dependency we need for this workspace. Here's the command to install it as a dev dependency:
+
+```shell
+pnpm add --save-dev typescript --filter types
+```
+
+The `package.json` should look like that:
+
+```json
+// packages/types/package.json
+
+{
+  "name": "types",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "type-check": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
+```
+
+We'll now add the configuration file for TypeScript:
+
+```json
+// packages/types/tsconfig.json
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": ["./src"]
+}
+```
+
+Now that everything is ready, let's add and export the type that we'll use at both `api` and `web`:
+
+```ts
+// packages/types/src/index.ts
+
+export type Workspace = {
+  name: string
+  version: string
+}
+```
+
+The shared `types` workspace or any shared workspace, should be installed in the other workspaces using it. The shared workspace will be listed alongside the other dependencies or dev dependencies inside the consuming workspace's `package.json`.
+
+pnpm has a dedicated protocol `workspace:<version>` to resolve local workspaces with linking. You might also want to change the workspace `<version>` to `*` to ensure you always have the latest workspace version.
+
+We can use the following command to install the `types` workspace:
+
+```shell
+pnpm add --save-dev types@workspace --filter <workspace>
+```
+
+Note that the package name used to install and reference the `types` workspace, should be named exactly as the defined `name` field inside the `types` workspace `package.json`.
+
+### Backend setup (Express, TypeScript, `esbuild`, `tsx`)
+
+We'll now build a simple backend API using Node.js and Express at `packages/api`.
+
+Here are our dependencies and dev dependencies:
+
+```shell
+pnpm add express cors --filter api
+pnpm add --save-dev typescript esbuild tsx @types/{express,cors} --filter api
+pnpm add --save-dev types@workspace --filter api
+```
+
+The `package.json` should look something like this:
+
+```json
+// packages/api/package.json
+
+{
+  "name": "api",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:express --external:cors",
+    "start": "node dist/index.js",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "esbuild": "^0.17.0",
+    "tsx": "^3.12.2",
+    "types": "workspace:*",
+    "typescript": "^4.9.4"
+  }
+}
+```
+
+We'll use the exact same `tsconfig.json` from the types workspace.
+
+Finally we'll add the `api` entry, and expose one endpoint:
+
+```ts
+// packages/api/src/index.ts
+
+import cors from 'cors'
+import express from 'express'
+
+import { Workspace } from 'types'
+
+const app = express()
+const port = 5000
+
+app.use(cors({ origin: 'http://localhost:3000' }))
+
+app.get('/workspaces', (_, response) => {
+  const workspaces: Workspace[] = [
+    { name: 'api', version: '1.0.0' },
+    { name: 'types', version: '1.0.0' },
+    { name: 'web', version: '1.0.0' },
+  ]
+  response.json({ data: workspaces })
+})
+
+app.listen(port, () => console.log(`Listening on http://localhost:${port}`))
+```
+
+### Frontend setup (React, TypeScript, Vite)
+
+This is the last workspace, we'll add it at `packages/web`. These are the dependencies to install:
+
+```shell
+pnpm add react react-dom --filter web
+pnpm add --save-dev typescript vite @vitejs/plugin-react @types/{react,react-dom} --filter web
+pnpm add --save-dev types@workspace --filter web
+```
+
+The `package.json` should look something like this:
+
+```json
+// packages/web/package.json
+
+{
+  "name": "web",
+  "scripts": {
+    "dev": "vite dev --port 3000",
+    "build": "vite build",
+    "start": "vite preview",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react": "^3.0.1",
+    "types": "workspace:*",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4"
+  }
+}
+```
+
+Again we'll use the same `tsconfig.json` file we used at `types` and `api`, adding only one line at `compilerOptions` for Vite's client types:
+
+```json {6}
+// packages/web/tsconfig.json
+
+{
+  "compilerOptions": {
+    // ...
+    "types": ["vite/client"]
+  }
+  // ...
+}
+```
+
+Let's now add the `vite.config.ts` and the entry `index.html`:
+
+```ts
+// packages/web/vite.config.ts
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+})
+```
+
+```html
+<!-- packages/web/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full stack TypeScript with Turborepo demo</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
+```
+
+And finally here's our entry for the React application at `src/index.tsx`:
+
+```tsx
+// packages/web/src/index.tsx
+
+import { StrictMode, useEffect, useState } from 'react'
+import { createRoot } from 'react-dom/client'
+
+import { Workspace } from 'types'
+
+const App = () => {
+  const [data, setData] = useState<Workspace[]>([])
+
+  useEffect(() => {
+    fetch('http://localhost:5000/workspaces')
+      .then((response) => response.json())
+      .then(({ data }) => setData(data))
+  }, [])
+
+  return (
+    <StrictMode>
+      <h1>Building a fullstack TypeScript project with Turborepo</h1>
+      <h2>Workspaces</h2>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </StrictMode>
+  )
+}
+
+const app = document.querySelector('#app')
+if (app) createRoot(app).render(<App />)
+```
+
+## Adding Turborepo
+
+If your monorepo is simple with only a few workspaces, managing them with pnpm workspaces can be totally sufficient.
+
+However with bigger projects we'll need to have a more efficient monorepo tool to manage their complexity and scale. Turborepo can improve your workspaces by speeding up your linting, testing and building pipelines without changing the structure of your monorepo.
+
+The speed gains are mainly because of [Turborepo's caching system](https://turbo.build/repo/docs/core-concepts/caching). After running a task, it will not run again until the workspace itself or a dependant workspace has changed.
+
+In addition, Turborepo can multitask; it schedules the tasks for maximizing the speed of executing them. You can read more about [running tasks at Turborepo core concepts guide](https://turborepo.org/docs/core-concepts/running-tasks), in this guide you'll also see a comparison between running workspace tasks by the package manager directly versus running tasks using Turborepo.
+
+### Installation and configuration
+
+As mentioned earlier, we don't need to modify our workspaces setup to use Turborepo. We'll only need to install and configure it to get it to work with our existing monorepo.
+
+Let's first install the `turbo` package at the monorepo root:
+
+```shell
+pnpm add --save-dev --workspace-root turbo
+```
+
+And let’s also add the `.turbo` directory to the `.gitignore` file, along with the task's artifacts, files, and directories we want to cache — like the `dist` directory in our case. The `.gitignore` file should be something like this:
+
+```gitignore
+.turbo
+node_modules
+dist
+```
+
+Make sure to have `git` initialized in your monorepo root by running `git init` if you haven’t already, as Turborepo uses `git` with file hashing for caching.
+
+Now let's add a `turbo.json` file to the monorepo root to configure our Turborepo pipelines.
+
+Pipelines allow us to declare which tasks depend on each other inside our monorepo. The pipelines infer the tasks dependency graph to properly schedule, execute, and cache the tasks outputs.
+
+Each pipeline direct key is a runnable task via `turbo run <task>`. If we don't include a task name inside the workspace's `package.json` `scripts` this task will be ignored for the corresponding workspace.
+
+Those are the tasks that we want to define for our monorepo: `dev`, `type-check` and `build`.
+
+Let's start defining each task with their options:
+
+```json
+// turbo.json
+
+{
+  "pipeline": {
+    "dev": {
+      "cache": false
+    },
+    "type-check": {
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": ["type-check"],
+      "outputs": ["dist/**"]
+    }
+  }
+}
+```
+
+`cache` is an enabled option by default, we've disabled it for the `dev` task.
+
+The `output` option is an array. If it's empty it will cache the task logs, otherwise it will cache the task specified outputs.
+
+We use `dependsOn` to run the `type-check` task for each workspace before running its `build` task.
+
+`cache` and `outputs` are straight forward to use, but `dependsOn` has multiple cases. You can learn more about all configuration options at [the configuration reference](https://turborepo.org/docs/reference/configuration)
+
+---
+
+Here's an overview of the files structure so far, after adding Turborepo:
+
+```shell {23}
+.
+├── packages
+│   ├── api
+│   │   ├── package.json
+│   │   ├── src
+│   │   │   └── index.ts
+│   │   └── tsconfig.json
+│   ├── types
+│   │   ├── package.json
+│   │   ├── src
+│   │   │   └── index.ts
+│   │   └── tsconfig.json
+│   └── web
+│       ├── index.html
+│       ├── package.json
+│       ├── src
+│       │   └── index.tsx
+│       ├── tsconfig.json
+│       └── vite.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+└── turbo.json
+```
+
+### Running tasks
+
+In the project root `package.json`, we can now add the scripts for the tasks we've defined. We'll add `turbo run <task>` commands to run a task across all workspaces, or we can use `--filter` to select the workspaces to run for a task:
+
+```json
+// package.json
+
+{
+  "name": "full-stack-typescript-with-turborepo-demo",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:api": "turbo run dev --filter api",
+    "dev:web": "turbo run dev --filter web --filter api",
+    "type-check": "turbo run type-check",
+    "build": "turbo run build"
+  },
+  "devDependencies": {
+    "turbo": "^1.7.0"
+  }
+}
+```
+
+If we now run the `build` script with `pnpm build` from the project root, it will run the `build` script for all workspaces in the monorepo:
+
+```shell {20}
+» pnpm build
+
+• Packages in scope: api, types, web
+• Running build in 3 packages
+• Remote caching disabled
+
+types:type-check: cache miss, executing ...
+types:type-check: ...
+api:type-check: cache miss, executing ...
+api:type-check: ...
+web:type-check: cache miss, executing ...
+web:type-check: ...
+web:build: cache miss, executing ...
+web:build: ...
+api:build: cache miss, executing ...
+api:build: ...
+
+ Tasks:    5 successful, 5 total
+Cached:    0 cached, 5 total
+  Time:    2.357s
+```
+
+In the subsequent run, if we haven't made any changes, we'll see an example of cached tasks output ⌁ `FULL TURBO`:
+
+```shell {20}
+» pnpm build
+
+• Packages in scope: api, types, web
+• Running build in 3 packages
+• Remote caching disabled
+
+web:type-check: cache hit, replaying output ...
+web:type-check: ...
+types:type-check: cache hit, replaying output ...
+types:type-check: ...
+api:type-check: cache hit, replaying output ...
+api:type-check: ...
+web:build: cache hit, replaying output ...
+web:build: ...
+api:build: cache hit, replaying output ...
+api:build: ...
+
+ Tasks:    5 successful, 5 total
+Cached:    5 cached, 5 total
+  Time:    60ms >>> FULL TURBO
+```
+
+## Final code
+
+You can find the full demo code on this [GitHub repo](https://github.com/oedotme/full-stack-typescript-with-turborepo-demo) and you can try it online via [StackBlitz](https://stackblitz.com/github/oedotme/full-stack-typescript-with-turborepo-demo).
+
+## What's next
+
+Monorepos facilitate the managing and scaling of complex applications. Using Turborepo on top of workspaces is a great option in a lot of cases.
+
+We've only scratched the surface of what we can do with Turborepo. You can find more examples on the [Turborepo examples directory on GitHub](https://github.com/vercel/turborepo/tree/main/examples). [Skill Recordings on GitHub](https://github.com/skillrecordings/products) is also another example that has been around since Turborepo was first released.
+
+We highly recommend you to take a look at [Turborepo core concepts](https://turborepo.org/docs/core-concepts/why-turborepo) and [the new handbook](https://turborepo.org/docs/handbook). There are also a couple of informative YouTube videos about Turborepo on [Vercel's channel](https://www.youtube.com/c/VercelHQ).
+
+Feel free to leave a comment on the discussion to share what you think about Turborepo, or if you have any question. Share this post if you find it useful and stay tuned for upcoming posts!
