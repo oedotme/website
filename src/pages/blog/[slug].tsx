@@ -33,8 +33,18 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
     >
       <H1>{meta.title}</H1>
       <p className="mb-6">{meta.description}</p>
+
       <Tags tags={meta.tags} />
-      <span className="mt-4 block text-sm opacity-70">{meta.date}</span>
+
+      <div className="mt-4 text-sm">
+        {meta.coauthored ? (
+          <>
+            <span className="opacity-70">Written with</span> <Link href="https://marianmolina.com"> Marian Molina</Link>
+            <span className="mx-1"> — </span>
+          </>
+        ) : null}
+        <span className="opacity-70">{meta.date}</span>
+      </div>
 
       <hr className="h-16 border-0" />
 

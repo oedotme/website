@@ -7,6 +7,7 @@ export type Post = {
   description: string
   tags: string[]
   image: string
+  coauthored: boolean
   date: string
   slug: string
 }
