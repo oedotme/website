@@ -32,11 +32,11 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
       date={meta.date}
     >
       <H1>{meta.title}</H1>
-      <p className="mb-6">{meta.description}</p>
+      <p className="mb-4">{meta.description}</p>
 
       <Tags tags={meta.tags} />
 
-      <div className="mt-4 text-sm">
+      <div className="mt-5 text-sm">
         {meta.coauthored ? (
           <>
             <span className="opacity-70">Written with</span> <Link href="https://marianmolina.com"> Marian Molina</Link>
