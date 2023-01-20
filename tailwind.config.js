@@ -16,7 +16,7 @@ module.exports = {
         comment: 'var(--comment)',
       },
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
+        sans: ['IBM Plex Sans', ...fontFamily.sans],
       },
       minHeight: {
         xs: '20rem',

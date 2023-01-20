@@ -64,7 +64,7 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
         <div className="my-4 flex gap-8 text-sm">
           {prev && (
             <Link className="mr-auto flex w-1/2 truncate rounded-sm py-2 text-left font-medium" href={prev.slug}>
-              <span className="mr-2">{'<--'}</span>
+              <span className="mr-2">←</span>
               <span className="flex-1 truncate">{prev.title}</span>
             </Link>
           )}
@@ -72,7 +72,7 @@ export default function BlogPost({ post: { meta, code, position } }: Props) {
           {next && (
             <Link className="ml-auto flex w-1/2 truncate rounded-sm py-2 text-right font-medium" href={next.slug}>
               <span className="flex-1 truncate">{next.title}</span>
-              <span className="ml-2">{'-->'}</span>
+              <span className="ml-2">→</span>
             </Link>
           )}
         </div>
