@@ -1,3 +1,4 @@
+import { existsSync } from 'fs'
 import fs from 'fs/promises'
 import { bundleMDX } from 'mdx-bundler'
 import prism from 'rehype-prism-plus'
@@ -36,6 +37,11 @@ export const getPostBySlug = async (slug: string) => {
   const path = `${process.cwd()}/content/posts`
   const source = await fs.readFile(`${path}/${slug}.mdx`, 'utf8')
   const image = `/images/posts/${slug}.png`
+
+  if (!existsSync(`public${image}`)) {
+    const { red, yellow, reset } = { red: '\x1b[31m', yellow: '\x1b[33m', reset: '\x1b[0m' }
+    console.log(`${yellow}warn${reset}  - missing cover image for ${red}content/posts/${slug}.mdx ${reset}`)
+  }
 
   const { frontmatter, code } = await bundleMDX({
     source,
