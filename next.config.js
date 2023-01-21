@@ -5,6 +5,7 @@ const remoteRefresh = require('next-remote-refresh')
 const config = {
   reactStrictMode: true,
   swcMinify: true,
+  experimental: { largePageDataBytes: 400 * 1000 },
   // webpack: (config, { dev, isServer }) => {
   //   if (!dev && !isServer) {
   //     config.resolve.alias['react'] = 'preact/compat'
