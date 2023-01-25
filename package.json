@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && NODE_ENV=production node -r esbuild-register sitemap.ts",
-    "export": "npm run build && next export -o build",
+    "build": "next build && tsx sitemap.ts",
+    "export": "pnpm build && next export -o build",
     "start": "next start",
     "serve": "serve build -p 5000",
     "typecheck": "tsc",
@@ -31,8 +31,6 @@
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.0.27",
     "autoprefixer": "^10.4.13",
-    "esbuild": "^0.17.3",
-    "esbuild-register": "^3.4.2",
     "eslint": "^8.32.0",
     "eslint-config-next": "^13.1.3",
     "eslint-config-prettier": "^8.6.0",
@@ -47,6 +45,7 @@
     "rehype-prism-plus": "^1.5.0",
     "serve": "^14.1.2",
     "tailwindcss": "^3.2.4",
+    "tsx": "^3.12.2",
     "typescript": "^4.9.4"
   }
 }

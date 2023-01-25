@@ -18,6 +18,7 @@ const profile = {
 
 export const constants = {
   profile,
+  domain: 'https://omarelhawary.me',
 
   links: {
     internal: [

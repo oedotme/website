@@ -19,7 +19,7 @@ const generateSitemap = async () => {
         .map(
           (url) => `
             <url>
-              <loc>${constants.profile.url + (url === '/index' ? '' : url)}</loc>
+              <loc>${constants.domain + (url === '/index' ? '' : url)}</loc>
             </url>
           `
         )
