@@ -1,8 +1,8 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
-  content: ['index.html', 'src/**/*.{md,mdx,js,ts,jsx,tsx}'],
+  content: ['src/**/*.{md,mdx,js,ts,jsx,tsx}'],
   darkMode: 'media',
   theme: {
     extend: {
@@ -25,9 +25,6 @@ module.exports = {
         lg: '64rem',
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 }
