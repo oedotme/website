@@ -1,0 +1,153 @@
+---
+title: Faster directory navigation with fzf
+description: How a one-line command will help you improve your CLI workflow
+tags: [cli, fzf, productivity]
+cowritten: true
+date: August 14, 2021
+---
+
+**Changing directories** is something we do quite a lot when using the command-line. You'd agree that **it's slow to fill a target directory path** even for a directory you visit often. The funny
+thing is that we repeat the same process every single time.
+
+Well, if you use shell completion it will give you useful suggestions so no more guessing, but it's still slow as you move from a directory to another one by one.
+
+What if you could **run a one-line command that would list all your directories, prompt you to type your target directory name, hit the `Enter` key to select it from the list** and voila, you are now at your target directory! Feels different, isn't it?
+
+You'd be surprised how easy it is to compose such a command by **combining `cd` with `fzf`, a general purpose command-line fuzzy finder.** `fzf` provides a very fast interactive interface that can be used with any type of list.
+
+So, what's this one-line command? Let's give it a look before explaining it in detail:
+
+```shell
+cd $(find * -type d | fzf)
+```
+
+Don't worry if it doesn't make sense just yet, it will soon become clearer. Let's first break it down into three steps:
+
+- `find * -type d` — gives us a list of directories
+- `fzf` — provides us with an input to filter this list
+- `cd` — changes directory taking `fzf` output as an argument
+
+---
+
+If you want to follow along, you can get `fzf` from this [installation guide](https://github.com/junegunn/fzf#installation).
+
+## Listing directories
+
+We first need to list the directories we want to search from. There are many tools to do that and for today we'll use `find` as it's usually already installed on most systems.
+
+Let's now see how to use it in action and take a look at its output :
+
+```shell
+find * -type d
+```
+
+```shell
+files
+files/personal
+files/personal/photos
+files/personal/notes
+files/work
+files/work/notes
+files/work/docs
+```
+
+`find` lists the directories within your current directory recursively.
+
+Here we used `*` as an argument to ignore the hidden directories, you could replace `*` with `.` to include all directories.
+
+You've also noticed we used the `-type d` flag and that's to tell `find` to search for only directories as it searches for both files and directories by default. So we have to specify that option to look only for directories.
+
+---
+
+Depending on your files structure, `find` output could vary from hundreds to thousands of directories. Hence, we need a tool to filter those results to the target directory. Here comes `fzf`.
+
+## Selecting directory
+
+Once we have our list of directories we want to search for our target directory and select it.
+
+To achieve that we just need to pipe the list of directories we got from `find` to `fzf`:
+
+```shell
+find * -type d | fzf
+```
+
+```shell
+» |
+  7/7 (0)
+› files
+  files/personal
+  files/personal/photos
+  files/personal/notes
+  files/work
+  files/work/notes
+  files/work/docs
+```
+
+It doesn't look so much different from what we saw with `find` output, **but the cool thing is that now you can start typing and the list will be filtered to match your input.**
+
+If we are looking for `notes/` directory for example, let's type `notes` and see the list updating:
+
+```shell
+» notes
+  2/7 (0)
+› files/personal/notes
+  files/work/notes
+```
+
+You can also go `Up` and `Down` with the arrow keys to navigate through the results and if you select a directory by hitting `Enter`, it'll be printed to the console:
+
+```shell
+files/personal/notes
+```
+
+---
+
+Almost there. Now we need to go to this directory.
+
+## Changing directory
+
+Here comes the last part of our command, let's take the result of `fzf` and pass it to `cd`:
+
+```shell
+cd $(find * -type d | fzf)
+```
+
+By typing `notes` then selecting its path as we did previously, the expression `$(find * - type d | fzf)` will be evaluated to `files/personal/notes` to become the argument of `cd`.
+
+---
+
+Here we are! Our current directory now changed to the selected directory.
+
+## Additional tips ⌁
+
+I would recommend **setting an alias to access this command quickly.** It also makes sense to start searching from your home directory, hence `cd ~`.
+
+```shell
+# bash | zsh
+alias sd="cd ~ && cd \$(find * -type d | fzf)"
+
+# fish
+alias sd "cd ~ && cd (find * -type d | fzf)"
+```
+
+Here `sd` alias would stand for search directories and it's similar to the good old `cd` command.
+
+You could set this alias permanently by adding the line above to your shell configuration file i.e. `.bashrc`, `.zshrc` or `config.fish` depending on what you're using.
+
+---
+
+**If you want to ignore some directories** with `find` you'll need a flag with an ignore pattern, or you can replace `find` with [`fd`](https://github.com/sharkdp/fd) or [`rg`](https://github.com/BurntSushi/ripgrep) as a search tool with a global `.ignore` file. Both are very fast.
+
+---
+
+There are also some [key bindings](https://github.com/junegunn/fzf#key-bindings-for-command-line) and widgets related to `fzf` that might not be installed by default. They enable you to change directories by pressing `ATL-C` or by running the command `fzf-cd-widget`.
+
+## What's next
+
+As you can see in case you work with hundreds or even thousands of directories, searching for a one directory with `fzf` would be much more efficient than just using `cd`.
+
+I'm currently using `fzf` with `nvim`, `npm` scripts and `git` commands, shell scripts and basically anything I could think of to make my life easier. Let me know if you are interested to know more about some of those use cases.
+
+What about you? I'm curious to know if you've used `fzf` before and how it fits in your current workflow. Or maybe you have some ideas to optimize your workflow with `fzf`?
+
+Share this post if you find it useful and stay tuned for upcoming posts. If you have questions or got stuck at some point, leave a comment on the discussion and I'll be happy to help.

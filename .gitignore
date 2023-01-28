@@ -1,6 +1,3 @@
-.next
-build
+.astro
+dist
 node_modules
-content/draft
-public/sitemap.xml
-.env.local

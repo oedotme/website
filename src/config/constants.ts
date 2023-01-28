@@ -1,12 +1,9 @@
-import { env } from './env'
-
 const profile = {
   name: 'Omar Elhawary',
   title: 'Omar Elhawary | Software Developer',
   description:
     'Software developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
   image: '/images/cover.png',
-  url: env.web.url,
   username: 'oedotme',
   links: {
     email: 'mailto:oedotme@gmail.com',
@@ -18,7 +15,7 @@ const profile = {
 
 export const constants = {
   profile,
-  domain: 'https://omarelhawary.me',
+  site: import.meta.env.SITE,
 
   links: {
     internal: [

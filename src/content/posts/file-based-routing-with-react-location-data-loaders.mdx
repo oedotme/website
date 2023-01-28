@@ -1,0 +1,317 @@
+---
+title: File-based routing with React Location — Data loaders
+description: Route-based data loaders with React Location and Vite
+tags: [react, react-location, remix, vite]
+cowritten: true
+date: December 28, 2021
+---
+
+**⌁ Check out [Generouted](https://github.com/oedotme/generouted) if you want to use client-side file-based routing**. It provides more features than what's covered here, multiple frameworks support and multiple routers integrations!
+
+---
+
+In the previous couple of posts we talked about how to setup file-based routing for client-side React applications with React Router and Vite. We covered the [base setup for file-based routing](https://omarelhawary.me/blog/file-based-routing-with-react-router) then added [route-based code-splitting to enable on-demand loading](https://omarelhawary.me/blog/file-based-routing-with-react-router-code-splitting). Finally we added [route-based pre-loading by using a custom Link component](https://omarelhawary.me/blog/file-based-routing-with-react-router-pre-loading).
+
+Today we'll take a look at how we can have the same setup with [React Location](https://react-location.tanstack.com/) instead of React Router. React Location introduces an interesting new approach for client-side routing inspired by full-stack React frameworks like Next.js and Remix.
+
+React Location makes the previous file-based routing setup even simpler. It also comes with a lot of features that offer a better user/dev experience. In this post we'll highlight one of them, loader functions. Those functions will run and return some data to their routes before rendering.
+
+By the end of this post, you’ll be able to define your routes with data loaders following this pattern:
+
+```tsx
+// src/pages/users/[id].tsx
+
+export const loader = async ({ params: { id } }) => {
+  return getUser(id)
+}
+
+export default function User() {
+  const { data } = useMatch()
+
+  return (
+    <div>
+      <div>{data.email}</div>
+    </div>
+  )
+}
+```
+
+You’ll get a better client-side routing experience with very little code to setup.
+
+If it's your first time reading about file-based routing with client-side React applications, I recommend you to check the previous posts for more in depth explanations.
+
+## Getting started
+
+We'll start by setting up a React project with Vite.
+
+You can [scaffold a Vite project](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) with React and TypeScript by using `--template react-ts`:
+
+```shell
+npm init vite@latest my-react-app -- --template react-ts
+```
+
+Then add `react-location` as a dependency:
+
+```shell
+npm install react-location
+```
+
+## Configuring routes
+
+This configuration part is almost identical to what we did in the previous setup with React Router. We used Vite's `import.meta.glob` API to load the routes modules following Next.js file-based routing conventions.
+
+We'll start the same way by loading all modules inside the `src/pages` directory. Also we'll have `src/pages/_app.tsx` and `src/pages/404.tsx` as preserved routes:
+
+```tsx {20}
+// src/routes.tsx
+
+const PRESERVED = import.meta.globEager('/src/pages/(_app|404).tsx')
+const ROUTES = import.meta.glob('/src/pages/**/[a-z[]*.tsx')
+
+const preservedRoutes: Route[] = Object.keys(PRESERVED).reduce((routes, key) => {
+  const path = key.replace(/\/src\/pages\/|\.tsx$/g, '')
+  return { ...routes, [path]: PRESERVED[key]?.default }
+}, {})
+
+const regularRoutes = Object.keys(ROUTES).map((key) => {
+  const route = ROUTES[key]
+  const path = key
+    .replace(/\/src\/pages|index|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+
+  return {
+    path,
+    element: () => route().then((mod) => (mod?.default ? <mod.default /> : <Fragment />)),
+  }
+})
+```
+
+The code above is basically the same as before, except we'll load each route component asynchronously by using the `element` property without using `React.lazy` or `<Suspense>` directly. We also added a fallback `<Fragment>` in case there wasn't a default export from that route yet.
+
+There's also `pendingElement` and `errorElement` that can be used to handle different route loading states but we'll not cover those in this post. You can find more details at [React Location route elements guide](https://react-location.tanstack.com/guides/route-elements).
+
+### Rendering routes
+
+React Location comes with a config-based API to define the routes, so we only need to pass the `routes` array to React Location's `<Router>` as a `routes` prop. We'll also append the `<NotFound>` component to our routes as a fallback route.
+
+To render the routes within our `<App>` or other layout components, we'll need to use the `<Outlet>` component to specify where the routes are rendered:
+
+```tsx
+// src/routes.tsx
+
+// ...
+
+const App = preservedRoutes?.['_app'] || Fragment
+const NotFound = preservedRoutes?.['404'] || Fragment
+
+const location = new ReactLocation()
+const routes = [...regularRoutes, { path: '*', element: <NotFound /> }]
+
+export const Routes = () => {
+  return (
+    <Router location={location} routes={routes}>
+      <App>
+        <Outlet />
+      </App>
+    </Router>
+  )
+}
+```
+
+---
+
+Finally we'll render the exported `Routes` component in our application entry:
+
+```tsx
+// src/main.tsx
+
+import { StrictMode } from 'react'
+import { render } from 'react-dom'
+
+import { Routes } from './routes'
+
+render(
+  <StrictMode>
+    <Routes />
+  </StrictMode>,
+  document.getElementById('root')
+)
+```
+
+## Data loaders
+
+React Location introduces this new data loaders feature that enables executing an asynchronous function for each route. If you return data from this function it will be ready for its route before it renders. You can check [why should you use route loaders? why are they cool?!](https://react-location.tanstack.com/guides/route-loaders#why-should-i-use-route-loaders-why-are-they-cool)
+
+Yes, loader functions are cool and plays very well with file-based routing as each route has its data loader. Having route-level loaders makes managing them easier especially when you start having many routes. It's also a familiar pattern if you're using full-stack React frameworks like Remix.
+
+You can define a loader function by adding a `loader` property to each route object. We can access the matching route information from the loader's first argument:
+
+```tsx
+const routes = [
+  {
+    path: '/users/:id',
+    element: <User />,
+    loader: async ({ params: { id } }, options) => {
+      return { user: await getUser(id) }
+    },
+  },
+]
+```
+
+In the example above, React Location will make sure that the user's data returned by `getUser` function is resolved before it renders the route.
+
+You can also wait for a parent route loader to resolve before its child by using the `parentMatch` from the loader's second argument:
+
+```tsx
+const routes = [
+  {
+    path: '/users/:id',
+    element: <User />,
+    loader: async ({ params: { id } }, { parentMatch }) => {
+      return { user: await parentMatch.loaderPromise.then(() => getUser(id)) }
+    },
+  },
+]
+```
+
+### Adding data loaders
+
+In order to use loader functions with file-based routing we'll need to define them on a route level. In our case, that's very simple to handle as we lazy-load all the modules with their exports, so we can export a function from each route and use it in our `routes` array.
+
+We can declare and export a `loader` function from each route within the `src/pages` directory and pass the same arguments to it as in the previous example.
+
+Then in the `src/routes.tsx` configuration we'll add a `loader` property for each route object. It will return the `loader` function with its arguments after loading the route module:
+
+```tsx {15}
+// src/routes.tsx
+
+// ...
+
+const regularRoutes = Object.keys(ROUTES).map((key) => {
+  const route = ROUTES[key]
+  const path = key
+    .replace(/\/src\/pages|index|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+
+  return {
+    path,
+    element: () => route().then((mod) => (mod?.default ? <mod.default /> : <Fragment />)),
+    loader: (...args) => route().then((mod) => mod?.loader?.(...args)),
+  }
+})
+```
+
+The final pattern will be as following:
+
+```tsx
+// src/pages/users/[id].tsx
+
+export const loader = async ({ params: { id } }) => {
+  return getUser(id)
+}
+
+export default function User() {
+  const { data } = useMatch()
+
+  return (
+    <div>
+      <div>{data.email}</div>
+    </div>
+  )
+}
+```
+
+## Final code
+
+The final code should be as following:
+
+```tsx
+// src/routes.tsx
+
+import { Fragment } from 'react'
+import { Outlet, ReactLocation, Route, Router } from 'react-location'
+
+const PRESERVED = import.meta.globEager('/src/pages/(_app|404).tsx')
+const ROUTES = import.meta.glob('/src/pages/**/[a-z[]*.tsx')
+
+const preservedRoutes = Object.keys(PRESERVED).reduce((routes, key) => {
+  const path = key.replace(/\/src\/pages\/|\.tsx$/g, '')
+  return { ...routes, [path]: PRESERVED[key]?.default }
+}, {})
+
+const regularRoutes: Route[] = Object.keys(ROUTES).map((key) => {
+  const route = ROUTES[key]
+  const path = key
+    .replace(/\/src\/pages|index|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+
+  return {
+    path,
+    element: () => route().then((mod) => (mod?.default ? <mod.default /> : 'Nothing exported.')),
+    loader: (...args) => route().then((mod) => mod?.loader?.(...args)),
+  }
+})
+
+const App = preservedRoutes?.['_app'] || Fragment
+const NotFound = preservedRoutes?.['404'] || Fragment
+
+const location = new ReactLocation()
+const routes = [...regularRoutes, { path: '*', element: <NotFound /> }]
+
+export const Routes = () => {
+  return (
+    <Router location={location} routes={routes}>
+      <App>
+        <Outlet />
+      </App>
+    </Router>
+  )
+}
+```
+
+## Additional info ⌁
+
+React Location's `<Link>` component supports route-based pre-loading for both its route's bundle and loader function. It's not enabled by default though. You'll need to set the `preload` prop of the `<Link>` component to a milliseconds numeric value.
+
+If you find yourself using the `preload` prop in many places, maybe you can have a custom `<Link>` component that wraps React Location's with a default `preload` value:
+
+```tsx
+// src/components/link.tsx
+
+export const Link = (props: LinkProps) => <LocationLink preload={5000} {...props} />
+```
+
+You can also add TypeScript route-level module typing across all routes by defining a `Route` type for example, using the `MakeGenerics` type from React Location:
+
+```tsx {5,6,8,13}
+// src/pages/users/[id].tsx
+
+import { LoaderFn, MakeGenerics, useMatch } from 'react-location'
+
+type User = { name: string; email: string }
+type Route = MakeGenerics<{ LoaderData: User; Params: { id: string } }>
+
+export const loader: LoaderFn<Route> = async ({ params: { id } }) => {
+  return getUser(id)
+}
+
+export default function User() {
+  const { data } = useMatch<Route>() // data: User
+  // ...
+}
+```
+
+This will add type-checking to the `loader` function's both arguments and return value, as well as to the `useMatch` hook value including `data` and `params` properties.
+
+## What's next
+
+You can check the [React Location docs](https://react-location.tanstack.com/overview) for more information about all its features, it was great trying it out. Hope this post makes you interested to learn more about it. We didn't cover route-level loading or error states, but it should be straight forward to add.
+
+If you want to see a working example of client-side React applications with file-based routing, data loaders, code-splitting and pre-loading, check out [Render](https://github.com/oedotme/render) it should be updated by now.
+
+I would love to hear what you think about this file-based routing setup with data loaders and if you have suggestions to improve it, feel free to leave a comment on the discussion. If you have questions or got stuck at some point I'll be happy to help.
+
+Share this post if you find it useful and stay tuned for upcoming posts.

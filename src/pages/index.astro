@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content'
+
+import { Link, List, ListItem } from '@/components'
+import { constants } from '@/config'
+import { Email, GitHub, Twitter } from '@/icons'
+import Page from '@/layouts/page.astro'
+
+const posts = (await getCollection('posts')).sort((a, z) => +new Date(z.data.date) - +new Date(a.data.date))
+---
+
+<Page
+  path="/"
+  title="Omar Elhawary | Software Developer"
+  description="Software developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming"
+  keywords="personal, website, blog"
+  image="/images/cover.png"
+  type="website"
+>
+  <h1 class="mb-10 text-4xl font-bold">Hi, I’m Omar!</h1>
+
+  <section class="mt-14 space-y-2">
+    <h2 class="text-xl font-normal leading-loose sm:leading-loose">
+      I’m a software developer and linux enthusiast interested in user/dev experience, software architecture, design
+      systems and functional programming.
+    </h2>
+
+    <h3 class="text-xl font-normal leading-loose sm:leading-loose">
+      I <Link href={constants.site + '/blog'}>blog</Link> about web development, tooling, linux and developer productivity.
+    </h3>
+  </section>
+
+  <section class="mt-12 space-x-3">
+    <Link href={constants.profile.links.email} class="text-default" aria-label="Email">
+      <Email />
+    </Link>
+
+    <Link href={constants.profile.links.github} class="text-default" aria-label="GitHub">
+      <GitHub />
+    </Link>
+
+    <Link href={constants.profile.links.twitter} class="text-default" aria-label="Twitter">
+      <Twitter />
+    </Link>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="mt-28 text-2xl font-bold">Recent posts</h2>
+    <List class="mt-12">
+      {
+        posts.slice(0, 3).map((post) => (
+          <ListItem class="mt-10 flex flex-col">
+            <Link class="group" href={`/blog/${post.slug}`}>
+              <span class="block text-sm font-medium opacity-60">{post.data.date}</span>
+              <h3 class="mt-2 text-lg font-semibold group-hover:underline">{post.data.title}</h3>
+              <p class="mt-2">{post.data.description}</p>
+            </Link>
+          </ListItem>
+        ))
+      }
+    </List>
+
+    <Link href="/blog" class="mt-10 inline-block text-sm font-medium">
+      View all posts <span class="ml-2">→</span>
+    </Link>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="mt-28 text-2xl font-bold">Latest projects</h2>
+
+    <List class="mt-12 list-none space-y-4">
+      {
+        constants.projects.slice(0, 3).map(({ name, description, link }) => (
+          <ListItem>
+            <Link href={link}>{name}</Link> — {description}
+          </ListItem>
+        ))
+      }
+    </List>
+
+    <Link href="/projects" class="mt-10 inline-block text-sm font-medium">
+      View all projects <span class="ml-2">→</span>
+    </Link>
+  </section>
+</Page>

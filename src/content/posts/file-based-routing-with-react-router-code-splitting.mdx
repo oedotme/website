@@ -1,0 +1,194 @@
+---
+title: File-based routing with React Router — Code-splitting
+description: Route-based code-splitting and lazy-loading with React Router and Vite
+tags: [next, react, react-router, vite]
+cowritten: true
+date: November 07, 2021
+---
+
+**⌁ Check out [Generouted](https://github.com/oedotme/generouted) if you want to use client-side file-based routing**. It provides more features than what's covered here, multiple frameworks support and multiple routers integrations!
+
+---
+
+In the previous post we talked about [file-based routing for client-side React applications](https://omarelhawary.me/blog/file-based-routing-with-react-router) with React Router and Vite, inspired by Next.js.
+
+**Today we'll add automatic route-based code-splitting and lazy-loading to the previous setup.**
+
+When your application starts having many routes, the size of its bundle could increase quite quickly as the code of all the routes is included in one bundle. You'll load all the routes at once even if you're only showing one route to the user. Not really efficient, right?
+
+This bundling behavior is what you get by default if you don't specify that you want to **split each route code into its own bundle**. That's not only particular to the file-based routing setup we covered in the previous post but to client-side routing setups in general if you don't enable code-splitting.
+
+[Code-splitting](https://reactjs.org/docs/code-splitting.html#code-splitting) will allow us to split the routes code into multiple bundles. We can start using it by introducing [dynamic imports](https://reactjs.org/docs/code-splitting.html#import) in our application. **Most bundlers start code-splitting automatically when they come across a dynamic import and split its code into a separate bundle**.
+
+Once we have multiple bundles we want to **load each of them on-demand**. We can lazy-load them by using the [`React.lazy`](https://reactjs.org/docs/react-api.html#reactlazy) function to render a dynamic import as a regular component.
+
+This update will result in:
+
+- Routes split into separate bundles and on-demand route loading
+- Reduced initial load time and improved overall application performance
+
+One downside though is that switching routes will not be instant as what we usually get when all routes are in one bundle. We'll address this in the next post covering how to pre-load the routes that users might be visiting.
+
+At the end of the post we'll compare the build output before and after enabling code-splitting.
+
+## Getting started
+
+We'll be using the React project with Vite and file-based routing we've setup previously.
+
+If you got started with the previous post, you're good to go. You'll just need to do few modifications. The modifications will involve two main things:
+
+- Using dynamic imports with each route
+- Using `React.lazy` function and `Suspense` component to render those dynamic imports
+
+Here's an example of [route-based code-splitting with React Router](https://reactjs.org/docs/code-splitting.html#route-based-code-splitting). We'll be doing a very similar setup except it will be automatic and part of the file-based routing setup we did in the previous post.
+
+## Updating configuration
+
+We'll start by setting up dynamic imports for each route in order to introduce code-splitting into our previous setup. When the bundler, Vite in our case, comes across a dynamic import it will split it into a separate bundle automatically.
+
+For the `ROUTES`, in the previous post, we used `import.meta.globEager` which imports all modules directly. There's another glob function [`import.meta.glob`](https://vitejs.dev/guide/features.html#glob-import) that works differently. With `import.meta.glob`, each matching module will result in a dynamic import that will be split into its own bundle during build.
+
+So to update the `ROUTES` we'll only replace `import.meta.globEager` with `import.meta.glob`:
+
+```tsx {1}
+const ROUTES = import.meta.glob('/src/pages/**/[a-z[]*.tsx')
+```
+
+The result will be similar to the one of `import.meta.globEager` except it will give us the modules dynamic imports instead of their regular exports:
+
+```tsx
+ROUTES = {
+  '/src/pages/index.tsx': () => import('/src/pages/index.tsx'),
+  '/src/pages/posts/index.tsx': () => import('/src/pages/posts/index.tsx'),
+  '/src/pages/posts/[slug].tsx': () => import('/src/pages/posts/[slug].tsx'),
+  ...
+}
+```
+
+Secondly, to lazy-load those dynamic imports on-demand, we can use `React.lazy` function that will render a dynamic import as a regular component. Each module value of the `ROUTES` object is a function that returns a dynamic import. And that's exactly what `React.lazy` function expects.
+
+So we can now call the `React.lazy` function with the value of each module:
+
+```tsx {7}
+const routes = Object.keys(ROUTES).map((route) => {
+  const path = route
+    .replace(/\/src\/pages|index|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+
+  return { path, component: lazy(ROUTES[route]) }
+})
+```
+
+Finally we need to render each route component within a `Suspense` component to show a fallback content while we're waiting for the lazy component to load:
+
+```tsx {7,14}
+export const Routes = () => {
+  const App = preserved?.['_app'] || Fragment
+  const NotFound = preserved?.['404'] || Fragment
+
+  return (
+    <App>
+      <Suspense fallback={'Loading...'}>
+        <Switch>
+          {routes.map(({ path, component: Component = Fragment }) => (
+            <Route key={path} path={path} component={Component} exact={true} />
+          ))}
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </Suspense>
+    </App>
+  )
+}
+```
+
+## Final code
+
+After updating the configuration the final code should be as following:
+
+```tsx {3,7,20,29,36}
+// src/routes.tsx
+
+import React, { Fragment, lazy, Suspense } from 'react'
+import { Switch, Route } from 'react-router-dom'
+
+const PRESERVED = import.meta.globEager('/src/pages/(_app|404).tsx')
+const ROUTES = import.meta.glob('/src/pages/**/[a-z[]*.tsx')
+
+const preserved = Object.keys(PRESERVED).reduce((preserved, file) => {
+  const key = file.replace(/\/src\/pages\/|\.tsx$/g, '')
+  return { ...preserved, [key]: PRESERVED[file].default }
+}, {})
+
+const routes = Object.keys(ROUTES).map((route) => {
+  const path = route
+    .replace(/\/src\/pages|index|\.tsx$/g, '')
+    .replace(/\[\.{3}.+\]/, '*')
+    .replace(/\[(.+)\]/, ':$1')
+
+  return { path, component: lazy(ROUTES[route]) }
+})
+
+export const Routes = () => {
+  const App = preserved?.['_app'] || Fragment
+  const NotFound = preserved?.['404'] || Fragment
+
+  return (
+    <App>
+      <Suspense fallback={'Loading...'}>
+        <Switch>
+          {routes.map(({ path, component: Component = Fragment }) => (
+            <Route key={path} path={path} component={Component} exact={true} />
+          ))}
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </Suspense>
+    </App>
+  )
+}
+```
+
+## Build output comparison
+
+Before code-splitting, a regular build with the `vite build` command will result in the following:
+
+```shell {4}
+dist/index.html              0.51   KiB
+
+dist/assets/index.hash.css   4.35   KiB / brotli: 1.31 KiB
+dist/assets/index.main.js    8.52   KiB / brotli: 2.47 KiB
+dist/assets/vendor.hash.js   148.09 KiB / brotli: 42.07 KiB
+```
+
+Let's take a look at the `index.main.js` size. That's the main source code bundle and it's now `8.52 KiB`. It includes all the routes code and other layout or shared code in all the application. It seems pretty small but it's only 7-8 routes and each has very little content.
+
+In the case of route-based code-splitting each route will only include its code and the build result will be as following:
+
+```shell {4-10,13}
+dist/index.html                   0.51 KiB
+
+# routes bundles
+dist/assets/login.hash.js         0.74   KiB / brotli: 0.35 KiB
+dist/assets/index.hash.js         1.57   KiB / brotli: 0.73 KiB
+dist/assets/routing.hash.js       0.48   KiB / brotli: 0.20 KiB
+dist/assets/logout.hash.js        0.57   KiB / brotli: 0.31 KiB
+dist/assets/[...all].hash.js      0.33   KiB / brotli: 0.19 KiB
+dist/assets/[timestamp].hash.js   0.34   KiB / brotli: 0.19 KiB
+dist/assets/within.hash.js        0.31   KiB / brotli: 0.19 KiB
+
+dist/assets/index.hash.css        4.35   KiB / brotli: 1.31 KiB
+dist/assets/index.main.js         5.55   KiB / brotli: 1.90 KiB
+dist/assets/vendor.hash.js        146.54 KiB / brotli: 41.74 KiB
+```
+
+Here `index.main.js` is only limited to the shared code, and adding new routes will not affect its size.
+
+## What's next
+
+If you want to see a working example of this setup, [Render](https://github.com/oedotme/render) should be updated by now. I also updated Render with React 18 to get server-side rendering and pre-rendering to work with `Suspense`. If you don't use either of those two rendering methods you still can downgrade to the latest stable React 17 while React 18 is in alpha.
+
+In the next post we'll talk about [routes pre-loading with this setup](https://omarelhawary.me/blog/file-based-routing-with-react-router-pre-loading). It will allow us to pre-load a route based on an event, like when the user views the route link or hovers over it.
+
+**I would love to hear what you think about this addition to the previous file-based routing setup**, feel free to leave a comment on the discussion. If you have questions or got stuck at some point I'll be happy to help.
+
+Share this post if you find it useful and stay tuned for upcoming posts.

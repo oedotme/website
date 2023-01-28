@@ -1,0 +1,39 @@
+---
+import { H1, H2, Link, List, ListItem, Text } from '@/components'
+import { constants } from '@/config'
+import Page from '@/layouts/page.astro'
+---
+
+<Page
+  path="/uses"
+  title="Uses | Omar Elhawary"
+  description="Tools I'm using for software development"
+  keywords="uses, tools, web, software, development, environment"
+  image="/images/cover.png"
+  type="website"
+>
+  <H1>Uses</H1>
+  <Text class="opacity-70">Tools I'm using for software development</Text>
+
+  <H2>Environment</H2>
+  <List class="list-none">
+    {
+      constants.uses.environment.map(({ name, description, link }) => (
+        <ListItem>
+          <Link href={link}>{name}</Link> — {description}
+        </ListItem>
+      ))
+    }
+  </List>
+
+  <H2>CLI</H2>
+  <List class="list-none">
+    {
+      constants.uses.cli.map(({ name, description, link }) => (
+        <ListItem>
+          <Link href={link}>{name}</Link> — {description}
+        </ListItem>
+      ))
+    }
+  </List>
+</Page>

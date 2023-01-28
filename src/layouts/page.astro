@@ -1,0 +1,120 @@
+---
+import '@/styles/colors.css'
+import '@/styles/global.css'
+import '@/styles/syntax.css'
+import '@/styles/layers.css'
+
+import { constants } from '@/config'
+import { Theme } from '@/icons'
+
+type Props = {
+  path: string
+  title: string
+  description: string
+  keywords: string
+  image: string
+  type: string
+  date?: string
+}
+
+const { profile } = constants
+const props = Astro.props as Props
+---
+
+<html lang="en" color-scheme="auto" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#fcfcfc" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="description" content={props.description} />
+    <meta name="author" content={profile.name} />
+    <meta name="keywords" content={props.keywords} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:title" content={props.title} />
+    <meta property="og:description" content={props.description} />
+    <meta property="og:image" content={constants.site + props.image} />
+    <meta property="og:image:alt" content={props.title} />
+    <meta property="og:type" content={props.type} />
+    <meta property="og:url" content={constants.site + props.path} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content={`@${profile.username}`} />
+    <meta name="twitter:site" content={`@${profile.username}`} />
+    <meta name="twitter:title" content={props.title} />
+    <meta name="twitter:description" content={props.description} />
+    <meta name="twitter:image" content={constants.site + props.image} />
+    {props.date ? <meta property="article:published_time" content={new Date(props.date).toISOString()} /> : null}
+    <link rel="preload" type="font/woff2" href="/fonts/ibm-plex-var.woff2" as="font" crossorigin="anonymous" />
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={constants.site + props.path} />
+    <title>{props.title}</title>
+  </head>
+
+  <body class="overflow-y-scroll bg-surface text-default selection:bg-default selection:text-surface">
+    <section class="container mx-auto flex min-h-screen max-w-4xl flex-col py-10 px-3 lg:px-16">
+      <header>
+        <nav class="flex justify-between">
+          <ul class="flex flex-wrap items-center gap-2 text-base font-medium sm:gap-6">
+            {
+              constants.links.internal.map(({ name, link }) => (
+                <li>
+                  <a href={link} class="p-2">
+                    {name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+
+          <button id="toggle-theme" aria-label="Toggle Theme" class="mx-1">
+            <Theme />
+          </button>
+        </nav>
+      </header>
+
+      <main class="min-h-xs flex-1 py-14 px-2 sm:py-20">
+        <slot />
+      </main>
+
+      <footer class="flex flex-col-reverse items-center justify-between gap-8 p-2 text-sm md:flex-row md:gap-32">
+        <span class="text-default opacity-70">&copy; 2023 Omar Elhawary</span>
+
+        <nav>
+          <ul class="flex flex-wrap justify-center gap-4 sm:gap-8">
+            {
+              constants.links.external.map(({ name, link }) => (
+                <li>
+                  <a href={link}>{name}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </footer>
+    </section>
+
+    <script>
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js')
+
+      const theme = {
+        initial: () => {
+          if (localStorage.getItem('theme')) return localStorage.getItem('theme') as string
+          if (matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
+          return 'light'
+        },
+        current: () => document.documentElement.getAttribute('color-scheme'),
+        set: (theme: string) => {
+          document.documentElement.setAttribute('color-scheme', theme)
+          localStorage.setItem('theme', theme)
+        },
+      }
+
+      theme.set(theme.initial())
+      const toggle = () => theme.set(theme.current() === 'light' ? 'dark' : 'light')
+
+      document.querySelector('#toggle-theme')?.addEventListener('click', toggle)
+    </script>
+  </body>
+</html>

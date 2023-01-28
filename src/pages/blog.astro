@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content'
+
+import { H1, H2, Link, List, ListItem, Text } from '@/components'
+import Page from '@/layouts/page.astro'
+
+const posts = (await getCollection('posts')).sort((a, z) => +new Date(z.data.date) - +new Date(a.data.date))
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort()
+---
+
+<Page
+  path="/blog"
+  title="Blog | Omar Elhawary"
+  description="Writing about web development, tooling, linux and developer productivity"
+  keywords={`uses, tools, web, software, development, environment, ${tags.join(', ')}`}
+  image="/images/cover.png"
+  type="website"
+>
+  <H1>Blog</H1>
+  <Text class="opacity-70">Writing about web development, tooling, linux and developer productivity</Text>
+
+  <H2>Posts</H2>
+
+  <List class="mb-16">
+    {
+      posts?.map((post) => (
+        <ListItem class="mt-14 flex flex-col first:mt-4">
+          <Link class="group" href={`/blog/${post.slug}`}>
+            <span class="block text-sm font-medium opacity-60">{post.data.date}</span>
+            <h3 class="mt-2 text-xl font-semibold group-hover:underline">{post.data.title}</h3>
+            <p class="mt-2">{post.data.description}</p>
+            <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 opacity-60">
+              {post.data.tags.map((tag) => (
+                <li class="text-sm font-light">#{tag}</li>
+              ))}
+            </ul>
+          </Link>
+        </ListItem>
+      ))
+    }
+  </List>
+</Page>

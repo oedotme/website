@@ -1,0 +1,108 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content'
+
+import { H1, Link, MDXComponents } from '@/components'
+import { constants } from '@/config'
+import Page from '@/layouts/page.astro'
+
+export const getStaticPaths = async () => {
+  const posts = await getCollection('posts')
+  return posts.map((post) => ({ params: { slug: post.slug }, props: post }))
+}
+
+const posts = (await getCollection('posts')).sort((a, z) => +new Date(z.data.date) - +new Date(a.data.date))
+const post = Astro.props as CollectionEntry<'posts'>
+const tags = [...new Set(post.data.tags)].sort()
+const { Content } = await post.render()
+
+const index = posts.findIndex(({ id }) => id === post.id)
+const prev = posts?.[index + 1]
+const next = posts?.[index - 1]
+---
+
+<Page
+  path={`/blog/${post.slug}`}
+  title={`${post.data.title} | Omar Elhawary`}
+  description={post.data.description}
+  keywords={`blog, post, ${tags.join(', ')}`}
+  image={`/images/${post.slug}.png`}
+  type="article"
+  date={post.data.date}
+>
+  <H1>{post.data.title}</H1>
+  <p class="">{post.data.description}</p>
+
+  <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 opacity-70">
+    {post.data.tags.map((tag) => <li class="text-sm font-light">#{tag}</li>)}
+  </ul>
+
+  <div class="mt-5 text-sm">
+    {
+      post.data.cowritten ? (
+        <>
+          <span class="opacity-70">Cowritten with</span> <Link href="https://marianmolina.com"> Marian Molina</Link>
+          <span class="mx-1"> — </span>
+        </>
+      ) : null
+    }
+    <span class="opacity-70">{post.data.date}</span>
+  </div>
+
+  <hr class="h-16 border-0" />
+
+  <Content components={MDXComponents} />
+
+  <hr class="h-4 border-0" />
+
+  <section class="my-8 text-sm">
+    <div class="my-8 flex justify-center gap-4 sm:justify-end sm:gap-6">
+      <Link
+        href={`https://twitter.com/intent/tweet` +
+          `?text=${post.data.title} — ${post.data.description}` +
+          `&url=${constants.site}/blog/${post.slug}` +
+          `&via=oedotme` +
+          `&hashtags=${tags.join(',')}`}
+      >
+        Share on Twitter
+      </Link>
+
+      <Link href={`https://twitter.com/search?q=${constants.site}/blog/${post.slug}&src=typed_query`}>
+        Discuss on Twitter
+      </Link>
+    </div>
+
+    <div class="my-4 flex gap-8 text-sm">
+      {
+        prev ? (
+          <Link class="mr-auto flex w-1/2 truncate rounded-sm py-2 text-left font-medium" href={`/blog/${prev.slug}`}>
+            <span class="mr-2">←</span>
+            <span class="flex-1 truncate">{prev.data.title}</span>
+          </Link>
+        ) : null
+      }
+
+      {
+        next ? (
+          <Link class="ml-auto flex w-1/2 truncate rounded-sm py-2 text-right font-medium" href={`/blog/${next.slug}`}>
+            <span class="flex-1 truncate">{next.data.title}</span>
+            <span class="ml-2">→</span>
+          </Link>
+        ) : null
+      }
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.copy-code').forEach((button) => {
+      // @ts-expect-error event
+      button.addEventListener('click', (event: MouseEvent & { target: HTMLButtonElement }) => {
+        navigator.clipboard
+          .writeText(String(event.target?.nextSibling?.textContent))
+          .then(() => (event.target.textContent = 'Copied!'))
+          .catch(() => (event.target.textContent = 'Not supported'))
+      })
+      // @ts-expect-error event
+      button.addEventListener('blur', (event) => (event.target.textContent = 'Copy'))
+    })
+  </script>
+</Page>
