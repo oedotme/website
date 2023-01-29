@@ -49,9 +49,9 @@ const posts = (await getCollection('posts')).sort((a, z) => +new Date(z.data.dat
       {
         posts.slice(0, 3).map((post) => (
           <ListItem class="mt-10 flex flex-col">
-            <Link class="group" href={`/blog/${post.slug}`}>
+            <Link href={`/blog/${post.slug}`}>
               <span class="block text-sm font-medium opacity-60">{post.data.date}</span>
-              <h3 class="mt-2 text-lg font-semibold group-hover:underline">{post.data.title}</h3>
+              <h3 class="mt-2 text-lg font-semibold">{post.data.title}</h3>
               <p class="mt-2">{post.data.description}</p>
             </Link>
           </ListItem>
