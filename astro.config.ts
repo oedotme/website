@@ -9,5 +9,6 @@ import prism from 'rehype-prism-plus'
 export default defineConfig({
   site: 'https://omarelhawary.me',
   vite: { resolve: { alias: { '@': '/src' } } },
-  integrations: [mdx({ syntaxHighlight: 'prism', rehypePlugins: [prism] }), prefetch(), sitemap(), solid(), tailwind()],
+  markdown: { syntaxHighlight: 'prism', rehypePlugins: [prism] },
+  integrations: [mdx(), prefetch(), sitemap(), solid(), tailwind()],
 })
