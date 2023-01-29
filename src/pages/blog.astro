@@ -9,7 +9,6 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort()
 ---
 
 <Page
-  path="/blog"
   title="Blog | Omar Elhawary"
   description="Writing about web development, tooling, linux and developer productivity"
   keywords={`uses, tools, web, software, development, environment, ${tags.join(', ')}`}
