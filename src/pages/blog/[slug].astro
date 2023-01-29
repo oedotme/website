@@ -31,10 +31,6 @@ const next = posts?.[index - 1]
   <H1>{post.data.title}</H1>
   <p class="">{post.data.description}</p>
 
-  <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 opacity-70">
-    {post.data.tags.map((tag) => <li class="text-sm font-light">#{tag}</li>)}
-  </ul>
-
   <div class="mt-5 text-sm">
     {
       post.data.cowritten ? (
