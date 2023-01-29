@@ -28,9 +28,11 @@ const props = Astro.props as Props
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
+    <meta name="title" content={props.title} />
     <meta name="description" content={props.description} />
     <meta name="author" content={profile.name} />
     <meta name="keywords" content={props.keywords} />
+    <meta property="og:locale" content="en" />
     <meta property="og:site_name" content={profile.name} />
     <meta property="og:title" content={props.title} />
     <meta property="og:description" content={props.description} />
@@ -43,7 +45,9 @@ const props = Astro.props as Props
     <meta name="twitter:site" content={`@${profile.username}`} />
     <meta name="twitter:title" content={props.title} />
     <meta name="twitter:description" content={props.description} />
+    <meta name="twitter:url" content={constants.site + Astro.url.pathname} />
     <meta name="twitter:image" content={constants.site + props.image} />
+    <meta name="twitter:image:alt" content={props.title} />
     {props.date ? <meta property="article:published_time" content={new Date(props.date).toISOString()} /> : null}
     <link rel="preload" type="font/woff2" href="/fonts/ibm-plex-var.woff2" as="font" crossorigin="anonymous" />
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
