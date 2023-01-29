@@ -91,16 +91,14 @@ const next = posts?.[index - 1]
     </div>
   </section>
 
-  <script>
+  <script is:inline>
     document.querySelectorAll('.copy-code').forEach((button) => {
-      // @ts-expect-error event
-      button.addEventListener('click', (event: MouseEvent & { target: HTMLButtonElement }) => {
+      button.addEventListener('click', (event) => {
         navigator.clipboard
-          .writeText(String(event.target?.nextSibling?.textContent))
+          .writeText(String(event.target.nextSibling?.textContent))
           .then(() => (event.target.textContent = 'Copied!'))
           .catch(() => (event.target.textContent = 'Not supported'))
       })
-      // @ts-expect-error event
       button.addEventListener('blur', (event) => (event.target.textContent = 'Copy'))
     })
   </script>

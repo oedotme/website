@@ -94,17 +94,17 @@ const props = Astro.props as Props
       </footer>
     </section>
 
-    <script>
+    <script is:inline>
       if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js')
 
       const theme = {
         initial: () => {
-          if (localStorage.getItem('theme')) return localStorage.getItem('theme') as string
+          if (localStorage.getItem('theme')) return localStorage.getItem('theme')
           if (matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
           return 'light'
         },
         current: () => document.documentElement.getAttribute('color-scheme'),
-        set: (theme: string) => {
+        set: (theme) => {
           document.documentElement.setAttribute('color-scheme', theme)
           localStorage.setItem('theme', theme)
         },
