@@ -52,12 +52,6 @@ export const constants = {
       link: 'https://github.com/oedotme/st',
       using: ['C'],
     },
-    {
-      name: 'Outline',
-      description: 'Video/Chat web application',
-      link: 'https://outlineapp.netlify.app',
-      using: ['TypeScript', 'React', 'Node.js', 'GraphQL', 'WebRTC'],
-    },
   ],
 
   uses: {
