@@ -30,15 +30,15 @@ const posts = (await getCollection('posts')).sort((a, z) => +new Date(z.data.dat
   </section>
 
   <section class="mt-12 space-x-3">
-    <Link href={constants.profile.links.email} class="text-default" aria-label="Email">
+    <Link href={constants.profile.links.email} classList={{ ['text-default']: true }} aria-label="Email">
       <Email />
     </Link>
 
-    <Link href={constants.profile.links.github} class="text-default" aria-label="GitHub">
+    <Link href={constants.profile.links.github} classList={{ ['text-default']: true }} aria-label="GitHub">
       <GitHub />
     </Link>
 
-    <Link href={constants.profile.links.twitter} class="text-default" aria-label="Twitter">
+    <Link href={constants.profile.links.twitter} classList={{ ['text-default']: true }} aria-label="Twitter">
       <Twitter />
     </Link>
   </section>
