@@ -1,8 +1,8 @@
 const profile = {
   name: 'Omar Elhawary',
-  title: 'Omar Elhawary | Software Developer',
+  title: 'Omar Elhawary | Software Engineer',
   description:
-    'Software developer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
+    'Software engineer and linux enthusiast interested in user/dev experience, design systems, statically typed languages and functional programming',
   image: '/images/cover.png',
   username: 'oedotme',
   links: {
