@@ -67,7 +67,7 @@ Let's go through an example of the resulting routes array for those two pages be
 
 ⌁ Layout nesting will be a default behavior. In case we don't want to specify a layout for nested segments but we still want to have them nested in the route URL, we can replace the forward slashes `/` _(directory nesting)_ with dots:
 
-- `src/pages/settings/profile/info.tsx` -> `src/pages/settings/profile.info.tsx`
+- `src/pages/settings/profile/info.tsx` → `src/pages/settings/profile.info.tsx`
 
 That will result in the following:
 
@@ -169,9 +169,9 @@ Let's now take a look on how to place each segment. As we mentioned earlier each
 
 That's the first segment in the segments array, here are some conditions we'll be handling:
 
-- Dynamic `root` segment -> ignored then skip to the next route
-- First and last segment -> added to the routes array with no children array
-- Otherwise -> added to the routes array making sure it has a children array even if empty
+- Dynamic `root` segment → ignored then skip to the next route
+- First and last segment → added to the routes array with no children array
+- Otherwise → added to the routes array making sure it has a children array even if empty
 
 ```tsx {7-20}
 const regularRoutes = Object.keys(ROUTES).reduce((routes, key) => {

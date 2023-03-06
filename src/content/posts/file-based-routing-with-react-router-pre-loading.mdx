@@ -104,10 +104,10 @@ We can handle static and dynamic route paths with the same logic. We'll use some
 - Find and replace the dynamic path segments with `.*`
 - Use the above result for the route path matching
 
-With dynamic paths we need to match `/posts/:slug` or `/posts/*` with `/posts/first-post`. We can specify those dynamic segments patterns like `:slug` or `*` -> `/:\w|\*/g` and replace them with the wildcard pattern `.*`:
+With dynamic paths we need to match `/posts/:slug` or `/posts/*` with `/posts/first-post`. We can specify those dynamic segments patterns like `:slug` or `*` → `/:\w|\*/g` and replace them with the wildcard pattern `.*`:
 
 ```tsx
-'posts/:slug'.replace(/:\w|\*/g, '.*') // posts/:slug || posts/* -> posts/.*
+'posts/:slug'.replace(/:\w|\*/g, '.*') // posts/:slug || posts/* → posts/.*
 ```
 
 Then we can match the path with a regex based on the previously replaced result:
