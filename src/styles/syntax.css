@@ -17,7 +17,7 @@ code .highlight-line {
 }
 
 code .highlight-line::before {
-  @apply absolute left-0 -top-0 -ml-5 h-full w-5 content-[""];
+  @apply absolute -top-0 left-0 -ml-5 h-full w-5 content-[""];
   background: var(--syntax-highline);
   border-left: 2.5px solid var(--syntax-modified);
 }
