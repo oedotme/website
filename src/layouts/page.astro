@@ -51,6 +51,7 @@ const props = Astro.props as Props
     {props.date ? <meta property="article:published_time" content={new Date(props.date).toISOString()} /> : null}
     <link rel="preload" type="font/woff2" href="/fonts/ibm-plex-var.woff2" as="font" crossorigin="anonymous" />
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={constants.site + Astro.url.pathname} />
     <title>{props.title}</title>
   </head>
