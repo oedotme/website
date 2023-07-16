@@ -173,7 +173,7 @@ export const Link = ({ children, to, prefetch = true, ...props }: Props) => {
     if (prefetchable && prefetch && ref?.current) {
       const observer = new IntersectionObserver(
         (entries) => entries.forEach((entry) => entry.isIntersecting && preload()),
-        { rootMargin: '200px' }
+        { rootMargin: '200px' },
       )
 
       observer.observe(ref.current)
@@ -253,7 +253,7 @@ export const Link = ({ children, to, prefetch = true, ...props }: Props) => {
     if (prefetchable && prefetch && ref?.current) {
       const observer = new IntersectionObserver(
         (entries) => entries.forEach((entry) => entry.isIntersecting && preload()),
-        { rootMargin: '200px' }
+        { rootMargin: '200px' },
       )
 
       observer.observe(ref.current)
