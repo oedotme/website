@@ -4,6 +4,8 @@ import '@/styles/global.css'
 import '@/styles/syntax.css'
 import '@/styles/layers.css'
 
+import { ViewTransitions } from 'astro:transitions'
+
 import { constants } from '@/config'
 import { Theme } from '@/icons'
 
@@ -54,6 +56,7 @@ const props = Astro.props as Props
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={constants.site + Astro.url.pathname} />
     <title>{props.title}</title>
+    <ViewTransitions />
   </head>
 
   <body class="overflow-y-scroll bg-surface text-default selection:bg-default selection:text-surface">
@@ -102,23 +105,30 @@ const props = Astro.props as Props
     <script is:inline>
       if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js')
 
-      const theme = {
-        initial: () => {
-          if (localStorage.getItem('theme')) return localStorage.getItem('theme')
-          if (matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
-          return 'light'
-        },
-        current: () => document.documentElement.getAttribute('color-scheme'),
-        set: (theme) => {
-          document.documentElement.setAttribute('color-scheme', theme)
-          localStorage.setItem('theme', theme)
-        },
-      }
+      document.documentElement.setAttribute('color-scheme', localStorage.getItem('theme') || 'light')
 
-      theme.set(theme.initial())
-      const toggle = () => theme.set(theme.current() === 'light' ? 'dark' : 'light')
+      document.addEventListener(
+        'astro:page-load',
+        () => {
+          const theme = {
+            initial: () => {
+              if (localStorage.getItem('theme')) return localStorage.getItem('theme')
+              if (matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
+              return 'light'
+            },
+            get: () => document.documentElement.getAttribute('color-scheme'),
+            set: (theme) => {
+              document.documentElement.setAttribute('color-scheme', theme)
+              localStorage.setItem('theme', theme)
+            },
+          }
 
-      document.querySelector('#toggle-theme')?.addEventListener('click', toggle)
+          theme.set(theme.initial())
+          const toggle = () => theme.set(theme.get() === 'light' ? 'dark' : 'light')
+          document.querySelector('#toggle-theme')?.addEventListener('click', toggle)
+        },
+        { once: true },
+      )
     </script>
   </body>
 </html>

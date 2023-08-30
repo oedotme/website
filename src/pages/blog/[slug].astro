@@ -28,7 +28,7 @@ const next = posts?.[index - 1]
   type="article"
   date={post.data.date}
 >
-  <H1>{post.data.title}</H1>
+  <H1 transition:name={post.slug}>{post.data.title}</H1>
   <p class="">{post.data.description}</p>
 
   <div class="mt-5 text-sm">
