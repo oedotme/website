@@ -26,9 +26,7 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort()
         <ListItem class="mt-14 flex flex-col first:mt-4">
           <Link href={`/blog/${post.slug}`}>
             <span class="block text-sm font-medium opacity-60">{post.data.date}</span>
-            <h3 class="mt-2 text-xl font-semibold" transition:name={post.slug}>
-              {post.data.title}
-            </h3>
+            <h3 class="mt-2 text-xl font-semibold">{post.data.title}</h3>
             <p class="mt-2">{post.data.description}</p>
             <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 opacity-60">
               {post.data.tags.map((tag) => (
