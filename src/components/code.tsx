@@ -1,11 +1,11 @@
-import { JSX, Show } from 'solid-js'
+import { ComponentProps, Show } from 'solid-js'
 
-export const Code = (props: JSX.HTMLAttributes<HTMLElement>) => {
+export const Code = (props: ComponentProps<'code'>) => {
   return (
     <Show
       when={props.class?.includes('language-')}
       fallback={
-        <code {...props} class="rounded bg-element px-1 py-1">
+        <code {...props} class="rounded border border-elevate bg-element px-1.5 py-0.5">
           {props.children}
         </code>
       }
