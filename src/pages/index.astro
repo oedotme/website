@@ -30,7 +30,7 @@ const posts = (await getCollection('posts')).sort((a, z) => +new Date(z.data.dat
     </h3>
   </section>
 
-  <section class="mt-12 space-x-3">
+  <section class="mt-12 space-x-2">
     <Link href={constants.profile.links.email} classList={{ ['text-default']: true }} aria-label="Email">
       <Email />
     </Link>
