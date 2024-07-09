@@ -102,7 +102,7 @@ function getInput<Input>(input: Input): Input {
   return input
 }
 
-const getInput = <Input,>(input: Input): Input => {
+const getInput = <Input>(input: Input): Input => {
   return input
 }
 ```
@@ -122,7 +122,7 @@ type Key = string | string[]
 type Fetcher<Data> = () => Promise<Data>
 type Options = { enabled?: boolean; cacheTime?: number }
 
-const useQuery = <Data,>(key: Key, fetcher: Fetcher<Data>, options?: Options): Query<Data> => {
+const useQuery = <Data>(key: Key, fetcher: Fetcher<Data>, options?: Options): Query<Data> => {
   // ...
 }
 ```

@@ -16,7 +16,6 @@ const profile = {
 export const constants = {
   profile,
   site: import.meta.env.SITE,
-
   links: {
     internal: [
       { name: 'Home', link: '/' },
@@ -31,7 +30,6 @@ export const constants = {
       { name: 'LinkedIn', link: profile.links.linkedin },
     ],
   },
-
   projects: [
     {
       name: 'Generouted',
@@ -48,7 +46,6 @@ export const constants = {
     {
       name: 'ST',
       description: 'Custom build of Simple Terminal',
-
       link: 'https://github.com/oedotme/st',
       using: ['C'],
     },

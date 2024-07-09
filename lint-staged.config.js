@@ -1,5 +1,5 @@
-module.exports = {
-  'src/**/*.{ts,tsx}': [() => 'tsc -p tsconfig.json', 'eslint --fix'],
-  '*.{astro,js,jsx}': 'eslint --fix',
-  '*.{css,html,json,md,mdx}': 'prettier -w',
+export default {
+  '*.{ts,tsx}': () => 'tsc -p tsconfig.json',
+  '*.{astro,js,jsx,ts,tsx}': 'eslint --fix --cache --cache-location node_modules/.cache/eslint',
+  '*.{astro,css,html,json,md,mdx,js,jsx,ts,tsx}': 'prettier --write --cache',
 }
