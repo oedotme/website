@@ -1,7 +1,30 @@
+@import 'tailwindcss';
+
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
 @font-face {
   font-family: 'IBM Plex Sans';
   font-style: normal;
   font-weight: 100 900;
   font-display: optional;
   src: url(/fonts/ibm-plex-var.woff2) format('woff2');
+}
+
+@theme {
+  --color-default: var(--default);
+  --color-primary: var(--primary);
+  --color-neutral: var(--neutral);
+  --color-surface: var(--surface);
+  --color-elevate: var(--elevate);
+  --color-element: var(--element);
+  --color-comment: var(--comment);
+
+  --font-sans:
+    IBM Plex Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+
+  --min-height-xs: 20rem;
+  --min-height-sm: 40rem;
+  --min-height-md: 48rem;
+  --min-height-lg: 64rem;
 }

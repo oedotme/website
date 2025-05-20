@@ -1,7 +1,7 @@
 import { ComponentProps, Show } from 'solid-js'
 
 const styles = {
-  base: 'border-b border-elevate outline-none text-primary',
+  base: 'border-b border-elevate outline-hidden text-primary',
   focus: 'ring-primary ring-offset-2 ring-offset-surface focus-visible:ring-1',
 }
 

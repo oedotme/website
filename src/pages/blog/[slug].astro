@@ -69,7 +69,7 @@ const next = posts?.[index - 1]
     <div class="my-4 flex gap-8 text-sm">
       {
         prev ? (
-          <Link class="mr-auto flex w-1/2 truncate rounded-sm py-2 text-left font-medium" href={`/blog/${prev.slug}`}>
+          <Link class="mr-auto flex w-1/2 truncate rounded-xs py-2 text-left font-medium" href={`/blog/${prev.slug}`}>
             <span class="mr-2">←</span>
             <span class="flex-1 truncate">{prev.data.title}</span>
           </Link>
@@ -78,7 +78,7 @@ const next = posts?.[index - 1]
 
       {
         next ? (
-          <Link class="ml-auto flex w-1/2 truncate rounded-sm py-2 text-right font-medium" href={`/blog/${next.slug}`}>
+          <Link class="ml-auto flex w-1/2 truncate rounded-xs py-2 text-right font-medium" href={`/blog/${next.slug}`}>
             <span class="flex-1 truncate">{next.data.title}</span>
             <span class="ml-2">→</span>
           </Link>
@@ -95,7 +95,7 @@ const next = posts?.[index - 1]
           .then(() => (event.target.textContent = 'Copied!'))
           .catch(() => (event.target.textContent = 'Not supported'))
       })
-      button.addEventListener('blur', (event) => (event.target.textContent = 'Copy'))
+      button.addEventListener('blur-sm', (event) => (event.target.textContent = 'Copy'))
     })
   </script>
 </Page>

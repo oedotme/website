@@ -1,3 +1,5 @@
+@reference "./global.css";
+
 code {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -23,7 +25,7 @@ code .highlight-line::before {
 }
 
 code .highlight-line::after {
-  @apply absolute right-0 top-0 -mr-6 h-full w-6 content-[""];
+  @apply absolute top-0 right-0 -mr-6 h-full w-6 content-[""];
   background: var(--syntax-highline);
 }
 
