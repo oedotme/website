@@ -1,0 +1,4 @@
+updateConfig:
+  ignoreDependencies:
+    - '@astrojs/tailwind'
+    - 'tailwindcss'
